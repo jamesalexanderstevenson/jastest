@@ -1,0 +1,17 @@
+Now that I've made it so you can interact with objects while wielding
+the backpacks and walkie talkie, I'd like to make the walkie talkie
+inspect items when clicking.  Right now, for example, it will trigger
+a mechanism because it has an on_punch, but will fail to pick up a torch.
+
+Not only would I like to be able to dig_immediate, it'd also be fun
+and, I think, interesting to give some data feedback based on what you
+clicked.  If I click a sheep with the walkie, perhaps I can get a little
+story or information.  If I click wood planks with a walkie, again I
+could show some more information.
+
+
+[CSM:]
+
+Skins automatic camera selection for 3rd person preview
+More zoom stuff
+Hook ambience into CSM

@@ -1,0 +1,3 @@
+auto_pickup (Automatically pickup dropped items) bool true
+auto_drop (Add drops from buildable_to nodes) bool true
+plop_sound (Plop!) bool true

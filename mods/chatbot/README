@@ -1,0 +1,3 @@
+TODO
+1. Check for movement timeout, and sit down.  If it's night, try laying.
+2. Check for food in inventory, place in wieldhand, and punch.
