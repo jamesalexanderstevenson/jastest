@@ -51,7 +51,7 @@ default.gui_survival_form = "size[8,8.5]"..
 		"image[4.75,1.5;1,1;gui_furnace_arrow_bg.png^[transformR270]"..
 		"listring[current_player;main]"..
 		"listring[current_player;craft]"..
-		default.get_hotbar_bg(0,4.25)
+		forms.get_hotbar_bg(0,4.25)
 
 -- Load files
 local default_path = minetest.get_modpath("default")

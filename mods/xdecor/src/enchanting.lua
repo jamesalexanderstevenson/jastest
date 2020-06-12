@@ -71,7 +71,8 @@ function enchanting.formspec(pos, num)
 			tooltip[sharp;Your weapon inflicts more damages]
 			tooltip[durable;Your tool last longer]
 			tooltip[fast;Your tool digs faster] ]] ..
-			default.gui_slots .. default.get_hotbar_bg(0.5,4.5)
+			--default.gui_slots .. forms.get_hotbar_bg(0.5,4.5)
+			forms.get_hotbar_bg(0.5, 4.5)
 
 	formspec = formspec .. (enchant_buttons[num] or "")
 	meta:set_string("formspec", formspec)
@@ -103,12 +104,10 @@ function enchanting.fields(pos, _, fields, sender)
 	local enchanted_tool = (mod or "") .. ":enchanted_" .. (name or "") .. "_" .. next(fields)
 
 	if mese:get_count() >= mese_cost and reg_tools[enchanted_tool] then
-		--[[
 		minetest.sound_play("xdecor_enchanting", {
 			to_player = sender:get_player_name(),
 			gain = 0.8
 		}, true)
-		--]]
 		tool:replace(enchanted_tool)
 		tool:add_wear(orig_wear)
 		mese:take_item(mese_cost)
@@ -179,10 +178,10 @@ function enchanting.timer(pos)
 		minetest.add_entity({x = pos.x, y = pos.y + 0.85, z = pos.z}, "xdecor:book_open")
 	end
 
-	local minp = {x = pos.x - 2, y = pos.y,     z = pos.z - 2}
-	local maxp = {x = pos.x + 2, y = pos.y + 1, z = pos.z + 2}
+	local minp = {x = pos.x - 4, y = pos.y - 2, z = pos.z - 4}
+	local maxp = {x = pos.x + 4, y = pos.y + 2, z = pos.z + 4}
 
-	local bookshelves = minetest.find_nodes_in_area(minp, maxp, "default:bookshelf")
+	local bookshelves = minetest.find_nodes_in_area(minp, maxp, {"default:bookshelf", "xdecor:multishelf"})
 	if #bookshelves == 0 then
 		return true
 	end
@@ -191,17 +190,18 @@ function enchanting.timer(pos)
 	local x = pos.x - bookshelf_pos.x
 	local y = bookshelf_pos.y - pos.y
 	local z = pos.z - bookshelf_pos.z
-
-	if tostring(x .. z):find(2) then
-		minetest.add_particle({
-			pos = bookshelf_pos,
-			velocity = {x = x, y = 2 - y, z = z},
-			acceleration = {x = 0, y = -2.2, z = 0},
-			expirationtime = 1,
-			size = 1.5,
-			glow = 5,
-			texture = "xdecor_glyph" .. random(1,18) .. ".png"
-		})
+	for i = 1, 4 do
+		if tostring(x .. z):find(i) then
+			minetest.add_particle({
+				pos = bookshelf_pos,
+				velocity = {x = x, y = 2 - y, z = z},
+				acceleration = {x = 0, y = -2.2, z = 0},
+				expirationtime = 1,
+				size = random(0.5, 1.5), --1.5,
+				glow = 5,
+				texture = "xdecor_glyph" .. random(1, 18) .. ".png"
+			})
+		end
 	end
 
 	return true
