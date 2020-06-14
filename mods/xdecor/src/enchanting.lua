@@ -57,22 +57,20 @@ local enchant_buttons = {
 
 function enchanting.formspec(pos, num)
 	local meta = minetest.get_meta(pos)
-	local formspec = [[ size[9,9;]
-			bgcolor[#080808BB;true]
-			background[0,0;9,9;ench_ui.png]
-			list[context;tool;0.9,2.9;1,1;]
-			list[context;mese;2,2.9;1,1;]
-			list[current_player;main;0.5,4.5;8,4;]
+	local formspec = [[ size[9,9]
+			background[-0.5,-0.5;10,11;ench_ui.png]
+			list[context;tool;0.5,2.9;1,1;]
+			list[context;mese;1.5,2.9;1,1;]
+			list[current_player;main;0.5,5.5;8,4;]
 			listring[current_player;main]
 			listring[context;tool]
 			listring[current_player;main]
 			listring[context;mese]
-			image[2,2.9;1,1;mese_layout.png]
+			image[1.5,2.9;1,1;mese_layout.png]
 			tooltip[sharp;Your weapon inflicts more damages]
 			tooltip[durable;Your tool last longer]
 			tooltip[fast;Your tool digs faster] ]] ..
-			--default.gui_slots .. forms.get_hotbar_bg(0.5,4.5)
-			forms.get_hotbar_bg(0.5, 4.5)
+			forms.get_hotbar_bg(0.5, 5.5)
 
 	formspec = formspec .. (enchant_buttons[num] or "")
 	meta:set_string("formspec", formspec)
