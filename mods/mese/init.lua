@@ -1,17 +1,10 @@
---[[
-=====================================================================
-** Meze **
-By Calinou.
-
-Copyright (c) 2015 Calinou and contributors.
-Licensed under the zlib license. See LICENSE.md for more information.
-=====================================================================
---]]
 local meze_frequency = 32 * 32 * 32
 
 minetest.register_node("mese:meze", {
 	description = "Meze Block",
 	tiles = {"mese_meze_block.png"},
+	paramtype = "light",
+	light_source = 3,
 	is_ground_content = true,
 	drop = "mese:meze",
 	groups = {cracky = 1, level = 2},
