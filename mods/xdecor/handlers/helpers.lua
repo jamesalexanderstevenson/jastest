@@ -50,7 +50,7 @@ function xdecor.stairs_valid_def(def)
 		not def.allow_metadata_inventory_take and
 		not (def.groups.not_in_creative_inventory == 1) and
 		not (def.groups.not_cuttable == 1) and
-		not def.groups.wool and
+		--not def.groups.wool and
 		(def.tiles and type(def.tiles[1]) == "string" and not
 		def.tiles[1]:find("default_mineral")) and
 		not def.mesecons and
