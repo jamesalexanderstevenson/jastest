@@ -133,7 +133,7 @@ local function apply_armor(player, pos)
 		return
 	end
 	local name, p_armor = armor:get_valid_player(player)
-	ll_items.throw_inventory(pos, p_armor:get_list("armor"))
+	ll_items.throw_inventory(player:get_pos(), p_armor:get_list("armor"), true)
 	p_armor:set_list("armor", {})
 	p_armor = nil
 
@@ -171,7 +171,7 @@ local function store_armor(player, pos)
 			armor:set_inventory_stack(player, n, nil)
 		end
 	end
-	ll_items.throw_inventory(pos, it)
+	ll_items.throw_inventory(pos, it, true)
 	it = nil
 
 	update_entity(pos)
