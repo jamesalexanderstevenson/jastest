@@ -212,7 +212,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		end
 		return
 	elseif formname == "forms:csm" then
-		local m = csm.players[name].channel --minetest.mod_channel_join(name)
+		local m = csm.players[name].channel
 		if fields.sprint or fields.jump or fields.zoom or fields.zoom_fov or fields.fov then
 			forms.show_dialog(name, "Awaiting an acknowledgement on your named mod channel.")
 			m:send_all("sprint_enable")

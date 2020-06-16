@@ -428,7 +428,7 @@ minetest.register_node("shop:shop_open", {
 			end
 		elseif fields.setup then
 			if owner == player then
-				sel[player] = node_pos
+				forms.players[player] = node_pos
 				minetest.show_formspec(owner, "shop:shop", get_shop_formspec(pos, 1))
 			end
 		end
@@ -502,13 +502,12 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= "shop:shop" then
 		return
 	end
-	local pos = sel[player:get_player_name()]
+	local pos = forms.players[player:get_player_name()]
 	if not pos then
-		print("!")
 		return
 	end
 	local name = player:get_player_name()
-	sel[name] = nil
+	forms.players[name] = nil
 	if fields.quit or fields.exit then
 		local n = minetest.get_node(pos)
 		minetest.swap_node(pos, {name = "shop:shop", param1 = n.param1, param2 = n.param2})
@@ -533,7 +532,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			inv:set_size("sell" .. pg_current + 1, 1)
 			meta:set_int("pages_current", pg_current + 1) 
 			meta:set_int("pages_total", pg_current + 1)
-			sel[name] = pos
+			forms.players[name] = pos
 			minetest.show_formspec(name, "shop:shop", get_shop_formspec(pos, pg_current + 1))
 		elseif pg_total > 1 then
 			if inv:is_empty("sell" .. pg_current) and inv:is_empty("buy" .. pg_current) then
@@ -556,7 +555,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				meta:set_int("pages_current", 1)
 			end
 		end
-		sel[name] = pos
+		forms.players[name] = pos
 		minetest.show_formspec(name, "shop:shop", get_shop_formspec(pos, meta:get_int("pages_current")))
 	elseif fields.prev then
 		if pg_total > 1 then
@@ -580,18 +579,18 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				meta:set_int("pages_current", pg_current - 1)
 			end
 		end
-		sel[name] = pos
+		forms.players[name] = pos
 		minetest.show_formspec(name, "shop:shop", get_shop_formspec(pos, meta:get_int("pages_current")))
 	elseif fields.done then
 		meta:set_string("formspec", get_shop_formspec_c(pos, 1))
 	elseif fields.stock then
-		sel[name] = pos
+		forms.players[name] = pos
 		minetest.show_formspec(name, "shop:shop", formspec_stock)
 	elseif fields.register then
-		sel[name] = pos
+		forms.players[name] = pos
 		minetest.show_formspec(name, "shop:shop", formspec_register)
 	elseif fields.trade then
-		sel[name] = pos
+		forms.players[name] = pos
 		local trade = meta:get_string("trade")
 		if trade == "true" then
 			meta:set_string("trade", "false")
@@ -646,9 +645,6 @@ minetest.register_on_leaveplayer(function(player)
 	local name = player:get_player_name()
 	if players[name] then
 		players[name] = nil
-	end
-	if sel[name] then
-		sel[name] = nil
 	end
 end)
 
