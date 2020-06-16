@@ -64,7 +64,7 @@ xdecor.register("plant_pot", {
 })
 
 minetest.register_craft({
-	output = "xdecor:plant_pot 2",
+	output = "xdecor:plant_pot",
 	recipe = {
 		{"default:clay_lump", "", "default:clay_lump"},
 		{"default:clay_lump", "default:dirt", "default:clay_lump"},

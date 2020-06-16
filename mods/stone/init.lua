@@ -66,27 +66,36 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "stone:cobble_compressed_triply",
 	recipe = {
-		{"stone:cobble_compressed_doubly", "stone:cobble_compressed_doubly", "stone:cobble_compressed_doubly"},
-		{"stone:cobble_compressed_doubly", "stone:cobble_compressed_doubly", "stone:cobble_compressed_doubly"},
-		{"stone:cobble_compressed_doubly", "stone:cobble_compressed_doubly", "stone:cobble_compressed_doubly"},
+		{"stone:cobble_compressed_doubly",
+				"stone:cobble_compressed_doubly", "stone:cobble_compressed_doubly"},
+		{"stone:cobble_compressed_doubly",
+				"stone:cobble_compressed_doubly", "stone:cobble_compressed_doubly"},
+		{"stone:cobble_compressed_doubly",
+				"stone:cobble_compressed_doubly", "stone:cobble_compressed_doubly"},
 	}
 })
 
 minetest.register_craft({
 	output = "stone:cobble_compressed_quadruply",
 	recipe = {
-		{"stone:cobble_compressed_triply", "stone:cobble_compressed_triply", "stone:cobble_compressed_triply"},
-		{"stone:cobble_compressed_triply", "stone:cobble_compressed_triply", "stone:cobble_compressed_triply"},
-		{"stone:cobble_compressed_triply", "stone:cobble_compressed_triply", "stone:cobble_compressed_triply"},
+		{"stone:cobble_compressed_triply",
+				"stone:cobble_compressed_triply", "stone:cobble_compressed_triply"},
+		{"stone:cobble_compressed_triply",
+				"stone:cobble_compressed_triply", "stone:cobble_compressed_triply"},
+		{"stone:cobble_compressed_triply",
+				"stone:cobble_compressed_triply", "stone:cobble_compressed_triply"},
 	}
 })
 
 minetest.register_craft({
 	output = "stone:cobble_compressed_quintuply",
 	recipe = {
-		{"stone:cobble_compressed_quadruply", "stone:cobble_compressed_quadruply", "stone:cobble_compressed_quadruply"},
-		{"stone:cobble_compressed_quadruply", "stone:cobble_compressed_quadruply", "stone:cobble_compressed_quadruply"},
-		{"stone:cobble_compressed_quadruply", "stone:cobble_compressed_quadruply", "stone:cobble_compressed_quadruply"},
+		{"stone:cobble_compressed_quadruply",
+				"stone:cobble_compressed_quadruply", "stone:cobble_compressed_quadruply"},
+		{"stone:cobble_compressed_quadruply",
+				"stone:cobble_compressed_quadruply", "stone:cobble_compressed_quadruply"},
+		{"stone:cobble_compressed_quadruply",
+				"stone:cobble_compressed_quadruply", "stone:cobble_compressed_quadruply"},
 	}
 })
 
@@ -113,4 +122,44 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "stone:cobble_compressed_quadruply 9",
 	recipe = {{"stone:cobble_compressed_quintuply"}}
+})
+
+minetest.register_craft({
+	output = "default:stone_with_coal",
+	recipe = {{"default:stone", "default:coal_lump"}}
+})
+
+minetest.register_craft({
+	output = "default:stone_with_iron",
+	recipe = {{"default:stone", "default:iron_lump"}}
+})
+
+minetest.register_craft({
+	output = "default:stone_with_copper",
+	recipe = {{"default:stone", "default:copper_lump"}}
+})
+
+minetest.register_craft({
+	output = "default:stone_with_tin",
+	recipe = {{"default:stone", "default:tin_lump"}}
+})
+
+minetest.register_craft({
+	output = "default:stone_with_gold",
+	recipe = {{"default:stone", "default:gold_lump"}}
+})
+
+minetest.register_craft({
+	output = "default:stone_with_mese",
+	recipe = {{"default:stone", "default:mese_crystal"}}
+})
+
+minetest.register_craft({
+	output = "default:stone_with_diamond",
+	recipe = {{"default:stone", "default:diamond"}}
+})
+
+minetest.register_craft({
+	output = "oresplus:stone_with_emerald",
+	recipe = {{"default:stone", "oresplus:emerald"}}
 })

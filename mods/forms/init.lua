@@ -183,7 +183,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			""
 			minetest.show_formspec(name, "clothing:clothing", fs)
 		elseif tab == "Craftguide" then
-			craftguide.show(name, "craftguide:book")
+			minetest.registered_items["craftguide:book"].on_use(nil, minetest.get_player_by_name(name))
 		elseif tab == "CSM" then
 			local zb = csm.players[name].zooming.state == "enabled"
 			local sb = csm.players[name].sprinting.state == "enabled"

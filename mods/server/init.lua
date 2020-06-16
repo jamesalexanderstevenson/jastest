@@ -165,15 +165,40 @@ minetest.register_chatcommand("what", {
 	params = "[dump|d]: Dump ItemStack",
 	privs = "interact",
 	func = function(name, param)
-		if (param == "d" or param == "dump") and
-				minetest.check_player_privs(name, "server") then
-			local str = minetest.get_player_by_name(name):get_wielded_item():to_string()
-			print(str)
-			return true, str
-		elseif param == "d" or param == "dump" then
-			local str = minetest.get_player_by_name(name):get_wielded_item():to_string()
-			print(str)
-			return false, "[Server] Insufficient privileges"
+		local d = minetest.check_player_privs(name, "debug")
+		if (param == "d" or param == "dump") then
+			if d then
+				local str = minetest.get_player_by_name(name):get_wielded_item():to_string()
+				print(str)
+				return true, str
+			else
+				local str = minetest.get_player_by_name(name):get_wielded_item():to_string()
+				print(str)
+				return false, "[Server] Insufficient privileges"
+			end
+		elseif param == "registered_nodes" then
+			if d then
+				local p = {}
+				for k, v in pairs(minetest.registered_nodes) do
+					p[#p + 1] = k
+				end
+				table.sort(p)
+				print(dump(p))
+			else
+				return false, "No"
+			end
+		elseif param == "registered_craftitems" then
+			if d then
+				local p = {}
+				for k, v in pairs(minetest.registered_craftitems) do
+					p[#p + 1] = k
+				end
+				table.sort(p)
+				print(dump(p))
+			else
+				return false, "No"
+			end
+
 		end
 		local thing = minetest.get_player_by_name(name):get_wielded_item()
 		return true, thing:get_description() .. " (" .. thing:get_name() .. ")"

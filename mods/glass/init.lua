@@ -17,7 +17,7 @@ for i = 1, #dye.dyes do
 		paramtype2 = "glasslikeliquidlevel",
 		sunlight_propagates = true,
 		is_ground_content = false,
-		groups = {cracky = 3, oddly_breakable_by_hand = 3},
+		groups = {cracky = 3, oddly_breakable_by_hand = 3, not_cuttable = 1},
 		sounds = default.node_sound_glass_defaults(),
 	})
 	minetest.register_craft({

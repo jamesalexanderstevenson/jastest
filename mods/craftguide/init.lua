@@ -2065,6 +2065,13 @@ function craftguide.show(name, item, show_usages)
 	show_fs(player, name)
 end
 
+register_command("craftguide", {
+	description = "Show craftguide",
+	func = function(name)
+		minetest.registered_items["craftguide:book"].on_use(nil, minetest.get_player_by_name(name))
+	end,
+})
+
 register_command("craft", {
 	description = S"Show recipe(s) of the pointed node",
 	func = function(name)

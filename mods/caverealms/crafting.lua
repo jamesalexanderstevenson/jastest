@@ -47,7 +47,13 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "bucket:bucket_water",
+	output = "bucket:bucket_river_water",
 	type = "shapeless",
 	recipe = {"bucket:bucket_empty", "caverealms:thin_ice"}
+})
+
+minetest.register_craft({
+	output = "bucket:bucket_river_water",
+	type = "shapeless",
+	recipe = {"bucket:bucket_empty", "default:ice"}
 })

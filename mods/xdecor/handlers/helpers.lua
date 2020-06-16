@@ -50,9 +50,13 @@ function xdecor.stairs_valid_def(def)
 		not def.allow_metadata_inventory_take and
 		not (def.groups.not_in_creative_inventory == 1) and
 		not (def.groups.not_cuttable == 1) and
+		not (def.groups.falling_node == 1) and
 		--not def.groups.wool and
-		(def.tiles and type(def.tiles[1]) == "string" and not
-		def.tiles[1]:find("default_mineral")) and
+		not def.description:match("Permafrost") and
+		not def.description:match("Compressed") and
+		not def.description:match("Trap Obsidian") and
+		--[[(def.tiles and type(def.tiles[1]) == "string" and
+				not def.tiles[1]:find("_mineral")) and]]
 		not def.mesecons and
 		def.description and
 		def.description ~= "" and

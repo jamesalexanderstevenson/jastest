@@ -4,26 +4,12 @@
 -- Load support for MT game translation.
 local S = minetest.get_translator("bucket")
 
-
-minetest.register_alias("bucket", "bucket:bucket_empty")
-minetest.register_alias("bucket_water", "bucket:bucket_water")
-minetest.register_alias("bucket_lava", "bucket:bucket_lava")
-
 minetest.register_craft({
 	output = "bucket:bucket_empty 1",
 	recipe = {
 		{"default:steel_ingot", "", "default:steel_ingot"},
 		{"", "default:steel_ingot", ""},
 	}
-})
-
-minetest.register_craft({
-	output = "bucket:bucket_wood_empty 1",
-	recipe = {
-		{"group:wood", "", "group:wood"},
-		{"group:wood", "", "group:wood"},
-		{"", "group:wood", ""}
-	},
 })
 
 bucket = {}
@@ -117,11 +103,7 @@ function bucket.register_liquid(source, flowing, itemname, inventory_image, name
 				end
 
 				minetest.set_node(lpos, {name = source})
-				local wtf = ItemStack("bucket:bucket_empty")
-				if itemstack:get_name():match("wood") then
-					wtf = ItemStack("bucket:bucket_wood_empty")
-				end
-				return wtf
+				return ItemStack("bucket:bucket_empty")
 			end
 		})
 	end
@@ -189,85 +171,6 @@ minetest.register_craftitem("bucket:bucket_empty", {
 	end,
 })
 
-minetest.register_craftitem("bucket:bucket_wood_empty", {
-	description = S("Empty Bucket"),
-	inventory_image = "bucket_wood.png",
-	groups = {tool = 1},
-	liquids_pointable = true,
-	on_use = function(itemstack, user, pointed_thing)
-		if pointed_thing.type == "object" then
-			pointed_thing.ref:punch(user, 1.0, { full_punch_interval=1.0 }, nil)
-			return user:get_wielded_item()
-		elseif pointed_thing.type ~= "node" then
-			-- do nothing if it's neither object nor node
-			return
-		end
-		-- Check if pointing to a liquid source
-		local node = minetest.get_node(pointed_thing.under)
-		local liquiddef = bucket.liquids[node.name]
-		local item_count = user:get_wielded_item():get_count()
-
-		if liquiddef ~= nil
-		and liquiddef.itemname ~= nil
-		and node.name == liquiddef.source then
-			if check_protection(pointed_thing.under,
-					user:get_player_name(),
-					"take ".. node.name) then
-				return
-			end
-
-			-- default set to return filled bucket
-			local giving_back = "bucket:bucket_wood_water"
-
-			-- check if holding more than 1 empty bucket
-			if item_count > 1 then
-
-				-- if space in inventory add filled bucked, otherwise drop as item
-				local inv = user:get_inventory()
-				if inv:room_for_item("main", {name = "bucket:bucket_wood_water"}) then
-					inv:add_item("main", {name = "bucket:bucket_wood_water"})
-				else
-					local pos = user:get_pos()
-					pos.y = math.floor(pos.y + 0.5)
-					minetest.add_item(pos, "bucket:bucket_wood_water")
-				end
-
-				-- set to return empty buckets minus 1
-				giving_back = "bucket:bucket_wood_empty "..tostring(item_count-1)
-
-			end
-
-			-- force_renew requires a source neighbour
-			local source_neighbor = false
-			if liquiddef.force_renew then
-				source_neighbor =
-					minetest.find_node_near(pointed_thing.under, 1, liquiddef.source)
-			end
-			if not (source_neighbor and liquiddef.force_renew) then
-				minetest.add_node(pointed_thing.under, {name = "air"})
-			end
-
-			return ItemStack(giving_back)
-		else
-			-- non-liquid nodes will have their on_punch triggered
-			local node_def = minetest.registered_nodes[node.name]
-			if node_def then
-				node_def.on_punch(pointed_thing.under, node, user, pointed_thing)
-			end
-			return user:get_wielded_item()
-		end
-	end,
-})
-
-bucket.register_liquid(
-	"default:water_source",
-	"default:water_flowing",
-	"bucket:bucket_wood_water",
-	"bucket_wood_water.png",
-	S("Wooden Water Bucket"),
-	{tool = 1, water_bucket = 1}
-)
-
 bucket.register_liquid(
 	"default:water_source",
 	"default:water_flowing",
@@ -322,5 +225,3 @@ if minetest.global_exists("dungeon_loot") then
 			types = {"normal"}},
 	})
 end
-
---setup.init("bucket:bucket_wood_empty", 18)
