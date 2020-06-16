@@ -16,6 +16,9 @@ end
 -- Optionally, you can register custom cuttable nodes in the workbench
 WB.custom_nodes_register = {
 	-- "default:leaves",
+	"bones:bones",
+	"caverealms:glow_obsidian",
+	"caverealms:glow_obsidian_2",
 }
 
 setmetatable(nodes, {

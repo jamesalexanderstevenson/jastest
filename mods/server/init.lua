@@ -18,6 +18,8 @@ local delay = 0
 local spawn_pos_hard = {x = 64, y = 65, z = 16}
 local spawn_set = minetest.settings:get("static_spawnpoint")
 local spawn_pos = minetest.string_to_pos(spawn_set) or spawn_pos_hard
+local items
+local items_tabstr = ""
 local admin_name = minetest.settings:get("name")
 local pool = {[admin_name] = true}
 local store = minetest.get_mod_storage()
@@ -202,6 +204,26 @@ minetest.register_chatcommand("what", {
 		end
 		local thing = minetest.get_player_by_name(name):get_wielded_item()
 		return true, thing:get_description() .. " (" .. thing:get_name() .. ")"
+	end,
+})
+
+minetest.register_chatcommand("items", {
+	func = function(name, param)
+		if not items then
+			items = {}
+			for k, v in pairs(minetest.registered_items) do
+				if not (v.groups and v.groups.not_in_creative_inventory) then
+					table.insert(items, k)
+				else
+					print("not itemized: " .. k)
+				end
+			end
+			table.sort(items)
+			tabstr = table.concat(items, ",")
+		end
+		local fs = "size[8,8.5]" ..
+				"table[0,0;8,8.5;items;" .. tabstr .. "]"
+		minetest.show_formspec(name, "setup:items", fs)
 	end,
 })
 
@@ -473,10 +495,18 @@ minetest.register_on_mods_loaded(function()
 	--]]
 end)
 
-minetest.register_alias("screwdriver", "screwdriver:screwdriver")
-minetest.register_alias("adminpick", "server:adminpick")
-minetest.register_alias("setter", "server:setter")
-minetest.register_alias("obs", "default:obsidian")
-minetest.register_alias("obsidian", "default:obsidian")
-minetest.register_alias("obsidian_brick", "default:obsidianbrick")
-minetest.register_alias("obsidian_block", "default:obsidian_block")
+minetest.register_privilege("creative")
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+	if formname == "setup:items" and
+				minetest.check_player_privs(player, "creative") and
+				fields.items and fields.items:sub(1, 3) == "DCL" then
+		local d = fields.items:sub(5)
+		local it = ItemStack(items[tonumber(d:sub(1, d:find(":") - 1))])
+		it:set_count(it:get_stack_max())
+		local inv = player:get_inventory()
+		it = inv:add_item("main", it)
+		if not it:is_empty() then
+			ll_items.throw_inventory(player:get_pos(), {it}, true)
+		end
+	end
+end)

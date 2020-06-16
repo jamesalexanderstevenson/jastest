@@ -84,6 +84,7 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 	end
 	local new_groups = table.copy(groups)
 	new_groups.stair = 1
+	new_groups.not_in_creative_inventory = 1
 	warn_if_exists("stairs:stair_" .. subname)
 	minetest.register_node(":stairs:stair_" .. subname, {
 		description = description,
@@ -179,6 +180,7 @@ function stairs.register_slab(subname, recipeitem, groups, images, description,
 	end
 	local new_groups = table.copy(groups)
 	new_groups.slab = 1
+	new_groups.not_in_creative_inventory = 1
 	warn_if_exists("stairs:slab_" .. subname)
 	minetest.register_node(":stairs:slab_" .. subname, {
 		description = description,
@@ -320,6 +322,7 @@ function stairs.register_stair_inner(subname, recipeitem, groups, images,
 	end
 	local new_groups = table.copy(groups)
 	new_groups.stair = 1
+	new_groups.not_in_creative_inventory = 1
 	if full_description then
 		description = full_description
 	else
@@ -407,6 +410,7 @@ function stairs.register_stair_outer(subname, recipeitem, groups, images,
 	end
 	local new_groups = table.copy(groups)
 	new_groups.stair = 1
+	new_groups.not_in_creative_inventory = 1
 	if full_description then
 		description = full_description
 	else
