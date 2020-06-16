@@ -14,7 +14,8 @@ csm.ack = function(name, message)
 		if message == "sprint_enable" then
 			if not csm.players[name].sprinting.ack then
 				if forms then
-					forms.show_dialog(name, "Awaiting an acknowledgement on your named mod channel.\n\n\nfailed")
+					forms.dialog(name, "Awaiting an acknowledgement on your named mod channel.\n\n\nfailed",
+							true, nil, nil, true, true)
 				else
 					minetest.chat_send_player(name, "No ack, WIP")
 				end

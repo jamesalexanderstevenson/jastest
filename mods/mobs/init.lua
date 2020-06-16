@@ -292,8 +292,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				end
 			else
 				local msg = "Attempting to spawn your mob!"
-				forms.show_dialog(name, msg)
-				minetest.after(0.34, forms.show_dialog, name, msg .. "\n\n\nfailed", "mobs:spawn_failed")
+				forms.dialog(name, msg)
+				minetest.after(0.34, forms.dialog, name, msg .. "\n\n\nfailed", true, "mobs:spawn_failed",
+						"Mobs?", true, true)
 			end
 		end
 	elseif fields["mobs:select"] then

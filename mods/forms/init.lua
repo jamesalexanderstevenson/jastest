@@ -53,15 +53,7 @@ local main_fs = "size[8,8.5]"..
 		"listring[current_player;craft]" ..
 		forms.get_hotbar_bg(0, 4.25)
 
-forms.show_dialog = function(name, message, formname)
-	formname = formname or "untitled"
-	local fs = "size[8,8.5]" ..
-			forms.x ..
-			"textarea[0.34,1;8,8.5;;" .. message .. ";]"
-	minetest.show_formspec(name, "forms:dialog_" .. formname, fs)
-end
-
-forms.dialog = function(player, message, dialog, formname, title, no_chat_msg)
+forms.dialog = function(player, message, dialog, formname, title, no_chat_msg, fullsize)
 	if not player then
 		return
 	end
@@ -83,7 +75,13 @@ forms.dialog = function(player, message, dialog, formname, title, no_chat_msg)
 	end
 
 	message = minetest.formspec_escape(message)
-	local formspec = "size[8,4]" ..
+	local formspec = ""
+	if fullsize then
+		formspec = formspec .. "size[8,8.5]"
+	else
+		formspec = formspec .. "size[8,4]"
+	end
+	formspec = formspec ..
 		forms.x ..
 		"textarea[0.35,0.76;8,4;;;" ..
 				message .. "]" ..
@@ -214,7 +212,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	elseif formname == "forms:csm" then
 		local m = csm.players[name].channel
 		if fields.sprint or fields.jump or fields.zoom or fields.zoom_fov or fields.fov then
-			forms.show_dialog(name, "Awaiting an acknowledgement on your named mod channel.")
+			forms.dialog(name, "Awaiting an acknowledgement on your named mod channel.", true, nil, nil, true, true)
 			m:send_all("sprint_enable")
 			csm.ack(name, "sprint_enable")
 		elseif fields.jump then
