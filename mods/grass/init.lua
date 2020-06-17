@@ -108,18 +108,18 @@ minetest.register_abm({
 	label = "Flora spread",
 	nodenames = {"group:spreading_dirt_type"},
 	neighbors = "air",
-	chance = 50,
-	interval = 150,
+	chance = 128, 
+	interval = 30,
 	catch_up = false,
 	action = function(pos, node)
 		pos.y = pos.y + 1
 		if minetest.get_node(pos).name ~= "air" then
 			return
 		end
-		local p1 = {x = pos.x + 2, y = pos.y - 1, z = pos.z + 2}
-		local p2 = {x = pos.x - 2, y = pos.y - 1, z = pos.z - 2}
+		local p1 = {x = pos.x + 2, y = pos.y + 2, z = pos.z + 2}
+		local p2 = {x = pos.x - 2, y = pos.y - 2, z = pos.z - 2}
 		local a, b = minetest.find_nodes_in_area(p1, p2, fsnn)
-		if #a > 2 then
+		if #a < 6 then
 			minetest.set_node(pos, {name = fsnn[math.random(#fsnn)]})
 		end
 	end,

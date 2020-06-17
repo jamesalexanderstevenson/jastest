@@ -386,7 +386,7 @@ minetest.register_craftitem("server:setter", {
 
 minetest.register_tool("server:adminpick", {
 	description = "Admin Pickaxe",
-	inventory_image = "default_tool_mesepick.png^default_obsidian_shard.png",
+	inventory_image = "server_adminpick.png",
 	range = 11,
 	groups = {not_in_creative_inventory = 1},
 	tool_capabilities = {
