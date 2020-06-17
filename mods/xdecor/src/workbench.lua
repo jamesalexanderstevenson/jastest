@@ -19,6 +19,17 @@ WB.custom_nodes_register = {
 	"bones:bones",
 	"caverealms:glow_obsidian",
 	"caverealms:glow_obsidian_2",
+	"caverealms:hot_cobble",
+	"caverealms:glow_ore",
+	"caverealms:glow_ruby_ore",
+	"caverealms:glow_amethyst_ore",
+	"caverealms:glow_emerald_ore",
+	"caverealms:glow_crystal",
+	"caverealms:glow_amethyst",
+	"caverealms:glow_mese",
+	"caverealms:glow_emerald",
+	"caverealms:glow_ruby",
+	"caverealms:salt_gem",
 }
 
 setmetatable(nodes, {

@@ -30,7 +30,7 @@ for color, hex in pairs(colors) do
 		description = desc.." Cotton Hat",
 		inventory_image = "clothing_inv_hat.png^[multiply:#"..hex,
 		uv_image = "(clothing_uv_hat.png^[multiply:#"..hex..")",
-		groups = {clothing=1},
+		groups = {clothing=1, not_in_creative_inventory = 1,},
 		on_use = clothing.on_use,
 		stack_max = 1,
 	})
@@ -38,7 +38,7 @@ for color, hex in pairs(colors) do
 		description = desc.." Cotton Shirt",
 		inventory_image = "clothing_inv_shirt.png^[multiply:#"..hex,
 		uv_image = "(clothing_uv_shirt.png^[multiply:#"..hex..")",
-		groups = {clothing=1},
+		groups = {clothing=1, not_in_creative_inventory = 1,},
 		on_use = clothing.on_use,
 		stack_max = 1,
 	})
@@ -46,7 +46,7 @@ for color, hex in pairs(colors) do
 		description = desc.." Cotton Pants",
 		inventory_image = "clothing_inv_pants.png^[multiply:#"..hex,
 		uv_image = "(clothing_uv_pants.png^[multiply:#"..hex..")",
-		groups = {clothing=1},
+		groups = {clothing=1, not_in_creative_inventory = 1,},
 		on_use = clothing.on_use,
 		stack_max = 1,
 	})
@@ -54,7 +54,7 @@ for color, hex in pairs(colors) do
 		description = desc.." Cotton Cape",
 		inventory_image = "clothing_inv_cape.png^[multiply:#"..hex,
 		uv_image = "(clothing_uv_cape.png^[multiply:#"..hex..")",
-		groups = {cape=1},
+		groups = {cape=1, not_in_creative_inventory = 1,},
 		on_use = clothing.on_use,
 		stack_max = 1,
 	})

@@ -227,6 +227,7 @@ minetest.register_item("classes:miner", {
 	type = "none",
 	wield_image = "wieldhand.png",
 	wield_scale = {x=1,y=1,z=2.5},
+	groups = {not_in_creative_inventory = 1},
 	tool_capabilities = {
 		full_punch_interval = 0.9,
 		max_drop_level = 0,
@@ -245,6 +246,7 @@ minetest.register_item("classes:miner", {
 minetest.register_tool("classes:mage", {
 	type = "none",
 	wield_image = "blank.png",
+	groups = {not_in_creative_inventory = 1},
 	tool_capabilities = {
 		full_punch_interval = 2,
 		max_drop_level = 1,
