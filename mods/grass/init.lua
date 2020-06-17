@@ -39,6 +39,7 @@ minetest.override_item("default:dirt_with_dry_grass",
 		{groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1}})
 
 local fsnn = {
+	"farming:cotton_wild",
 	"farming:cotton_6",
 	"farming:wheat_6",
 	"crops:carrot_plant_5",
@@ -66,6 +67,14 @@ local fsnn = {
 	"default:dry_grass_3",
 	"default:dry_grass_4",
 	"default:dry_grass_5",
+	"default:bush_sapling",
+	"default:sapling",
+	"default:fern_1",
+	"default:fern_2",
+	"default:fern_3",
+	"default:marram_grass_1",
+	"default:marram_grass_2",
+	"default:marram_grass_3",
 }
 
 local fsnn_dry = {
