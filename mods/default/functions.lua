@@ -268,6 +268,8 @@ function default.dig_up(pos, node, digger)
 	local nn = minetest.get_node(np)
 	if nn.name == node.name then
 		minetest.node_dig(np, nn, digger)
+		minetest.set_node(np, {name = "air"})
+		ll_items.throw_inventory(np, {nn})
 	end
 end
 
