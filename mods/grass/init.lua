@@ -105,15 +105,20 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-	label = "Flora spread",
+	label = "Flora spread 2",
 	nodenames = {"group:spreading_dirt_type"},
 	neighbors = "air",
 	chance = 128, 
 	interval = 30,
 	catch_up = false,
 	action = function(pos, node)
+		local nn = minetest.get_node(pos).name
+		if nn == "default:dirt_with_snow" then
+			return
+		end
 		pos.y = pos.y + 1
-		if minetest.get_node(pos).name ~= "air" then
+		nn = minetest.get_node(pos).name
+		if nn ~= "air" then
 			return
 		end
 		local p1 = {x = pos.x + 2, y = pos.y + 2, z = pos.z + 2}
