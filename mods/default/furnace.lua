@@ -66,19 +66,11 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 			if inv:is_empty("src") then
 				meta:set_string("infotext", S("Furnace is empty"))
 			end
-			if stack:get_count() > 99 then
-				server.check_items(player)
-				return 0
-			end
 			return stack:get_count()
 		else
 			return 0
 		end
 	elseif listname == "src" then
-		if stack:get_count() > 99 then
-			server.check_items(player)
-			return 0
-		end
 		return stack:get_count()
 	elseif listname == "dst" then
 		return 0

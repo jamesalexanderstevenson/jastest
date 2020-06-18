@@ -202,9 +202,6 @@ function workbench.timer(pos)
 end
 
 function workbench.allow_put(pos, listname, index, stack, player)
-	if stack:get_count() > 99 then
-		server.check_items(player)
-	end
 	local meta = minetest.get_meta(pos)
 	if meta:get_int("locked") > 0 and
 			player:get_player_name() ~= meta:get_string("owner") and
@@ -234,9 +231,6 @@ function workbench.on_put(pos, listname, index, stack, player)
 end
 
 function workbench.allow_move(pos, from_list, from_index, to_list, to_index, count, player)
-	if count > 99 then
-		server.check_items(player)
-	end
 	local meta = minetest.get_meta(pos)
 	if meta:get_int("locked") > 0 and
 			player:get_player_name() ~= meta:get_string("owner") and
@@ -257,9 +251,6 @@ function workbench.on_move(pos, from_list, from_index, to_list, to_index, count,
 end
 
 function workbench.allow_take(pos, listname, index, stack, player)
-	if stack:get_count() > 99 then
-		server.check_items(player)
-	end
 	local meta = minetest.get_meta(pos)
 	if meta:get_int("locked") > 0 and
 			player:get_player_name() ~= meta:get_string("owner") and

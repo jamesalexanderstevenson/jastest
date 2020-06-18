@@ -116,21 +116,12 @@ function default.chest.register_chest(prefixed_name, d)
 			if not default.can_interact_with_node(player, pos) then
 				return 0
 			end
-			if stack:get_count() > 99 then
-				server.check_items(player)
-				return 99
-			end
 			return stack:get_count()
 		end
 		def.allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 			if not default.can_interact_with_node(player, pos) then
 				return 0
 			end
-			if stack:get_count() > 99 then
-				server.check_items(player)
-				return 99
-			end
-
 			return stack:get_count()
 		end
 		def.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)

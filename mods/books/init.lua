@@ -10,10 +10,9 @@ minetest.register_chatcommand("book", {
 			return false, "No player!"
 		end
 		local inv = player:get_inventory()
-		if not inv:contains_item("main", "default:book") and
-				not server.is_admin(name) then
+		if not inv:contains_item("main", "default:book") then
 			return false, "[Server] No writeable book!"
-		elseif not server.is_admin(name) then
+		else
 			inv:remove_item("main", "default:book")
 		end
 		local new_stack = ItemStack("default:book_written")

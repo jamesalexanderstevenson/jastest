@@ -20,56 +20,8 @@ local spawn_set = minetest.settings:get("static_spawnpoint")
 local spawn_pos = minetest.string_to_pos(spawn_set) or spawn_pos_hard
 local items
 local items_tabstr = ""
-local admin_name = minetest.settings:get("name")
-local pool = {[admin_name] = true}
-local store = minetest.get_mod_storage()
-local prepool = minetest.deserialize(store:get("pool"))
-if prepool then
-	pool = prepool
-end
-
-local default_privs = {}
-for _, v in pairs(minetest.settings:get("default_privs"):split(", ")) do
-	default_privs[v] = true
-end
-
-server.check_items = function(player, oneshot)
-	if not minetest.get_player_by_name(player:get_player_name()) then
-		return
-	end
-	local inv = player:get_inventory()
-	local lists = inv:get_lists()
-	for k, v in pairs(lists) do
-		for kk, vv in pairs(v) do
-			if vv:get_count() > 99 then
-				inv:set_stack(k, kk, nil)
-			end
-		end
-	end
-	if not oneshot then
-		minetest.after(49, server.check_items, player)
-	end
-end
-
-server.is_admin = function(name)
-	return pool[name]
-end
 
 minetest.log = function()
-end
-
-local function check_privs(name)
-	if minetest.get_player_by_name(name) then
-		if not pool[name] then
-			local privs = minetest.get_player_privs(name)
-			for k, v in pairs(privs) do
-				if not (k == "fast" or k == "fly") and not default_privs[k] then
-					privs[k] = nil
-				end
-			end
-			minetest.set_player_privs(name, privs)
-		end
-	end
 end
 
 minetest.register_privilege("debug", {
@@ -86,25 +38,6 @@ minetest.register_on_chat_message(function(name, message)
 	table.insert(forms.lines, 1, "<" .. name .."> " .. message)
 end)
 
-minetest.register_globalstep(function(dtime)
-	if delay < 60 then
-		delay = delay + dtime
-		return
-	else
-		delay = 0
-	end
-	local mo = minetest.get_connected_players()
-	for i = 1, #mo do
-		check_privs(mo[i]:get_player_name())
-	end
-end)
-
-minetest.register_on_joinplayer(function(player)
-	minetest.after(1, function()
-		check_privs(player:get_player_name())
-	end)
-end)
-
 -- Chat Commands
 minetest.register_chatcommand("debug", {
 	description = "Debug functions",
@@ -115,28 +48,6 @@ minetest.register_chatcommand("debug", {
 		print(minetest.is_protected(pos, ""))
 		return true, "Printed"
 	end
-})
-
-minetest.register_chatcommand("check_items", {
-	description = "Check inventory for strange stacks",
-	params = "A person, place, or thing",
-	privs = "warden",
-	func = function(name, param)
-		local player = minetest.get_player_by_name(name)
-		local target = minetest.get_player_by_name(param)
-		if param == "" then
-			server.check_items(player, true)
-			return true, "[Server] Checking your inventory"
-		elseif target then
-			if minetest.check_player_privs(name, "protector") then
-				server.check_items(target)
-				return true, "[Server] Checking " .. target:get_player_name()
-			end
-			server.check_items(target, true)
-			return true, "[Server] Checking " .. target:get_player_name()
-		end
-		return false, "[Server] Try again"
-	end,
 })
 
 minetest.register_chatcommand("spawn", {
@@ -272,52 +183,6 @@ minetest.register_chatcommand("killme", {
 	end,
 })
 
--- Chatcommand overrides
-minetest.override_chatcommand("admin", {
-	description = "List or manage admins",
-	params = "[list|add|delete]",
-	privs = "shout",
-	func = function(name, param)
-		local privs = minetest.get_player_privs(name)
-		if name ~= admin_name then
-			if admin_name then
-				return true, "[Server] The administrator of this server is " .. admin_name .. "."
-			else
-				return false, "[Server] There's no administrator named in the config file."
-			end
-		end
-		param = param:split(" ")
-		if param[2] and param[2] == admin_name then
-			return false, "[Server] Cannot modify admin name"
-		end
-		if param[1] == "add" then
-			if param[2] then
-				pool[param[2]] = true
-				store:set_string("pool", minetest.serialize(pool))
-				return true, "[Server] Added " .. param[2]
-			else
-				return false, "[Server] No name"
-			end
-		elseif param[1] == "delete" then
-			if not param[2] then
-				return false, "[Server] No argument"
-			end
-			if pool[param[2]] then
-				pool[param[2]] = nil
-				store:set_string("pool", minetest.serialize(pool))
-				return true, "[Server] Removed " .. param[2]
-			end
-			return false, "[Server] Name not found"
-		elseif param[1] == "list" then
-			for k, v in pairs(pool) do
-				minetest.chat_send_player(name, k)
-			end
-			return true, "[Server] Listed"
-		end
-		return true, "[Server] /admin <list|delete|add>"
-	end,
-})
-
 minetest.override_chatcommand("me", {
 	func = function(name, param)
 		local s = "* " .. name .. " " .. param
@@ -408,15 +273,7 @@ minetest.register_tool("server:adminpick", {
 		itemstack:clear()
 		return itemstack
 	end,
-	after_use = function(itemstack, user, node, digparams)
-		if not server.is_admin(user:get_player_name()) then
-			return ""
-		end
-	end,
 	on_place = function(itemstack, placer, pointed_thing)
-		if not server.is_admin(placer:get_player_name()) then
-			return ""
-		end
 		if pointed_thing and pointed_thing.type == "node" then
 			local pos = pointed_thing.under or pointed_thing.above
 			if pos then
@@ -433,69 +290,8 @@ minetest.register_tool("server:adminpick", {
 	end,
 })
 
---[[
-local function kill_node(pos, _, puncher)
-	if puncher:get_wielded_item():get_name() == "server:adminpick" then
-		if not minetest.check_player_privs(puncher:get_player_name(), "protector") then
-			puncher:set_wielded_item("")
-			return
-		end
-
-		local nn = minetest.get_node(pos).name
-		if nn == "air" then
-			return
-		end
-		local node_drops = minetest.get_node_drops(nn, "server:adminpick")
-		for i = 1, #node_drops do
-			local add_node = puncher:get_inventory():add_item("main", node_drops[i])
-			if add_node then
-				minetest.add_item(pos, add_node)
-			end
-		end
-		minetest.remove_node(pos)
-		minetest.check_for_falling(pos)
-	end
-end
---]]
-
-minetest.register_on_mods_loaded(function()
-	for k, v in pairs(minetest.registered_privileges) do
-		local old
-		if v.on_grant then
-			old = v.on_grant
-		end
-		minetest.registered_privileges[k].on_grant = function(name, granter_name)
-			minetest.after(0.1, function()
-				check_privs(name)
-				if granter_name then
-					check_privs(granter_name)
-				end
-			end)
-			if old then
-				old(name, granter_name)
-			end
-		end
-	end
-	--[[
-	for node in pairs(minetest.registered_nodes) do
-		local def = minetest.registered_nodes[node]
-		for i in pairs(def) do
-			if i == "on_punch" then
-				local rem = def.on_punch
-				local function new_on_punch(pos, new_node, puncher, pointed_thing)
-					kill_node(pos, new_node, puncher)
-					return rem(pos, new_node, puncher, pointed_thing)
-				end
-				minetest.override_item(node, {
-					on_punch = new_on_punch
-				})
-			end
-		end
-	end
-	--]]
-end)
-
 minetest.register_privilege("creative")
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname == "setup:items" and
 				minetest.check_player_privs(player, "creative") and

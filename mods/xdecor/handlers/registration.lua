@@ -145,9 +145,6 @@ function xdecor.register(name, def)
 		def.on_blast = function() end
 		def.allow_metadata_inventory_move = function(pos, from_list, from_index,
 				to_list, to_index, count, player)
-			if count > 99 then
-				server.check_items(player)
-			end
 			local meta = minetest.get_meta(pos)
 			if meta:get_int("locked") > 0 and
 					player:get_player_name() ~= meta:get_string("owner") and
@@ -157,9 +154,6 @@ function xdecor.register(name, def)
 			return count
 		end
 		def.allow_metadata_inventory_put = function(pos, listname, index, stack, player)
-			if stack:get_count() > 99 then
-				server.check_items(player)
-			end
 			local meta = minetest.get_meta(pos)
 			if meta:get_int("locked") > 0 and
 					player:get_player_name() ~= meta:get_string("owner") and
@@ -169,9 +163,6 @@ function xdecor.register(name, def)
 			return stack:get_count()
 		end
 		def.allow_metadata_inventory_take = function(pos, listname, index, stack, player)
-			if stack:get_count() > 99 then
-				server.check_items(player)
-			end
 			local meta = minetest.get_meta(pos)
 			if meta:get_int("locked") > 0 and
 					player:get_player_name() ~= meta:get_string("owner") and

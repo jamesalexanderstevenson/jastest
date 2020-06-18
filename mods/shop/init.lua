@@ -67,9 +67,6 @@ local function check_armor_privs(bit, index, stack)
 	local f = function(p)
 		local name, inv = armor:get_valid_player(p)
 		if name and minetest.get_player_by_name(name) then
-			if server.is_admin(name) then
-				return
-			end
 			local player = minetest.get_player_by_name(name)
 			local privs = minetest.get_player_privs(name)
 			local boots_fast = inv:contains_item("armor", "shop:boots_fast")
@@ -94,16 +91,13 @@ local function check_armor_privs(bit, index, stack)
 				hud.message(player, "You no longer have the fly priv!")
 			end
 			if y then
-				if (privs.fly or privs.fast) and not server.is_admin(name) then
+				if (privs.fly or privs.fast) then
 					-- activate
 					players[name] = nil
-				elseif server.is_admin(name) then
-					privs.fly = true
-					privs.fast = true
 				end
 				minetest.set_player_privs(name, privs)
 				poll_privs(name)
-			elseif (privs.fly or privs.fast) and not server.is_admin(name) then
+			elseif (privs.fly or privs.fast) then
 				poll_privs(name)
 			end
 		end
