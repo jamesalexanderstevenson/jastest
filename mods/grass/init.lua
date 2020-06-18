@@ -112,13 +112,11 @@ minetest.register_abm({
 	interval = 30,
 	catch_up = false,
 	action = function(pos, node)
-		local nn = minetest.get_node(pos).name
-		if nn == "default:dirt_with_snow" then
+		if minetest.get_node(pos).name == "default:dirt_with_snow" then
 			return
 		end
 		pos.y = pos.y + 1
-		nn = minetest.get_node(pos).name
-		if nn ~= "air" then
+		if minetest.get_node(pos).name ~= "air" then
 			return
 		end
 		local p1 = {x = pos.x + 2, y = pos.y + 2, z = pos.z + 2}

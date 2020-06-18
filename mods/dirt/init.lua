@@ -20,13 +20,15 @@ minetest.register_abm({
 	neighbors = {
 		"default:grass_4",
 		"default:grass_5",
+		"default:papyrus",
 	},
 	interval = 30,
 	chance = 3,
 	catch_up = false,
 	action = function(pos, node)
 		local grass = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
-		if grass and grass.name:match("grass") then
+		if grass and grass.name:match("grass") or
+				grass.name == "default:papyrus" then
 			minetest.set_node(pos, {name = "default:dirt_with_grass"})
 		end
 	end,
