@@ -121,7 +121,8 @@ minetest.register_abm({
 			return
 		end
 		pos.y = pos.y + 1
-		if minetest.get_node(pos).name ~= "air" then
+		if minetest.get_node(pos).name ~= "air" or
+				minetest.get_node_light(pos) < 12 then
 			return
 		end
 		local p1 = {x = pos.x + 2, y = pos.y + 2, z = pos.z + 2}
