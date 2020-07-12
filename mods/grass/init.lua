@@ -2,20 +2,25 @@
 -- Copyright 2020 James Steveson
 -- GNU GPL 3+
 
-for n = 1, 6 do
-	local item = "grass_" .. n
-	if n == 6 then
-		item = "junglegrass"
-	end
+for n = 1, 5 do
 	minetest.register_craft({
 		type = "shapeless",
 		output = "default:dirt_with_grass",
 		recipe = {
 			"default:dirt",
-			"default:" .. item,
+			"default:grass_" .. n,
 		}
 	})
 end
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "default:dirt_with_grass",
+	recipe = {
+		"default:dirt",
+		"default:junglegrass",
+	}
+})
 
 minetest.register_craft({
 	type = "shapeless",

@@ -1,10 +1,12 @@
+-- crops/carrot.lua
+
 minetest.register_node("crops:carrot_seeds", {
 	description = "Carrot Seeds",
 	inventory_image = "crops_carrot_seeds.png",
 	wield_image = "crops_carrot_seeds.png",
 	tiles = { "crops_carrot_plant_1.png" },
 	drawtype = "plantlike",
-	waving = 1,
+	waving = 0,
 	sunlight_propagates = false,
 	use_texture_alpha = true,
 	walkable = false,
@@ -21,25 +23,47 @@ minetest.register_node("crops:carrot_seeds", {
 	end
 })
 
-for stage = 1, 5 do
-minetest.register_node("crops:carrot_plant_" .. stage , {
+for stage = 1, 4 do
+	minetest.register_node("crops:carrot_plant_" .. stage , {
+		description = "Carrot Plant",
+		tiles = {"crops_carrot_plant_" .. stage .. ".png"},
+		drawtype = "plantlike",
+		waving = 1,
+		sunlight_propagates = true,
+		use_texture_alpha = true,
+		walkable = false,
+		paramtype = "light",
+		groups = {snappy = 3, flammable = 3, flora = 1, attached_node = 1,
+				not_in_creative_inventory = 1},
+		drop = {},
+		sounds = default.node_sound_leaves_defaults(),
+		selection_box = {
+			type = "fixed",
+			fixed = {-0.25, -0.5, -0.25,
+					0.25, 0, 0.25}
+		}
+	})
+end
+
+minetest.register_node("crops:carrot_plant_5", {
 	description = "Carrot Plant",
-	tiles = {"crops_carrot_plant_" .. stage .. ".png"},
+	tiles = {"crops_carrot_plant_5.png"},
 	drawtype = "plantlike",
 	waving = 1,
 	sunlight_propagates = true,
 	use_texture_alpha = true,
 	walkable = false,
 	paramtype = "light",
-	groups = {snappy = 3, flammable = 3, flora = 1, attached_node = 1, not_in_creative_inventory = 1},
-	drop = {},
+	groups = {snappy = 3, flammable = 3, flora = 1, attached_node = 1,
+			not_in_creative_inventory = 1},
+	drop = "crops:carrot",
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5,  0.5, -0.5 + (((math.min(stage, 4)) + 1) / 5), 0.5}
+		fixed = {-0.5, -0.5, -0.5,
+				0.5, 0, 0.5}
 	}
 })
-end
 
 minetest.register_craftitem("crops:carrot", {
 	description = "Carrot",
