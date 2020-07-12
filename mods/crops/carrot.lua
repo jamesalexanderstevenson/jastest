@@ -4,12 +4,13 @@ minetest.register_node("crops:carrot_seeds", {
 	description = "Carrot Seeds",
 	inventory_image = "crops_carrot_seeds.png",
 	wield_image = "crops_carrot_seeds.png",
-	tiles = { "crops_carrot_plant_1.png" },
+	tiles = {"crops_carrot_plant_1.png"},
 	drawtype = "plantlike",
 	waving = 0,
+	buildable_to = true,
 	sunlight_propagates = false,
 	use_texture_alpha = true,
-	walkable = false,
+	walkable = true,
 	paramtype = "light",
 	groups = {snappy = 3, flammable = 3, flora = 1, attached_node = 1},
 	on_place = function(itemstack, placer, pointed_thing)
@@ -17,10 +18,16 @@ minetest.register_node("crops:carrot_seeds", {
 		if minetest.get_item_group(under.name, "soil") <= 1 then
 			return
 		end
-		crops.plant(pointed_thing.above, {name="crops:carrot_plant_1"})
+		if pointed_thing.under.z - pointed_thing.above.z ~= 0 or
+				pointed_thing.under.x - pointed_thing.above.x ~= 0 then
+			return
+		end
+		crops.plant(pointed_thing.above, {name = "crops:carrot_plant_1"})
 		itemstack:take_item()
 		return itemstack
-	end
+	end,
+	--on_ignite = function()
+	--end,
 })
 
 for stage = 1, 4 do
@@ -29,6 +36,7 @@ for stage = 1, 4 do
 		tiles = {"crops_carrot_plant_" .. stage .. ".png"},
 		drawtype = "plantlike",
 		waving = 1,
+		buildable_to = true,
 		sunlight_propagates = true,
 		use_texture_alpha = true,
 		walkable = false,
@@ -37,11 +45,14 @@ for stage = 1, 4 do
 				not_in_creative_inventory = 1},
 		drop = {},
 		sounds = default.node_sound_leaves_defaults(),
+		floodable = true,
 		selection_box = {
 			type = "fixed",
-			fixed = {-0.25, -0.5, -0.25,
-					0.25, 0, 0.25}
-		}
+			fixed = {-0.25, -0.5, -0.25, 0.25, 0, 0.25}
+		},
+		on_flood = flood.on_flood,
+		--on_ignite = function()
+		--end,
 	})
 end
 
@@ -58,11 +69,12 @@ minetest.register_node("crops:carrot_plant_5", {
 			not_in_creative_inventory = 1},
 	drop = "crops:carrot",
 	sounds = default.node_sound_leaves_defaults(),
+	floodable = true,
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5,
-				0.5, 0, 0.5}
-	}
+		fixed = {-0.25, -0.5, -0.25, 0.25, 0, 0.25}
+	},
+	on_flood = flood.on_flood,
 })
 
 minetest.register_craftitem("crops:carrot", {
@@ -77,9 +89,7 @@ minetest.register_craft({
 	recipe = {"crops:carrot"}
 })
 
---
 -- the carrots "block"
---
 minetest.register_node("crops:soil_with_carrots", {
 	description = "Soil with Carrots",
 	tiles = {"default_dirt.png^crops_carrot_soil.png", "default_dirt.png"},
