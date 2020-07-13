@@ -14,6 +14,11 @@ local function door_toggle(pos_actuator, pos_door, player)
 	end
 
 	local name = minetest.get_node(pos_door).name
+	if name == "mese:meselamp_off" then
+		minetest.swap_node(pos_door, {name = "default:meselamp"})
+	elseif name == "default:meselamp" then
+		minetest.swap_node(pos_door, {name = "mese:meselamp_off"})
+	end
 	if name == "funblock:block" then
 		minetest.registered_nodes["funblock:block"]._runit(player, pos_door)
 	end
@@ -22,14 +27,14 @@ local function door_toggle(pos_actuator, pos_door, player)
 	minetest.after(2, function()
 		if minetest.get_node(pos_actuator).name:sub(-3) == "_on" then
 			minetest.set_node(pos_actuator,
-				{name=actuator.name, param2=actuator.param2})
+					{name = actuator.name, param2 = actuator.param2})
 		end
-		if name ~= "funblock:block" then
+		if door then
 			door:close(player)
 		end
 	end)
 
-	if name ~= "funblock:block" then
+	if door then
 		door:open(player)
 	end
 end
@@ -44,7 +49,7 @@ function plate.timer(pos)
 	if objs == {} or not doors.get then return true end
 	local minp = {x=pos.x-2, y=pos.y-1, z=pos.z-2}
 	local maxp = {x=pos.x+2, y=pos.y+1, z=pos.z+2}
-	local doors = minetest.find_nodes_in_area(minp, maxp, {"group:door", "funblock:block"})
+	local doors = minetest.find_nodes_in_area(minp, maxp, {"group:door", "funblock:block", "group:mese"})
 
 	for _, player in pairs(objs) do
 		if player:is_player() then
@@ -97,12 +102,14 @@ local function hit_it(pos, node, clicker)
 	if (c.aux1 or c.sneak) and c.LMB then
 		return itemstack
 	end
+	--[[
 	if not doors.get then
 		return itemstack
 	end
+	--]]
 	local minp = {x=pos.x-2, y=pos.y-1, z=pos.z-2}
 	local maxp = {x=pos.x+2, y=pos.y+1, z=pos.z+2}
-	local doors = minetest.find_nodes_in_area(minp, maxp, {"group:door", "funblock:block"})
+	local doors = minetest.find_nodes_in_area(minp, maxp, {"group:door", "funblock:block", "group:mese"})
 
 	for i = 1, #doors do
 		door_toggle(pos, doors[i], clicker)

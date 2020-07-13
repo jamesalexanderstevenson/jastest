@@ -1,3 +1,8 @@
+--
+
+local S = minetest.get_translator(minetest.get_current_modname())
+
+-- Meze by Calinou
 local meze_frequency = 32 * 32 * 32
 
 minetest.register_node("mese:meze", {
@@ -338,4 +343,15 @@ minetest.register_craft({
 		{"default:glass"},
 		{"group:stick"},
 	}
+})
+
+minetest.register_node("mese:meselamp_off", {
+	description = S("Mese Lamp (You hacker you!)"),
+	drawtype = "glasslike",
+	tiles = {"default_meselamp.png"},
+	paramtype = "light",
+	sunlight_propagates = true,
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3, mese = 1},
+	sounds = default.node_sound_glass_defaults(),
 })

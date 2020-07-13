@@ -1,6 +1,7 @@
 -- jastest/mods/ll_items
+-- Part of jastest Minetest Game
 -- Copyright 2020 James Stevenson
--- GPL 3+
+-- GNU GPL 3+
 
 ll_items = {}
 
