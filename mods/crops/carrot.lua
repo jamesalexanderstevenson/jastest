@@ -63,6 +63,7 @@ minetest.register_node("crops:carrot_plant_5", {
 	waving = 1,
 	sunlight_propagates = true,
 	use_texture_alpha = true,
+	buildable_to = true,
 	walkable = false,
 	paramtype = "light",
 	groups = {snappy = 3, flammable = 3, flora = 1, attached_node = 1,

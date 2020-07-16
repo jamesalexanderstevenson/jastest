@@ -48,23 +48,24 @@ minetest.register_node("crops:melon_seed", {
 })
 
 for stage = 1, 6 do
-minetest.register_node("crops:melon_plant_" .. stage , {
-	description = S("Melon plant"),
-	tiles = { "crops_melon_plant_" .. stage .. ".png" },
-	drawtype = "plantlike",
-	waving = 1,
-	sunlight_propagates = true,
-	use_texture_alpha = true,
-	walkable = false,
-	paramtype = "light",
-	groups = { snappy=3, flammable=3, flora=1, attached_node=1, not_in_creative_inventory=1 },
-	drop = "crops:melon_seed",
-	sounds = default.node_sound_leaves_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5,  0.5, -0.5 + (((math.min(stage, 4)) + 1) / 5), 0.5}
-	}
-})
+	minetest.register_node("crops:melon_plant_" .. stage , {
+		description = S("Melon plant"),
+		tiles = { "crops_melon_plant_" .. stage .. ".png" },
+		drawtype = "plantlike",
+		waving = 1,
+		sunlight_propagates = true,
+		use_texture_alpha = true,
+		buildable_to = true,
+		walkable = false,
+		paramtype = "light",
+		groups = { snappy=3, flammable=3, flora=1, attached_node=1, not_in_creative_inventory=1 },
+		drop = "crops:melon_seed",
+		sounds = default.node_sound_leaves_defaults(),
+		selection_box = {
+			type = "fixed",
+			fixed = {-0.5, -0.5, -0.5,  0.5, -0.5 + (((math.min(stage, 4)) + 1) / 5), 0.5}
+		}
+	})
 end
 
 minetest.register_node("crops:melon_plant_5_attached", {
@@ -76,6 +77,7 @@ minetest.register_node("crops:melon_plant_5_attached", {
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
 	use_texture_alpha = true,
+	buildable_to = true,
 	walkable = false,
 	paramtype = "light",
 	groups = { snappy=3, flammable=3, flora=1, attached_node=1, not_in_creative_inventory=1 },
@@ -109,7 +111,7 @@ minetest.register_node("crops:melon", {
 	sunlight_propagates = false,
 	use_texture_alpha = false,
 	walkable = true,
-	groups = { snappy=3, flammable=3, oddly_breakable_by_hand=2 },
+	groups = {snappy = 3, flammable = 3, oddly_breakable_by_hand = 2, attached_node = 1},
 	paramtype2 = "facedir",
 	drop = {},
 	sounds = default.node_sound_wood_defaults({
