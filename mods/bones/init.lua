@@ -202,14 +202,22 @@ local bone_veg = {
 	seedlings = {
 		"default:large_cactus_seedling",
 	},
+	dirt = {
+		"default:dirt",
+	},
 }
 
 local function grow(pos, group, item)
-	local t = minetest.get_node_timer(pos)
-	local ts = t:is_started()
-	local to = t:get_timeout()
-	local te = t:get_elapsed()
-	t:set(to * 0.5, te * 2)
+	--print(pos, group, item)
+	if item == "default:dirt" then
+		minetest.set_node(pos, {name = "default:dirt_with_grass"})
+	else
+		local t = minetest.get_node_timer(pos)
+		local ts = t:is_started()
+		local to = t:get_timeout()
+		local te = t:get_elapsed()
+		t:set(to * 0.5, te * 2)
+	end
 end
 
 local function bone_meal(itemstack, user, pointed_thing)
