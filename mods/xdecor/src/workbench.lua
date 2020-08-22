@@ -66,7 +66,7 @@ workbench.defs = {
 
 local repairable_tools = {"pick", "axe", "shovel", "sword", "hoe",
 		"armor", "shield", "net", "screwdriver", "shooter",
-		"lasso", "flint"}
+		"lasso", "flint", "bell"}
 
 -- Tools allowed to be repaired
 function workbench:repairable(stack)
