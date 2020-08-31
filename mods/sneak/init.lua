@@ -9,9 +9,33 @@ local function poll(player)
 		local c = player:get_player_control()
 		if c.sneak and not sneaking[name] then
 			sneaking[name] = true
-			player:set_properties({makes_footstep_sound = false})
+			player:set_properties({
+				makes_footstep_sound = false,
+				collisionbox = {
+					-0.3, 0.0, -0.3,
+					0.3, 0.9, 0.3,
+				},
+				eye_height = 0.9,
+				visual_size = {
+					x = 1,
+					y = 0.67,
+					z = 1,
+				},
+			})
 		elseif sneaking[name] and not c.sneak then
-			player:set_properties({makes_footstep_sound = true})
+			player:set_properties({
+				makes_footstep_sound = true,
+				collisionbox = {
+					-0.3, 0.0, -0.3,
+					0.3, 1.7, 0.3,
+				},
+				eye_height = 1.47,
+				visual_size = {
+					x = 1,
+					y = 1,
+					z = 1,
+				},
+			})
 			sneaking[name] = false
 		end
 	end
