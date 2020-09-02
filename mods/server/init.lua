@@ -20,9 +20,22 @@ local spawn_set = minetest.settings:get("static_spawnpoint")
 local spawn_pos = minetest.string_to_pos(spawn_set) or spawn_pos_hard
 local items
 local items_tabstr = ""
+local admin_name = minetest.settings:get("name")
+local default_privs = minetest.string_to_privs(minetest.settings:get("default_privs"))
 
 minetest.log = function()
 end
+
+minetest.register_on_joinplayer(function(player)
+	minetest.after(1.5, function()
+		local name = player:get_player_name()
+		if minetest.get_player_by_name(name) and
+				name ~= admin_name and
+				not minetest.is_singleplayer() then
+			minetest.set_player_privs(name, default_privs)
+		end
+	end)
+end)
 
 minetest.register_privilege("debug", {
 	description = "Can use debug functions",
