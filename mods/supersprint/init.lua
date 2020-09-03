@@ -72,40 +72,39 @@ local function sprint(player)
 	end
 
 	local name = player:get_player_name()
-	local stam = stamina.get_stamina(name)
-	local sat = stamina.get_stamina(name)
-	local vel = player:get_player_velocity()
-	local y = vel.y < -14
-	if csm.players[name] and csm.players[name].sprinting and
-				csm.players[name].sprinting.state == "enabled" then
-		if csm.players[name].sprinting.aux1 and not y and not sprinting[name] and
-				 stam >= 1 and not stamina.is_poisoned(name) and
-				 not stamina.is_cooldowned(name) and
-				 sat >= 10 then
-			sprinting[name] = true
-			physics(player, true)
-		elseif sprinting[name] and not csm.players[name].sprinting.aux1 then
-			sprinting[name] = false
-			physics(player, false)
-		elseif sprinting[name] and y or stam <= 0 or sat <= 0 then
-			sprinting[name] = false
-			physics(player, false)
+	local attached = player_api.player_attached[name]
+	if minetest.get_player_by_name(name) and not attached then
+		local stam = stamina.get_stamina(name)
+		local sat = stamina.get_stamina(name)
+		local pos = player:get_pos()
+		local c = control(player)
+		local s = sprinting[name]
+		local vel = player:get_player_velocity()
+		local y = vel.y < -14
+		if vel.x > 5 or vel.z > 5 or
+				vel.x < -5 or vel.z < -5 then
+			accelerating[name] = true
+		else
+			accelerating[name] = false
 		end
-	elseif minetest.get_player_by_name(name) then
-		local attached = player_api.player_attached[name]
 
-		if not attached then
-			local del = minetest.get_us_time() - t[name]
-			local pos = player:get_pos()
-			local c = control(player)
-			local s = sprinting[name]
-
-			if vel.x > 5 or vel.z > 5 or
-					vel.x < -5 or vel.z < -5 then
-				accelerating[name] = true
-			else
-				accelerating[name] = false
+		if csm.players[name] and csm.players[name].sprinting and
+					csm.players[name].sprinting.state == "enabled" then
+			if csm.players[name].sprinting.aux1 and not y and not s and
+					 stam >= 1 and not stamina.is_poisoned(name) and
+					 not stamina.is_cooldowned(name) and
+					 sat >= 10 then
+				sprinting[name] = true
+				physics(player, true)
+			elseif s and not csm.players[name].sprinting.aux1 then
+				sprinting[name] = false
+				physics(player, false)
+			elseif s and y or stam <= 0 or sat <= 0 then
+				sprinting[name] = false
+				physics(player, false)
 			end
+		else
+			local del = minetest.get_us_time() - t[name]
 			if not s and (c.aux1 or sprint_toggle[name]) and
 					stam >= 1 and sat >= 10 and
 					not y then
@@ -129,12 +128,12 @@ local function sprint(player)
 				rm(player)
 				t[name] = minetest.get_us_time()
 			end
-			if sprinting[name] and
-					(c.up or c.down or c.left or
-					c.right or c.jump) then
-				if players[name] <= 1 then
-					boost(player, pos)
-				end
+		end
+		if sprinting[name] and
+				(c.up or c.down or c.left or
+				c.right or c.jump) then
+			if players[name] <= 1 then
+				boost(player, pos)
 			end
 		end
 	end
