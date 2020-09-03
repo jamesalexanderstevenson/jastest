@@ -39,6 +39,15 @@ minetest.register_craftitem("mtd:gold_coin", {
 })
 
 minetest.register_craft({
+	output = "default:gold_ingot",
+	recipe = {
+		{"mtd:gold_coin", "mtd:gold_coin", "mtd:gold_coin"},
+		{"mtd:gold_coin", "mtd:gold_coin", "mtd:gold_coin"},
+		{"mtd:gold_coin", "mtd:gold_coin", "mtd:gold_coin"},
+	},
+})
+
+minetest.register_craft({
 	output = "mtd:gold_coin 9",
 	type = "shapeless",
 	recipe = {"default:gold_ingot"},
