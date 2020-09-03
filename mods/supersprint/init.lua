@@ -74,9 +74,11 @@ local function sprint(player)
 	local name = player:get_player_name()
 	local stam = stamina.get_stamina(name)
 	local sat = stamina.get_stamina(name)
+	local vel = player:get_player_velocity()
+	local y = vel.y < -14
 	if csm.players[name] and csm.players[name].sprinting and
 				csm.players[name].sprinting.state == "enabled" then
-		if csm.players[name].sprinting.aux1 and not sprinting[name] and
+		if csm.players[name].sprinting.aux1 and not y and not sprinting[name] and
 				 stam >= 1 and not stamina.is_poisoned(name) and
 				 not stamina.is_cooldowned(name) and
 				 sat >= 10 then
@@ -85,7 +87,7 @@ local function sprint(player)
 		elseif sprinting[name] and not csm.players[name].sprinting.aux1 then
 			sprinting[name] = false
 			physics(player, false)
-		elseif sprinting[name] and stam <= 0 or sat <= 0 then
+		elseif sprinting[name] and y or stam <= 0 or sat <= 0 then
 			sprinting[name] = false
 			physics(player, false)
 		end
@@ -97,8 +99,6 @@ local function sprint(player)
 			local pos = player:get_pos()
 			local c = control(player)
 			local s = sprinting[name]
-			local vel = player:get_player_velocity()
-			local y = vel.y < -10 
 
 			if vel.x > 5 or vel.z > 5 or
 					vel.x < -5 or vel.z < -5 then
