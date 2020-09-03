@@ -1,6 +1,8 @@
 cozy = {}
 cozy.players = {}
 
+local idlers = {}
+
 local anim = {
 	stand = {
 		frames = {x = 0,   y = 79},
@@ -92,6 +94,31 @@ cozy.set = function(name, posture, pos)
 	cozy.players[name] = posture
 end
 
+local function idle_check(player)
+	local name = player:get_player_name()
+	if minetest.get_player_by_name(name) and
+			cozy.players[name] == "stand" then
+		local pos = player:get_pos()
+		idlers[name] = idlers[name] or {pos = pos, timeout = 0}
+		local distance = vector.distance(pos, idlers[name].pos)
+		--print("distance:", distance)
+		if distance == 0 then
+			idlers[name].timeout = idlers[name].timeout + 5
+		else
+			idlers[name].timeout = 0
+		end
+		idlers[name].pos = pos
+		--print("timeout:", idlers[name].timeout)
+		if idlers[name].timeout >= 60 then
+			cozy.set(name, "sit")
+			idlers[name].timeout = 0
+		end
+		minetest.after(5, function()
+			idle_check(player)
+		end)
+	end
+end
+
 minetest.register_chatcommand("cozy", {
 	description = "Set posture",
 	params = "[sit|lay|stand]",
@@ -101,6 +128,9 @@ minetest.register_chatcommand("cozy", {
 
 minetest.register_on_joinplayer(function(player)
 	cozy.players[player:get_player_name()] = "stand"
+	minetest.after(5, function()
+		idle_check(player)
+	end)
 end)
 
 minetest.register_on_leaveplayer(function(player)

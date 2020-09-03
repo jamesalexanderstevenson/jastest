@@ -38,10 +38,10 @@ local function poll(player)
 			})
 			sneaking[name] = false
 		end
+		minetest.after(0.09, function()
+			poll(player)
+		end)
 	end
-	minetest.after(0.1, function()
-		poll(player)
-	end)
 end
 
 minetest.register_on_joinplayer(function(player)
