@@ -262,7 +262,7 @@ minetest.register_craftitem("server:setter", {
 	end,
 })
 
-minetest.register_tool("server:adminpick", {
+minetest.register_tool("server:adminpick2", {
 	description = "Admin Pickaxe",
 	inventory_image = "server_adminpick.png",
 	range = 11,
