@@ -233,7 +233,7 @@ minetest.override_chatcommand("msg", {
 })
 
 -- Pick and setter
-minetest.register_craftitem("server:setter", {
+minetest.register_craftitem("server:setter2", {
 	description = "Super Setter",
 	inventory_image = "default_tool_steelpick.png^default_obsidian_shard.png",
 	groups = {not_in_creative_inventory = 1},
