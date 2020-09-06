@@ -83,6 +83,7 @@ local on_punch = function(pos, node, puncher, pointed_thing)
 		hud.message(puncher, "Hold still")
 		timer = function(p, player, time, meta, sid, warp)
 			if not player then
+				meta:set_string("state", "")
 				return
 			end
 			if vector.equals(p, player:get_pos()) then
