@@ -82,7 +82,10 @@ local on_punch = function(pos, node, puncher, pointed_thing)
 		local p = puncher:get_pos()
 		hud.message(puncher, "Hold still")
 		timer = function(p, player, time, meta, sid, warp)
-			if player and vector.equals(p, player:get_pos()) then
+			if not player then
+				return
+			end
+			if vector.equals(p, player:get_pos()) then
 				if time >= 4.4 then
 					minetest.sound_fade(sid, -1, 0)
 					meta:set_string("state", "")
