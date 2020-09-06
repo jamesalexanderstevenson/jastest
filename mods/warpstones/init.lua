@@ -82,7 +82,7 @@ local on_punch = function(pos, node, puncher, pointed_thing)
 		local p = puncher:get_pos()
 		hud.message(puncher, "Hold still")
 		timer = function(p, player, time, meta, sid, warp)
-			if not minetest.get_player_by_name(name) then
+			if not minetest.get_player_by_name(puncher:get_player_name()) then
 				meta:set_string("state", "")
 				return
 			end
