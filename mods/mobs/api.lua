@@ -3342,15 +3342,12 @@ function mob_class:on_step(dtime)
 	self.env_damage_timer = self.env_damage_timer + dtime
 
 	if (self.state == "attack" and self.env_damage_timer > 1)
-	or self.state ~= "attack" then
-
+			or self.state ~= "attack" then
 		self.env_damage_timer = 0
-
 		-- check for environmental damage (water, fire, lava etc.)
-		--if self:do_env_damage() then return end
-
+		if self:do_env_damage() then return end
 		-- node replace check (cow eats grass etc.)
-		--self:replace(pos)
+		self:replace(pos)
 	end
 
 	self:general_attack()
