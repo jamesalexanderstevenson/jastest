@@ -951,7 +951,9 @@ function mob_class:do_env_damage()
 	end
 
 	local pos = self.object:get_pos()
-
+	if not pos then
+		return false
+	end
 	self.time_of_day = minetest.get_timeofday()
 
 	-- remove mob if standing inside ignore node
