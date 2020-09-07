@@ -135,8 +135,12 @@ end
 local function cycle_wp(player)
 	local name = player:get_player_name()
 	local ci = walkie.players[name].waypoints.ci
+	if not ci then
+		ci = 1
+	else
+		ci = ci % #wps + 1
+	end
 	local wp = walkie.players[name].waypoints.pos
-	ci = ci % #wps + 1
 	walkie.players[name].waypoints.ci = ci
 	local id = wps[ci]
 	local pos = walkie.players[name].waypoints[id]
