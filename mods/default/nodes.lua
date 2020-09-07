@@ -221,6 +221,10 @@ default:brick
 
 default:meselamp
 default:mese_post_light
+default:mese_post_light_acacia_wood
+default:mese_post_light_junglewood
+default:mese_post_light_pine_wood
+default:mese_post_light_aspen_wood
 
 Misc
 ----
@@ -430,7 +434,7 @@ minetest.register_node("default:obsidian_light_mese", {
 			"q_oblight2.png"},
 	paramtype = "light",
 	paramtype2 = "facedir",
-	sounds = default.node_sound_stone_defaults(),
+	sounds = default.node_sound_glass_defaults(),
 	groups = {cracky = 2, level = 2, obsidian = 1},
 	light_source = 9,
 })
@@ -442,7 +446,7 @@ minetest.register_node("default:obsidian_light_iron", {
 			"q_oblight.png"},
 	paramtype = "light",
 	paramtype2 = "facedir",
-	sounds = default.node_sound_stone_defaults(),
+	sounds = default.node_sound_glass_defaults(),
 	groups = {cracky = 2, level = 2, obsidian = 1},
 	light_source = 9,
 })
@@ -465,7 +469,7 @@ minetest.register_node("default:dirt_with_grass", {
 	groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
 	drop = "default:dirt",
 	sounds = default.node_sound_dirt_defaults({
-		footstep = {name = "default_grass_footstep", gain = 0.75},
+		footstep = {name = "default_grass_footstep", gain = 0.25},
 	}),
 })
 
@@ -680,7 +684,7 @@ minetest.register_node("default:ice", {
 	is_ground_content = false,
 	paramtype = "light",
 	groups = {cracky = 3, slippery = 3, melty = 1},
-	sounds = default.node_sound_glass_defaults(),
+	sounds = default.node_sound_ice_defaults(),
 })
 
 -- Mapgen-placed ice with 'is ground content = true' to contain tunnels
@@ -691,7 +695,7 @@ minetest.register_node("default:cave_ice", {
 	groups = {cracky = 3, slippery = 3, melty = 1,
 			not_in_creative_inventory = 1},
 	drop = "default:ice",
-	sounds = default.node_sound_glass_defaults(),
+	sounds = default.node_sound_ice_defaults(),
 })
 
 --
@@ -832,7 +836,7 @@ minetest.register_node("default:apple", {
 	},
 	groups = {fleshy = 3, dig_immediate = 3, flammable = 2,
 		leafdecay = 3, leafdecay_drop = 1, food_apple = 1},
-	on_use = minetest.item_eat(10),
+	on_use = minetest.item_eat(2),
 	sounds = default.node_sound_leaves_defaults(),
 
 	after_place_node = function(pos, placer, itemstack)
@@ -2863,12 +2867,10 @@ local function register_sign(material, desc, def)
 		sounds = def.sounds,
 
 		on_construct = function(pos)
-			--local n = minetest.get_node(pos)
 			local meta = minetest.get_meta(pos)
 			meta:set_string("formspec", "field[text;;${text}]")
 		end,
 		on_receive_fields = function(pos, formname, fields, sender)
-			--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
 			local player_name = sender:get_player_name()
 			if minetest.is_protected(pos, player_name) then
 				minetest.record_protection_violation(pos, player_name)
@@ -2885,7 +2887,7 @@ local function register_sign(material, desc, def)
 			end
 			--minetest.log("action", (player_name or "") .. " wrote \"" ..
 			print((player_name or "") .. " wrote \"" ..
-				text .. "\" to sign at " .. minetest.pos_to_string(pos))
+					text .. "\" to sign at " .. minetest.pos_to_string(pos))
 			local meta = minetest.get_meta(pos)
 			meta:set_string("text", text)
 
@@ -3124,25 +3126,34 @@ minetest.register_node("default:meselamp", {
 	light_source = default.LIGHT_MAX,
 })
 
-minetest.register_node("default:mese_post_light", {
-	description = S("Mese Post Light"),
-	tiles = {"default_mese_post_light_top.png", "default_mese_post_light_top.png",
-		"default_mese_post_light_side_dark.png", "default_mese_post_light_side_dark.png",
-		"default_mese_post_light_side.png", "default_mese_post_light_side.png"},
-	wield_image = "default_mese_post_light_side.png",
-	drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-2 / 16, -8 / 16, -2 / 16, 2 / 16, 8 / 16, 2 / 16},
-		},
-	},
-	paramtype = "light",
-	light_source = default.LIGHT_MAX,
-	sunlight_propagates = true,
-	is_ground_content = false,
-	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
-	sounds = default.node_sound_wood_defaults(),
+default.register_mesepost("default:mese_post_light", {
+	description = S("Apple Wood Mese Post Light"),
+	texture = "default_fence_wood.png",
+	material = "default:wood",
+})
+
+default.register_mesepost("default:mese_post_light_acacia", {
+	description = S("Acacia Wood Mese Post Light"),
+	texture = "default_fence_acacia_wood.png",
+	material = "default:acacia_wood",
+})
+
+default.register_mesepost("default:mese_post_light_junglewood", {
+	description = S("Jungle Wood Mese Post Light"),
+	texture = "default_fence_junglewood.png",
+	material = "default:junglewood",
+})
+
+default.register_mesepost("default:mese_post_light_pine_wood", {
+	description = S("Pine Wood Mese Post Light"),
+	texture = "default_fence_pine_wood.png",
+	material = "default:pine_wood",
+})
+
+default.register_mesepost("default:mese_post_light_aspen_wood", {
+	description = S("Aspen Wood Mese Post Light"),
+	texture = "default_fence_aspen_wood.png",
+	material = "default:aspen_wood",
 })
 
 --
