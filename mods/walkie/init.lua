@@ -12,13 +12,13 @@ local pi = math.pi
 local wps = {[1] = "death", [2] = "cmd", [3] = "spawn", [4] = "respawn",}
 
 local hud_elem_compass = {
-	hud_elem_type = "image",
+	hud_elem_type = "compass",
 	position = {x = 1, y = 1},
-	name = "Compass",
-	scale = {x = 1, y = 1},
-	text = "walkie_empty.png",
-	alignment = {x = -1, y = -1},
 	offset = {x = -20, y = -156},
+	size = {x = 36, y = 36},
+	alignment = {x = -1, y = -1},
+	text = "walkie_empty.png",
+	dir = 1,
 }
 
 local hud_elem_coords = {
@@ -56,13 +56,16 @@ local function updater(player)
 		walkie.players[name].active = true
 		-- Show compass & coordinates.
 		walkie.players[name].pos = player:get_pos()
-		walkie.players[name].dir = player:get_look_horizontal()
 		local p = vector.round(walkie.players[name].pos)
-		local d = floor(walkie.players[name].dir * pi)
+		--walkie.players[name].dir = player:get_look_horizontal()
+		--local d = floor(walkie.players[name].dir * pi)
+		--[[
 		if d >= 1 and d < 4 then
+		--]]
 			player:hud_change(walkie.meters[name].compass,
 					"text",
-					"walkie_compass_nw.png")
+					"walkie_compass_n.png")
+		--[[
 		elseif d >= 4 and d < 6 then
 			player:hud_change(walkie.meters[name].compass,
 					"text",
@@ -92,6 +95,7 @@ local function updater(player)
 					"text",
 					"walkie_compass_n.png")
 		end
+		--]]
 		player:hud_change(walkie.meters[name].coords,
 				"text",
 				p.x .. ", " .. p.y .. ", " .. p.z)
@@ -113,6 +117,15 @@ local function updater(player)
 				end
 				minetest.sound_play("walkie_blip", {object = player}, true)
 			end
+		end
+	elseif walkie.players[name].active and wielding then
+		local pos = player:get_pos()
+		if vector.distance(pos, walkie.players[name].pos) ~= 0 then
+			walkie.players[name].pos = pos
+			local p = vector.round(walkie.players[name].pos)
+			player:hud_change(walkie.meters[name].coords,
+					"text",
+					p.x .. ", " .. p.y .. ", " .. p.z)
 		end
 	elseif walkie.players[name].active and not wielding then
 		walkie.players[name].active = false
