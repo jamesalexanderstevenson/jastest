@@ -83,7 +83,7 @@ mobs.loho = function(player, pos)
 					end
 				end
 				if out_of_sight then
-					if not hostile and (dirt or snow or grass) then
+					if (animal or npc) and (dirt or snow or grass) and pos.y > 0 then
 						if maap:find("sheep") then
 							maap = "mobs:sheep_white"
 						end
@@ -112,8 +112,7 @@ mobs.loho = function(player, pos)
 							minetest.add_entity(lo, maap)
 							print(os.date(), maap)
 						end
-					elseif (stone or obsidian or grass) and (hostile or npc) and
-								(pos.y < -250 or night) then
+					elseif (stone or obsidian or grass) and (pos.y < 0 or night) then
 						if maap == "mobs:lava_flan" and not lava and rand() >= 0.5 then
 							maap = "mobs:oerkki"
 						elseif lava then
