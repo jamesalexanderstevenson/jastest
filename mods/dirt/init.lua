@@ -4,8 +4,8 @@ minetest.register_abm({
 		"default:grass_4",
 		"default:grass_5"
 	},
-	interval = 30,
-	chance = 3,
+	interval = 60,
+	chance = 10,
 	catch_up = false,
 	action = function(pos, node)
 		local grass = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
@@ -22,8 +22,8 @@ minetest.register_abm({
 		"default:grass_5",
 		"default:papyrus",
 	},
-	interval = 30,
-	chance = 3,
+	interval = 60,
+	chance = 10,
 	catch_up = false,
 	action = function(pos, node)
 		local grass = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
