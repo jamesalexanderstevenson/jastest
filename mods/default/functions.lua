@@ -593,7 +593,7 @@ minetest.register_abm({
 		"group:dry_grass",
 		"default:snow",
 	},
-	interval = 6,
+	interval = 60,
 	chance = 50,
 	catch_up = false,
 	action = function(pos, node)
@@ -633,7 +633,7 @@ minetest.register_abm({
 minetest.register_abm({
 	label = "Grass covered",
 	nodenames = {"group:spreading_dirt_type", "default:dry_dirt_with_dry_grass"},
-	interval = 8,
+	interval = 60,
 	chance = 50,
 	catch_up = false,
 	action = function(pos, node)
@@ -671,7 +671,7 @@ minetest.register_abm({
 		"stairs:stair_inner_cobble", "stairs:stair_outer_cobble",
 		"walls:cobble"},
 	neighbors = {"group:water"},
-	interval = 16,
+	interval = 60,
 	chance = 200,
 	catch_up = false,
 	action = function(pos, node)
@@ -793,8 +793,8 @@ minetest.register_abm({
 		"default:bush_leaves",
 	},
 	neighbors = {"air"},
-	interval = 1,
-	chance = 3,
+	interval = 10,
+	chance = 5,
 	action = function(pos, node)
 		local nn = minetest.get_node(pos)
 		if nn.param2 == 1 then
