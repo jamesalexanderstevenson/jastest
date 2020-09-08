@@ -120,11 +120,11 @@ mobs.loho = function(player, pos)
 						elseif lava then
 							maap = "mobs:lava_flan"
 						end
-						if minetest.is_protected(lo, "") or rand() >= 0.667 then
+						if minetest.is_protected(lo, "") or rand() >= 0.9 then
 							maap = "mobs:rat"
-							if rand() < 0.34 then
+							if rand() < 0.2 then
 								maap = "mobs:npc"
-							elseif rand() >= 0.67 then
+							elseif rand() >= 0.9 then
 								maap = "mobs:trader"
 							end
 						end
