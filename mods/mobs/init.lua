@@ -83,36 +83,34 @@ mobs.loho = function(player, pos)
 					end
 				end
 				if out_of_sight then
-					if dirt or snow or grass then
-						if not hostile then
-							if maap:find("sheep") then
-								maap = "mobs:sheep_white"
+					if not hostile and (dirt or snow or grass) then
+						if maap:find("sheep") then
+							maap = "mobs:sheep_white"
+						end
+						if snow and rand() >= 0.5 then
+							maap = "mobs:penguin"
+						end
+						if flower then
+							maap = "mobs:bee"
+						end
+						local c = 0
+						for k, v in pairs(o) do
+							local loa = v:get_luaentity()
+							if loa and loa.health then
+								c = c + 1
 							end
-							if snow and rand() >= 0.5 then
-								maap = "mobs:penguin"
+						end
+						local ob = minetest.get_objects_inside_radius(lo, 16)
+						for k, v in pairs(ob) do
+							local loa = v:get_luaentity()
+							if loa and loa.health then
+								c = c + 1
 							end
-							if flower then
-								maap = "mobs:bee"
-							end
-							local c = 0
-							for k, v in pairs(o) do
-								local loa = v:get_luaentity()
-								if loa and loa.health then
-									c = c + 1
-								end
-							end
-							local ob = minetest.get_objects_inside_radius(lo, 16)
-							for k, v in pairs(ob) do
-								local loa = v:get_luaentity()
-								if loa and loa.health then
-									c = c + 1
-								end
-							end
-							if c < threshold1 and 
-									vector.distance(pos, lo) > threshold1_dist then
-								minetest.add_entity(lo, maap)
-								print(os.date(), maap)
-							end
+						end
+						if c < threshold1 and 
+								vector.distance(pos, lo) > threshold1_dist then
+							minetest.add_entity(lo, maap)
+							print(os.date(), maap)
 						end
 					elseif (stone or obsidian or grass) and (hostile or npc) and
 								(pos.y < -250 or night) then
