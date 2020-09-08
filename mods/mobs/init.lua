@@ -114,8 +114,8 @@ mobs.loho = function(player, pos)
 								print(os.date(), maap)
 							end
 						end
-					elseif (stone or obsidian) and (hostile or npc)
-							and (pos.y < -250 or night) then
+					elseif (stone or obsidian or grass) and (hostile or npc) and
+								(pos.y < -250 or night) then
 						if maap == "mobs:lava_flan" and not lava and rand() >= 0.5 then
 							maap = "mobs:oerkki"
 						elseif lava then
