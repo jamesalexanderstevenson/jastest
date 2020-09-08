@@ -12,25 +12,24 @@ mobs.human = {
 
 	items = {
 		--{item for sale, price, chance of appearing in trader's inventory}
-		{"default:apple 10", "default:gold_ingot 2", 10},
-		{"farming:bread 10", "default:gold_ingot 4", 5},
-		{"default:clay 10", "default:gold_ingot 2", 12},
-		{"default:brick 10", "default:gold_ingot 4", 17},
-		{"default:glass 10", "default:gold_ingot 4", 17},
-		{"default:obsidian 10", "default:gold_ingot 15", 50},
-		{"default:diamond 1", "default:gold_ingot 5", 40},
-		{"farming:wheat 10", "default:gold_ingot 2", 17},
-		{"default:tree 5", "default:gold_ingot 4", 20},
-		{"default:stone 10", "default:gold_ingot 8", 17},
-		{"default:desert_stone 10", "default:gold_ingot 8", 27},
-		{"default:sapling 1", "default:gold_ingot 1", 7},
-		{"default:pick_steel 1", "default:gold_ingot 2", 7},
-		{"default:sword_steel 1", "default:gold_ingot 2", 17},
-		{"default:shovel_steel 1", "default:gold_ingot 1", 17},
-		{"default:cactus 2", "default:gold_ingot 2", 40},
-		{"default:papyrus 2", "default:gold_ingot 2", 40},
-		{"default:mese_crystal_fragment 1", "default:dirt_with_grass 10", 90},
-		{"default:mese_crystal_fragment 1", "default:gold_ingot 5", 90},
+		{"default:apple 10", "mtd:gold_coin 2", 10},
+		{"farming:bread 10", "mtd:gold_coin 4", 5},
+		{"default:clay 10", "mtd:gold_coin 2", 12},
+		{"default:brick 10", "mtd:gold_coin 4", 17},
+		{"default:glass 10", "mtd:gold_coin 4", 17},
+		{"default:obsidian 10", "mtd:gold_coin 15", 50},
+		{"default:diamond 1", "mtd:gold_coin 5", 40},
+		{"farming:wheat 10", "mtd:gold_coin 2", 17},
+		{"default:tree 5", "mtd:gold_coin 4", 20},
+		{"default:stone 10", "mtd:gold_coin 8", 17},
+		{"default:desert_stone 10", "mtd:gold_coin 8", 27},
+		{"default:sapling 1", "mtd:gold_coin 1", 7},
+		{"default:pick_steel 1", "mtd:gold_coin 2", 7},
+		{"default:sword_steel 1", "mtd:gold_coin 2", 17},
+		{"default:shovel_steel 1", "mtd:gold_coin 1", 17},
+		{"default:cactus 2", "mtd:gold_coin 2", 40},
+		{"default:papyrus 2", "mtd:gold_coin 2", 40},
+		{"default:mese_crystal_fragment 1", "mtd:gold_coin 5", 90},
 	}
 }
 
@@ -87,11 +86,13 @@ mobs:register_mob("mobs:trader", {
 		mobs_trader(self, clicker, entity, mobs.human)
 	end,
 	on_spawn = function(self)
-		self.nametag = S("Trader")
+		self.game_name = tostring(mobs.human.names[math.random(1, #mobs.human.names)])
+		self.nametag = S("Trader @1", self.game_name)
 		self.object:set_properties({
 			nametag = self.nametag,
-			nametag_color = "#FFFFFF"
+			nametag_color = "#00FF00"
 		})
+
 		return true -- return true so on_spawn is run once only
 	end,
 })
