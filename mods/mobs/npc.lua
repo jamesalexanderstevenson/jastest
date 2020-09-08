@@ -40,7 +40,7 @@ mobs:register_mob("mobs:npc", {
 	drops = {
 		{name = "default:wood", chance = 1, min = 1, max = 3},
 		{name = "default:apple", chance = 2, min = 1, max = 2},
-		{name = "default:axe_stone", chance = 5, min = 1, max = 1},
+		{name = "walkie:talkie", chance = 5, min = 1, max = 1},
 	},
 	--water_damage = 0,
 	--lava_damage = 2,
@@ -77,7 +77,7 @@ mobs:register_mob("mobs:npc", {
 		local name = clicker:get_player_name()
 
 		-- right clicking with gold lump drops random item from mobs.npc_drops
-		if item:get_name() == "default:gold_lump" then
+		if item:get_name() == "mtd:gold_coin" then
 
 			if not mobs.is_creative(name) then
 				item:take_item()
