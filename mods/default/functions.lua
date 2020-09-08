@@ -859,9 +859,9 @@ minetest.register_abm({
 	label = "Water drop",
 	nodenames = {"default:water_source"},
 	neighbors = {"default:water_flowing", "air"},
-	interval = 3,
-	chance = 4,
-	catch_up = false,
+	interval = 15,
+	chance = 10,
+	catch_up = true,
 	action = function(pos, node)
 		local pb = {x = pos.x, y = pos.y - 1, z = pos.z}
 		local nb = minetest.get_node(pb)
@@ -879,9 +879,9 @@ minetest.register_abm({
 	label = "River water drop",
 	nodenames = {"default:river_water_source"},
 	neighbors = {"default:river_water_flowing", "air"},
-	interval = 3,
-	chance = 4,
-	catch_up = false,
+	interval = 15,
+	chance = 10,
+	catch_up = true,
 	action = function(pos, node)
 		local pb = {x = pos.x, y = pos.y - 1, z = pos.z}
 		local nb = minetest.get_node(pb)
@@ -898,9 +898,9 @@ minetest.register_abm({
 minetest.register_abm({
 	nodenames = {"default:lava_source"},
 	neighbors = {"default:lava_flowing", "air"},
-	interval = 1,
-	chance = 1,
-	catch_up = false,
+	interval = 15,
+	chance = 10,
+	catch_up = true,
 	action = function(pos, node)
 		local pb = {x = pos.x, y = pos.y - 1, z = pos.z}
 		local nb = minetest.get_node(pb)
@@ -918,8 +918,8 @@ minetest.register_abm({
 	nodenames = {"default:water_flowing", "default:river_water_flowing", "default:lava_flowing"},
 	neighbors = {"air"},
 	interval = 15,
-	chance = 3,
-	catch_up = false,
+	chance = 10,
+	catch_up = true,
 	action = function(pos, node)
 		local l = node.name:sub(1, -8)
 		l = l .. "source"
