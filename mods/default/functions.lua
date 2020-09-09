@@ -896,6 +896,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
+	label = "Lava drop",
 	nodenames = {"default:lava_source"},
 	neighbors = {"default:lava_flowing", "air"},
 	interval = 15,

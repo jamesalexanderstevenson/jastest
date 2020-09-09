@@ -91,6 +91,7 @@ local fsnn_dry = {
 }
 
 minetest.register_abm({
+	label = "Biome growth",
 	nodenames = {"default:dirt_with_grass"},
 	neighbors = fsnn_dry,
 	chance = 50,

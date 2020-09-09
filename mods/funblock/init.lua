@@ -173,6 +173,7 @@ minetest.register_on_leaveplayer(function(player)
 end)
 
 minetest.register_abm({
+	label = "Funblock",
 	nodenames = {"funblock:block"},
 	interval = 1,
 	chance = 1,

@@ -164,8 +164,8 @@ minetest.register_abm({
 		"group:oddly_breakable_by_hand",
 		"group:dig_immediate"
 	},
-	interval = 4,
-	chance = 64,
+	interval = 25,
+	chance = 96,
 	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if active_object_count < 1 and active_object_count_wider < 16 then
