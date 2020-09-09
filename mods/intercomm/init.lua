@@ -60,6 +60,6 @@ minetest.register_craft({
 	recipe = {
 		{"default:copper_ingot", "default:mese_crystal", "default:copper_ingot"},
 		{"default:steel_ingot", "walkie:talkie", "default:steel_ingot"},
-		{"default:copper_ingot", "diamond:diamond", "default:copper_ingot"},
+		{"default:copper_ingot", "default:diamond", "default:copper_ingot"},
 	}
 })
