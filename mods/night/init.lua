@@ -2,7 +2,7 @@
 -- Copyright 2020 James Stevenson
 -- GNU GPL 3+
 
-night = {toggle = false, night = false}
+night = {toggle = false}
 local players = {}
 
 local store = minetest.get_mod_storage()
@@ -24,12 +24,12 @@ local function check_time()
 	check_time_speed()	
 	local t = os.date("*t")
 	time = minetest.get_timeofday()
-	if time > 0.45 and time < 0.9 and not night.night then
-		night.night = true
-		print("Good night")
-	elseif night.night and (time <= 0.45 or time >= 0.9) then
+	if time > 0.45 and time < 0.9 then
 		night.night = false
 		print("Good day")
+	elseif (time <= 0.45 or time >= 0.9) then
+		night.night = true
+		print("Good night")
 	end
 	if night.toggle then
                 minetest.set_timeofday(((t.hour + 12) % 24 * 60 + t.min) / 1440)

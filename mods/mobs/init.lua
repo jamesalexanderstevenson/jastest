@@ -123,9 +123,9 @@ mobs.loho = function(player, pos)
 							maap = "mobs:oerkki"
 						elseif lava then
 							maap = "mobs:lava_flan"
-						elseif sand and rand >= 0.5 then
+						elseif sand and rand() >= 0.5 then
 							maap = "mobs:sand_monster"
-						elseif dirt and rand >= 0.5 then
+						elseif dirt and rand() >= 0.5 then
 							maap = "mobs:dirt_monster"
 						end
 						if minetest.is_protected(lo, "") or rand() >= 0.9 then
