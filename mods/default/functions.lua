@@ -596,7 +596,7 @@ minetest.register_abm({
 		"default:snow",
 	},
 	interval = 60,
-	chance = 50,
+	chance = 500,
 	catch_up = false,
 	action = function(pos, node)
 		-- Check for darkness: night, shadow or under a light-blocking node
@@ -636,7 +636,7 @@ minetest.register_abm({
 	label = "Grass covered",
 	nodenames = {"group:spreading_dirt_type", "default:dry_dirt_with_dry_grass"},
 	interval = 60,
-	chance = 50,
+	chance = 500,
 	catch_up = false,
 	action = function(pos, node)
 		local above = {x = pos.x, y = pos.y + 1, z = pos.z}
