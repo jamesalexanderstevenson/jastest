@@ -26,10 +26,8 @@ local function check_time()
 	time = minetest.get_timeofday()
 	if time > 0.45 and time < 0.9 then
 		night.night = false
-		print("Good day")
 	elseif (time <= 0.45 or time >= 0.9) then
 		night.night = true
-		print("Good night")
 	end
 	if night.toggle then
                 minetest.set_timeofday(((t.hour + 12) % 24 * 60 + t.min) / 1440)
