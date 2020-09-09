@@ -55,6 +55,7 @@ mobs.loho = function(player, pos)
 				local flower = n.name:find("flower")
 				local dirt = n.name:find("dirt")
 				local grass = n.name:find("grass")
+				local sand = n.name:find("sand")
 				local snow = n.name:find("snow")
 				local stone = n.name:find("stone")
 				local obsidian = n.name:find("obsidian")
@@ -115,16 +116,20 @@ mobs.loho = function(player, pos)
 						end
 					elseif (hostile or npc) and (stone or obsidian or grass) and
 							(pos.y < 0 or not day) then
-						if maap == "mobs:lava_flan" and not lava and rand() >= 0.5 then
+						if maap == "mobs:lava_flan" and not lava then
 							maap = "mobs:oerkki"
 						elseif lava then
 							maap = "mobs:lava_flan"
+						elseif sand then
+							maap = "mobs:sand_monster"
+						elseif dirt then
+							maap = "mobs:dirt_monster"
 						end
 						if minetest.is_protected(lo, "") or rand() >= 0.9 then
 							maap = "mobs:rat"
-							if rand() < 0.2 then
+							if rand() < 0.1 then
 								maap = "mobs:npc"
-							elseif rand() >= 0.9 then
+							elseif rand() >= 0.95 then
 								maap = "mobs:trader"
 							end
 						end
