@@ -30,6 +30,7 @@ minetest.register_node("trap:obsidian_ghost", {
 })
 
 minetest.register_abm({
+	label = "Primed trap obsidian",
 	nodenames = "trap:obsidian",
 	neighbors = "air",
 	interval = 1,
@@ -49,6 +50,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
+	label = "Trapped obsidian",
 	nodenames = "trap:obsidian_ghost",
 	neighbors = "air",
 	interval = 1,

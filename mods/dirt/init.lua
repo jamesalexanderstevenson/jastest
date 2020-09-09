@@ -1,4 +1,5 @@
 minetest.register_abm({
+	label = "Mossycobble to dirt",
 	nodenames = {"default:mossycobble"},
 	neighbors = {
 		"default:grass_4",
@@ -16,6 +17,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
+	label = "Dirt to grassy dirt",
 	nodenames = {"default:dirt"},
 	neighbors = {
 		"default:grass_4",

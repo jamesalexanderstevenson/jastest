@@ -404,6 +404,7 @@ minetest.register_entity("3d_armor_stand:armor_entity", {
 })
 
 minetest.register_abm({
+	label = "3d_armor_stand updater",
 	nodenames = {"3d_armor_stand:locked_armor_stand", "3d_armor_stand:armor_stand"},
 	interval = 15,
 	chance = 1,

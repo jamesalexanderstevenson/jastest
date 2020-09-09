@@ -256,8 +256,9 @@ minetest.register_abm({
 	label = "Grow cactus",
 	nodenames = {"default:cactus"},
 	neighbors = {"group:sand"},
-	interval = 12,
+	interval = 128,
 	chance = 83,
+	catch_up = true,
 	action = function(...)
 		default.grow_cactus(...)
 	end
@@ -277,8 +278,9 @@ minetest.register_abm({
 		"default:dry_dirt",
 		"default:dry_dirt_with_dry_grass",
 	},
-	interval = 14,
-	chance = 71,
+	interval = 120,
+	chance = 55,
+	catch_up = true,
 	action = function(...)
 		default.grow_papyrus(...)
 	end
@@ -760,6 +762,7 @@ function default.can_interact_with_node(player, pos)
 end
 
 minetest.register_abm({
+	label = "Broken leaves repair",
 	nodenames = {
 		"default:leaves_broken",
 		"default:jungleleaves_broken",
@@ -781,6 +784,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
+	label = "Player breaks leaves",
 	nodenames = {
 		"default:leaves",
 		"default:jungleleaves",
@@ -916,6 +920,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
+	label = "Renew liquid",
 	nodenames = {"default:water_flowing", "default:river_water_flowing", "default:lava_flowing"},
 	neighbors = {"air"},
 	interval = 55,

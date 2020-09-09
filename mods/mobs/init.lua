@@ -155,6 +155,7 @@ mobs.loho = function(player, pos)
 end
 
 minetest.register_abm({
+	label = "Mob spawning",
 	nodenames = "air",
 	neighbors = {
 		"group:cracky",
@@ -164,8 +165,8 @@ minetest.register_abm({
 		"group:oddly_breakable_by_hand",
 		"group:dig_immediate"
 	},
-	interval = 25,
-	chance = 96,
+	interval = 35,
+	chance = 128,
 	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if active_object_count < 1 and active_object_count_wider < 16 then

@@ -241,6 +241,7 @@ local function grow_mese_crystal_ore(pos, node)
 end
 
 minetest.register_abm({
+	label = "Mese crystal ore growth",
 	nodenames = {"mese:crystal_ore1", "mese:crystal_ore2",
 			"mese:crystal_ore3"},
 	neighbors = {"default:obsidian", "default:lava_source"},
@@ -252,6 +253,7 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
+	label = "Mese crystal ore birth",
 	nodenames = {"default:obsidian"},
 	neighbors = {"group:water"},
 	interval = 45,

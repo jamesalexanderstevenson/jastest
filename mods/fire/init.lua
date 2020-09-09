@@ -46,6 +46,7 @@ minetest.register_node("fire:antifire", {
 })
 
 minetest.register_abm({
+	label = "Antifire",
 	nodenames = {"fire:antifire"},
 	interval = 1,
 	chance = 1,

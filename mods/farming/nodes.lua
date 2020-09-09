@@ -184,8 +184,8 @@ end
 minetest.register_abm({
 	label = "Farming soil",
 	nodenames = {"group:field"},
-	interval = 15,
-	chance = 4,
+	interval = 30,
+	chance = 64,
 	action = function(pos, node)
 		local n_def = minetest.registered_nodes[node.name] or nil
 		local wet = n_def.soil.wet or nil
