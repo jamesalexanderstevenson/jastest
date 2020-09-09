@@ -2,7 +2,7 @@
 -- Copyright 2020 James Stevenson
 -- GNU GPL 3+
 
-night = {toggle = false}
+night = {toggle = false, night = false}
 local players = {}
 
 local store = minetest.get_mod_storage()
@@ -10,7 +10,6 @@ local night_toggle = store:get("night_toggle")
 night.toggle = night_toggle and night_toggle == "true"
 local time = minetest.get_timeofday()
 local del = 0
-local click = false
 
 local function check_time_speed()
 	local time_speed = minetest.settings:get("time_speed")
@@ -25,11 +24,11 @@ local function check_time()
 	check_time_speed()	
 	local t = os.date("*t")
 	time = minetest.get_timeofday()
-	if time > 0.45 and time < 0.9 and not click then
-		click = true
+	if time > 0.45 and time < 0.9 and not night.night then
+		night.night = true
 		print("Good night")
-	elseif click and (time <= 0.45 or time >= 0.9) then
-		click = false
+	elseif night.night and (time <= 0.45 or time >= 0.9) then
+		night.night = false
 		print("Good day")
 	end
 	if night.toggle then
@@ -173,7 +172,7 @@ local function poll(name)
 end
 
 minetest.register_globalstep(function(dtime)
-	if del <= 60 then
+	if del <= 30 then
 		del = del + dtime
 		return
 	end

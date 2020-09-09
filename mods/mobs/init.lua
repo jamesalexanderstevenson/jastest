@@ -34,12 +34,14 @@ mobs.loho = function(player, pos)
 				end
 			end
 			if n and n.name ~= "air" then
+				--[[
 				local day = minetest.get_timeofday()
 				if day >= 0.45 and day <= 0.9 then
 					day = true
 				else
 					day = false
 				end
+				--]]
 				local ma = {}
 				for k, _ in pairs(mobs.spawning_mobs) do
 					ma[#ma + 1] = k
@@ -85,7 +87,7 @@ mobs.loho = function(player, pos)
 				end
 				if out_of_sight then
 					if (animal or npc) and (dirt or snow or grass) and
-							(pos.y >= 0 and day) then
+							pos.y >= 0 and not night.night then
 						if maap:find("sheep") then
 							maap = "mobs:sheep_white"
 						end
@@ -114,15 +116,16 @@ mobs.loho = function(player, pos)
 							minetest.add_entity(lo, maap)
 							print(os.date(), maap)
 						end
-					elseif (hostile or npc) and (stone or obsidian or grass) and
-							(pos.y < 0 or not day) then
+					elseif (hostile or npc) and
+							(stone or obsidian or grass or dirt or sand) and
+							(pos.y < 0 or night.night) then
 						if maap == "mobs:lava_flan" and not lava then
 							maap = "mobs:oerkki"
 						elseif lava then
 							maap = "mobs:lava_flan"
-						elseif sand then
+						elseif sand and rand >= 0.5 then
 							maap = "mobs:sand_monster"
-						elseif dirt then
+						elseif dirt and rand >= 0.5 then
 							maap = "mobs:dirt_monster"
 						end
 						if minetest.is_protected(lo, "") or rand() >= 0.9 then
