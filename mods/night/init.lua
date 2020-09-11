@@ -32,10 +32,10 @@ function night.check_time()
 
 	time = minetest.get_timeofday()
 	if time <= 0.25 or time >= 0.75 then
-		print("night", time)
+		--print("night", time)
 		night.night = true
 	else--if (time <= 0.45 or time >= 0.9) then
-		print("day", time)
+		--print("day", time)
 		night.night = false
 	end
 end
