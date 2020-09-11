@@ -87,7 +87,7 @@ mobs.loho = function(player, pos)
 				end
 				if out_of_sight then
 					if (animal or npc) and (dirt or snow or grass) and
-							pos.y >= 0 and not night.night then
+							lpo.y >= 0 and not night.night then
 						if maap:find("sheep") then
 							maap = "mobs:sheep_white"
 						end
@@ -118,7 +118,7 @@ mobs.loho = function(player, pos)
 						end
 					elseif (hostile or npc) and
 							(stone or obsidian or grass or dirt or sand) and
-							(pos.y < 16 or night.night) then
+							(lpo.y < 16 or night.night) then
 						if maap == "mobs:lava_flan" and not lava then
 							maap = "mobs:oerkki"
 						elseif lava then
@@ -128,7 +128,7 @@ mobs.loho = function(player, pos)
 						elseif dirt and rand() >= 0.5 then
 							maap = "mobs:dirt_monster"
 						end
-						if minetest.is_protected(lo, "") or rand() >= 0.9 then
+						if minetest.is_protected(lpo, "") or rand() >= 0.9 then
 							maap = "mobs:rat"
 							if rand() < 0.1 then
 								maap = "mobs:npc"
