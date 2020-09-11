@@ -114,11 +114,14 @@ mobs.loho = function(player, pos)
 						if c < threshold1 and 
 								vector.distance(pos, lo) > threshold1_dist then
 							minetest.add_entity(lo, maap)
-							print(night.night, lpo.y, os.date(), maap)
+							--[[
+							print("top", "night:", night.night, lpo.y, os.date(),
+									maap, "prot:", minetest.is_protected(lpo, ""))
+							--]]
 						end
 					elseif (hostile or npc) and
 							(stone or obsidian or grass or dirt or sand) and
-							(lpo.y < 16 or night.night) then
+							(lpo.y < -16 or night.night) then
 						if maap == "mobs:lava_flan" and not lava then
 							maap = "mobs:oerkki"
 						elseif lava then
@@ -152,8 +155,11 @@ mobs.loho = function(player, pos)
 						end
 						if c < threshold2 and
 								vector.distance(pos, lo) > threshold2_dist then
-							print(night.night, lpo.y, os.date(), maap)
 							minetest.add_entity(lo, maap)
+							--[[
+							print("bottom", "night:", night.night, lpo.y, os.date(),
+									maap, "prot:", minetest.is_protected(lpo, ""))
+							--]]
 						end
 					end
 				end
