@@ -20,21 +20,24 @@ end
 
 check_time_speed()
 
-local function check_time()
+function night.check_time()
 	check_time_speed()	
 	local t = os.date("*t")
-	time = minetest.get_timeofday()
-	if time > 0.45 and time < 0.9 then
-		night.night = false
-	elseif (time <= 0.45 or time >= 0.9) then
-		night.night = true
-	end
 	if night.toggle then
                 minetest.set_timeofday(((t.hour + 12) % 24 * 60 + t.min) / 1440)
         else
                 minetest.set_timeofday((t.hour * 60 + t.min) / 1440)
         end
 	store:set_string("night_toggle", tostring(night.toggle))
+
+	time = minetest.get_timeofday()
+	if time <= 0.25 or time >= 0.75 then
+		print("night", time)
+		night.night = true
+	else--if (time <= 0.45 or time >= 0.9) then
+		print("day", time)
+		night.night = false
+	end
 end
 
 local function envis(name, param)
@@ -174,7 +177,7 @@ minetest.register_globalstep(function(dtime)
 		del = del + dtime
 		return
 	end
-	check_time()
+	night.check_time()
 	del = 0
 end)
 
@@ -222,12 +225,19 @@ minetest.register_on_leaveplayer(function(player)
 	players[player:get_player_name()] = nil
 end)
 
-minetest.register_chatcommand("night_toggle", {
+minetest.register_chatcommand("night", {
 	description = "Display night/day status",
-	params = "",
+	params = "[time]",
 	privs = "shout",
-	func = function(name, param)
-		return true, "Toggle: " .. tostring(night.toggle)
+	func = function(name, params)
+		params = tonumber(params)
+		if params and minetest.check_player_privs(name, "server") then
+			minetest.set_timeofday(params)
+			hud.message("Time set")
+		end
+		return true, "Time:" .. minetest.get_timeofday() ..
+				" / Night: " .. tostring(night.night) ..
+				" / Toggle: " .. tostring(night.toggle)
 	end,
 })
 
@@ -244,4 +254,4 @@ minetest.register_chatcommand("sleep", {
 	end,
 })
 
-minetest.after(1, check_time)
+minetest.after(1, night.check_time)

@@ -153,14 +153,15 @@ function beds.kick_players()
 end
 
 function beds.skip_night()
-	local t = os.date("*t")
+	--local t = os.date("*t")
 	if night.toggle then
-                minetest.set_timeofday((t.hour * 60 + t.min) / 1440)
+		--minetest.set_timeofday((t.hour * 60 + t.min) / 1440)
 		night.toggle = false
         else
-                minetest.set_timeofday(((t.hour + 12) % 24 * 60 + t.min) / 1440)
+		--minetest.set_timeofday(((t.hour + 12) % 24 * 60 + t.min) / 1440)
 		night.toggle = true
         end
+	night.check_time()
 
 end
 

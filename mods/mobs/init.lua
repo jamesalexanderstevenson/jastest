@@ -114,7 +114,7 @@ mobs.loho = function(player, pos)
 						if c < threshold1 and 
 								vector.distance(pos, lo) > threshold1_dist then
 							minetest.add_entity(lo, maap)
-							print(os.date(), maap)
+							print("night:", night.night, os.date(), maap)
 						end
 					elseif (hostile or npc) and
 							(stone or obsidian or grass or dirt or sand) and
@@ -152,7 +152,7 @@ mobs.loho = function(player, pos)
 						end
 						if c < threshold2 and
 								vector.distance(pos, lo) > threshold2_dist then
-							print(os.date(), maap)
+							print("night:", night.night, os.date(), maap)
 							minetest.add_entity(lo, maap)
 						end
 					end
