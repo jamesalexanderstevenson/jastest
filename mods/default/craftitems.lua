@@ -289,6 +289,18 @@ minetest.register_craftitem("default:iron_lump", {
 minetest.register_craftitem("default:mese_crystal", {
 	description = S("Mese Crystal"),
 	inventory_image = "default_mese_crystal.png",
+	on_use = function(itemstack, user, pointed_thing)
+		--print(dump(pointed_thing))
+		if not pointed_thing or pointed_thing.type ~= "node" then
+			return itemstack
+		end
+		local n = minetest.get_node(pointed_thing.under)
+		if minetest.get_item_group(n.name, "igniter") > 0 then
+			minetest.swap_node(pointed_thing.under, {name = "fire:antifire"})
+			itemstack:take_item()
+		end
+		return itemstack
+	end,
 })
 
 minetest.register_craftitem("default:mese_crystal_fragment", {
