@@ -396,6 +396,11 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast, owne
 		queued_data.fn(queued_data.pos)
 	end
 
+	--[[
+	minetest.log("action", "TNT owned by " .. owner .. " detonated at " ..
+		minetest.pos_to_string(pos) .. " with radius " .. radius)
+	--]]
+
 	return drops, radius
 end
 
@@ -405,7 +410,7 @@ function tnt.boom(pos, def)
 	def.damage_radius = def.damage_radius or def.radius * 2
 	local meta = minetest.get_meta(pos)
 	local owner = meta:get_string("owner")
-	if not def.explode_center then
+	if not def.explode_center and def.ignore_protection ~= true then
 		minetest.set_node(pos, {name = "tnt:boom"})
 	end
 	local sound = def.sound or "tnt_explode"
@@ -420,6 +425,10 @@ function tnt.boom(pos, def)
 		eject_drops(drops, pos, radius)
 	end
 	add_effects(pos, radius, drops)
+	--[[
+	minetest.log("action", "A TNT explosion occurred at " .. minetest.pos_to_string(pos) ..
+		" with radius " .. radius)
+	--]]
 end
 
 minetest.register_node("tnt:boom", {
