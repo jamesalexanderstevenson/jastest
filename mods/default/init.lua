@@ -22,7 +22,6 @@ minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
 	local info = minetest.get_player_information(name)
 	if info and info.formspec_version and info.formspec_version > 1 then
-		--formspec = formspec .. "background9[5,5;1,1;gui_formbg.png;true;10]"
 		formspec = formspec .. "background9[5,5;1,1;craftguide_bg_full.png;true;10]"
 	else
 		formspec = formspec .. "background[5,5;1,1;gui_formbg.png;true]"
@@ -44,14 +43,14 @@ end
 
 default.gui_survival_form = "size[8,8.5]"..
 		forms.x ..
-		"list[current_player;main;0,4.25;8,1;]"..
-		"list[current_player;main;0,5.5;8,3;8]"..
-		"list[current_player;craft;1.75,0.5;3,3;]"..
-		"list[current_player;craftpreview;5.75,1.5;1,1;]"..
-		"image[4.75,1.5;1,1;gui_furnace_arrow_bg.png^[transformR270]"..
-		"listring[current_player;main]"..
-		"listring[current_player;craft]"..
-		forms.get_hotbar_bg(0,4.25)
+		"list[current_player;main;0,4.25;8,1;]" ..
+		"list[current_player;main;0,5.5;8,3;8]" ..
+		"list[current_player;craft;1.75,0.5;3,3;]" ..
+		"list[current_player;craftpreview;5.75,1.5;1,1;]" ..
+		"image[4.75,1.5;1,1;gui_furnace_arrow_bg.png^[transformR270]" ..
+		"listring[current_player;main]" ..
+		"listring[current_player;craft]" ..
+		forms.get_hotbar_bg(0, 4.25)
 
 -- Load files
 local default_path = minetest.get_modpath("default")
@@ -63,7 +62,7 @@ dofile(default_path.."/chests.lua")
 dofile(default_path.."/furnace.lua")
 dofile(default_path.."/torch.lua")
 dofile(default_path.."/tools.lua")
---dofile(default_path.."/item_entity.lua")
+dofile(default_path.."/item_entity.lua")
 dofile(default_path.."/craftitems.lua")
 dofile(default_path.."/crafting.lua")
 dofile(default_path.."/mapgen.lua")
