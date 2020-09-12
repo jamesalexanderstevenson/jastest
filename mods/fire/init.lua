@@ -205,7 +205,7 @@ minetest.override_item("default:coalblock", {
 --
 
 -- Enable if no setting present
-local flame_sound = false --minetest.settings:get_bool("flame_sound", true)
+local flame_sound = minetest.settings:get_bool("flame_sound", true)
 
 if flame_sound then
 	local handles = {}
