@@ -205,7 +205,7 @@ minetest.override_item("default:coalblock", {
 --
 
 -- Enable if no setting present
-local flame_sound = false --minetest.settings:get_bool("flame_sound", true)
+local flame_sound = minetest.settings:get_bool("flame_sound", true)
 
 if flame_sound then
 	local handles = {}
@@ -340,21 +340,16 @@ if fire_enabled then
 		catch_up = false,
 		action = function(pos)
 			local p = minetest.find_node_near(pos, 1, {"group:flammable"})
-			if p then
-				local flammable_node = minetest.get_node(p)
-				local def = minetest.registered_nodes[flammable_node.name]
-				if def.on_burn then
-					if not minetest.is_protected(pos, "") then
-						def.on_burn(p)
-					end
-				elseif not minetest.is_protected(pos, "") then
-					minetest.remove_node(p)
-					minetest.check_for_falling(p)
-				end
+			if not p then
+				return
 			end
-			p = minetest.find_node_near(pos, 1, {"group:water"})
-			if p then
-				minetest.set_node(pos, {name = "fire:antifire"})
+			local flammable_node = minetest.get_node(p)
+			local def = minetest.registered_nodes[flammable_node.name]
+			if def.on_burn then
+				def.on_burn(p)
+			else
+				minetest.remove_node(p)
+				minetest.check_for_falling(p)
 			end
 		end
 	})
