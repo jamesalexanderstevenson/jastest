@@ -30,9 +30,9 @@ mobs:register_mob("mobs:kitten", {
 		{"mobs_kitten_sandy.png"},
 	},
 	makes_footstep_sound = false,
-	sounds = {
-		random = "mobs_kitten",
-	},
+	--sounds = {
+		--random = "mobs_kitten",
+	--},
 	walk_velocity = 0.6,
 	walk_chance = 15,
 	run_velocity = 2,
@@ -98,10 +98,10 @@ mobs:register_mob("mobs:kitten", {
 
 		minetest.add_item(pos, "mobs:hairball")
 
-		minetest.sound_play("default_dig_snappy", {
+		minetest.sound_play("mobs_kitten", {
 			pos = pos,
 			gain = 1.0,
-			max_hear_distance = 5,
+			--max_hear_distance = 5,
 		}, true)
 	end,
 })
