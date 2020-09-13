@@ -75,6 +75,7 @@ minetest.register_entity("ambience:tv", {
 	initial_properties = {
 		visual = "sprite",
 		textures = {"doors_blank.png"},
+		pointable = false,
 	},
 	on_step = function(self, dtime)
 		local t = self.timer or 0

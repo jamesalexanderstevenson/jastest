@@ -23,6 +23,13 @@ local function sur(player)
 				end
 			end
 		end
+		local m = minetest.find_node_near(pos, 1, {"group:igniter", "group:torch"}, true)
+		if m then
+			local d = vector.distance(m, pos)
+			if d <= 0.75 then
+				player:set_hp(player:get_hp() - 5, {type = "set_hp", heat = true})
+			end
+		end
 	end
 	minetest.after(0.9, function()
 		sur(player)
