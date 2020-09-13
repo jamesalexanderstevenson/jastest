@@ -23,14 +23,14 @@ local function auto_pickup(player)
 
 	local alive = player:get_hp() > 0
 	local name = player:get_player_name()
-	local attached = player_api.player_attached[name]
+	--local attached = player_api.player_attached[name]
 
-	if alive and not attached and
+	if alive and --and not attached and
 			vector.equals(pos, player:get_pos()) then
 		--local new_pos = vector.new(player:get_pos()) -- try this if it crashes again
 		local pop = vector.new(player:get_pos())
 		if pop then
-			local o = minetest.get_objects_inside_radius(pop, 0.667)
+			local o = minetest.get_objects_inside_radius(pop, 1.25)
 			for i = 1, #o do
 				local obj = o[i]
 				local p = obj:is_player()
