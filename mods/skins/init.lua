@@ -244,14 +244,17 @@ minetest.register_on_joinplayer(function(player)
 			multiskin.set_player_skin(player, sk)
 			armor.textures[name].skin = sk
 			armor:set_player_armor(player)
-			local inv = player:get_inventory()
-			inv:set_size("skin", 1)
-			inv:set_stack("skin", 1, "skins:" .. rp)
 			if math.random() >= 0.5 then
 				meta:set_string("gender", "male")
 			else
 				meta:set_string("gender", "female")
 			end
+			local inv = player:get_inventory()
+			if not inv then
+				return
+			end
+			inv:set_size("skin", 1)
+			inv:set_stack("skin", 1, "skins:" .. rp)
 		end
 	end)
 end)
