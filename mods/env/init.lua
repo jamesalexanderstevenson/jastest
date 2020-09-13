@@ -1,6 +1,6 @@
--- move dropped items closer to player
--- check for nearby fire, lava, do environmental damage
--- etc
+-- mods/env is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 local function sur(player)
 	local name = player:get_player_name()
@@ -49,7 +49,7 @@ function minetest.handle_node_drops(pos, drops, digger)
 	local give_item
 	if inv then
 		give_item = function(item)
-			return item --inv:add_item("main", item)
+			return item
 		end
 	else
 		give_item = function(item)
@@ -62,9 +62,9 @@ function minetest.handle_node_drops(pos, drops, digger)
 		local left = give_item(dropped_item)
 		if type(left) == "string" or not left:is_empty() then
 			local p = {
-				x = pos.x + math.random()/2-0.25,
-				y = pos.y + math.random()/2-0.25,
-				z = pos.z + math.random()/2-0.25,
+				x = pos.x + math.random() / 2 - 0.25,
+				y = pos.y + math.random() / 2 - 0.25,
+				z = pos.z + math.random() / 2 - 0.25,
 			}
 			local o = minetest.add_item(p, left)
 			if digger and digger:is_player() then
