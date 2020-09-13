@@ -33,7 +33,7 @@ local function jump(player)
 		in_water = player:is_in_liquid()
 
 		local m = minetest.mod_channel_join(player:get_name())
-		if not ack then
+		if not jumping_ack then
 			m:send_all("jump_enable")
 		end
 		if j and not touching and not jumping and
@@ -41,7 +41,7 @@ local function jump(player)
 				minetest.get_us_time() - del > 334000 then
 			jumping = true
 			del = minetest.get_us_time()
-			if ack == "disabled" then
+			if jumping_ack == "disabled" then
 				sp({name = "jump_jump", gain = 0.2, pitch = 1.05})
 			else
 				m:send_all("jump")
