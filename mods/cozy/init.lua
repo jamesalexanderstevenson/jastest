@@ -1,3 +1,7 @@
+-- /mods/cozy is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 cozy = {}
 cozy.players = {}
 
@@ -101,14 +105,12 @@ local function idle_check(player)
 			local pos = player:get_pos()
 			idlers[name] = idlers[name] or {pos = pos, timeout = 0}
 			local distance = vector.distance(pos, idlers[name].pos)
-			--print("distance:", distance)
 			if distance == 0 then
 				idlers[name].timeout = idlers[name].timeout + 5
 			else
 				idlers[name].timeout = 0
 			end
 			idlers[name].pos = pos
-			--print("timeout:", idlers[name].timeout)
 			if idlers[name].timeout >= 60 then
 				cozy.set(name, "sit")
 				idlers[name].timeout = 0
@@ -135,5 +137,9 @@ minetest.register_on_joinplayer(function(player)
 end)
 
 minetest.register_on_leaveplayer(function(player)
-	cozy.players[player:get_player_name()] = nil
+	local name = player:get_player_name()
+	cozy.players[name] = nil
+	if idlers[name] then
+		idlers[name] = nil
+	end
 end)
