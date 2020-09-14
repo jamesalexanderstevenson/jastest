@@ -148,14 +148,30 @@ end
 -- Lavacooling
 --
 
+local minerals = {
+	{name = "default:stone_with_emerald", chance = 75},
+	{name = "default:stone_with_diamond", chance = 60},
+	{name = "default:stone_with_gold", chance = 40},
+	{name = "default:stone_with_coal", chance = 25},
+	{name = "default:stone_with_copper", chance = 20},
+	{name = "default:stone_with_iron", chance = 15},
+}
+
 default.cool_lava = function(pos, node)
 	if node.name == "default:lava_source" then
 		minetest.set_node(pos, {name = "default:obsidian"})
 	else -- Lava flowing
-		minetest.set_node(pos, {name = "default:stone"})
+		local n = minerals[math.random(#minerals)]
+		if math.random() < 0.334 and math.random(100) > n.chance then
+			n = n.name
+		else
+			n = "default:stone"
+		end
+		minetest.set_node(pos, {name = n})
 	end
+	pos.y = pos.y - 2
 	minetest.sound_play("default_cool_lava",
-		{pos = pos, max_hear_distance = 16, gain = 0.25}, true)
+			{pos = pos, max_hear_distance = 16, gain = 0.15}, true)
 end
 
 if minetest.settings:get_bool("enable_lavacooling") ~= false then
