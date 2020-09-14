@@ -3,6 +3,7 @@
 -- GNU GPL 3+
 
 -- jump
+local oj
 local del = minetest.get_us_time()
 local touching = false
 local in_water = false
@@ -28,7 +29,13 @@ local radar = false
 local function jump(player)
 	player = player or minetest.localplayer
 	if player then
+		local p = player:get_pos()
 		local j = player:get_control().jump
+		if not oj then
+			oj = p
+		elseif p.y > oj.y and not j then
+			j = true
+		end
 		touching = player:is_touching_ground()
 		in_water = player:is_in_liquid()
 
@@ -49,7 +56,6 @@ local function jump(player)
 		elseif touching then
 			jumping = false
 		elseif minetest.get_us_time() - del > 334000 then
-			local p = player:get_pos()
 			p.y = p.y - 1
 			local n = minetest.get_node_or_nil(p)
 			if n and n.name == "air" then
