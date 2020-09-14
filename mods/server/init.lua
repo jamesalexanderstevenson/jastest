@@ -17,7 +17,8 @@ local S = minetest.get_translator(mod_name)
 local delay = 0
 local spawn_pos_hard = {x = 64, y = 65, z = 16}
 local spawn_set = minetest.settings:get("static_spawnpoint")
-local spawn_pos = minetest.string_to_pos(spawn_set) or spawn_pos_hard
+server.spawn_pos = minetest.string_to_pos(spawn_set) or spawn_pos_hard
+
 local items
 local items_tabstr = ""
 local admin_name = minetest.settings:get("name")
@@ -72,7 +73,7 @@ minetest.register_chatcommand("spawn", {
 		if not player then
 			return
 		end
-		player:set_pos(spawn_pos)
+		player:set_pos(server.spawn_pos)
 		return true, "[Server] Teleported to spawn location"
 	end,
 })

@@ -293,10 +293,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		else
 			hud.message(player, "You do not currently have a home set, sending you to spawn!")
 			hud.message(player, "Set home with /sethome command", 1)
-			player:set_pos({x = 64, y = 65, z = 16})
+			player:set_pos(server.spawn_pos)
 		end
 	elseif fields.safe_spawn then
-		player:set_pos({x = 64, y = 65, z = 16})
+		player:set_pos(server.spawn_pos)
 	elseif fields.setup then
 		local meta = player:get_meta()
 		local amb = meta:get_string("ambient") == "switched_on" or false
