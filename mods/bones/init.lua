@@ -23,7 +23,7 @@ local bones_formspec =
 	"list[current_player;main;0,6.08;8,3;8]" ..
 	"listring[current_name;main]" ..
 	"listring[current_player;main]" ..
-	default.get_hotbar_bg(0, 4.85)
+	default.get_hotbar_bg(0,4.85)
 
 local share_bones_time = tonumber(minetest.settings:get("share_bones_time")) or 1200
 local share_bones_time_early = tonumber(minetest.settings:get("share_bones_time_early")) or share_bones_time / 4
@@ -250,6 +250,7 @@ minetest.register_on_dieplayer(function(player, reason)
 	end]]
 
 	local bones_position_message = minetest.settings:get_bool("bones_position_message") == true
+	local player_name = player:get_player_name()
 	local pos = vector.round(player:get_pos())
 	local pos_string = minetest.pos_to_string(pos)
 
@@ -366,8 +367,7 @@ minetest.register_on_dieplayer(function(player, reason)
 	minetest.log("action", player_name .. " dies at " .. pos_string ..
 		". Bones placed")
 	if bones_position_message then
-		minetest.chat_send_player(player_name,
-				S("@1 died at @2, and bones were placed.", player_name, pos_string))
+		minetest.chat_send_player(player_name, S("@1 died at @2, and bones were placed.", player_name, pos_string))
 	end
 
 	local meta = minetest.get_meta(pos)
