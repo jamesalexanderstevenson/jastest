@@ -240,6 +240,13 @@ end
 
 minetest.register_on_dieplayer(function(player, reason)
 	local player_name = player:get_player_name()
+	local pos = vector.round(player:get_pos())
+	local n = minetest.get_node_or_nil(pos)
+	print(dump(n))
+	if n and n.name:find("lava") then
+		minetest.set_node(pos, {name = "default:water_source"})
+	end
+		
 	if minetest.check_player_privs(player_name, "godmode") then
 		return
 	end
@@ -251,7 +258,6 @@ minetest.register_on_dieplayer(function(player, reason)
 
 	local bones_position_message = minetest.settings:get_bool("bones_position_message") == true
 	local player_name = player:get_player_name()
-	local pos = vector.round(player:get_pos())
 	local pos_string = minetest.pos_to_string(pos)
 
 	-- return if keep inventory set or in creative mode

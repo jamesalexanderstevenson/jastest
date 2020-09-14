@@ -1,3 +1,7 @@
+if not minetest.settings:get("protect_spawn") then
+	return
+end
+
 local store = AreaStore()
 -- -600 for y due to caverealms beginning around -700
 local e1 = {x = -6000, y = -600, z = -6000}
