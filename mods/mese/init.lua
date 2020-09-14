@@ -294,6 +294,21 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craftitem("mese:stick", {
+	description = "Mese Stick",
+	inventory_image = "default_stick.png^[colorize:yellow:55",
+	groups = {stick = 1},
+})
+
+minetest.register_craft({
+	output = "mese:stick",
+	recipe = {
+		{"default:mese_crystal_fragment"},
+		{"default:mese_crystal_fragment"},
+		{"default:mese_crystal_fragment"},
+	},
+})
+
 minetest.register_tool("mese:crystalline_bell", {
 	description = "Crystalline Bell",
 	inventory_image = "mese_crystals_crystalline_bell.png",
