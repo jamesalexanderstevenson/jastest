@@ -1,5 +1,5 @@
 if not minetest.settings:get("protect_spawn") or
-		minetest.settings:get("protect_spawn") == false then
+		minetest.settings:get_bool("protect_spawn") == false then
 	return
 end
 
