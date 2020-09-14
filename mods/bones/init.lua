@@ -242,8 +242,7 @@ minetest.register_on_dieplayer(function(player, reason)
 	local player_name = player:get_player_name()
 	local pos = vector.round(player:get_pos())
 	local n = minetest.get_node_or_nil(pos)
-	print(dump(n))
-	if n and n.name:find("lava") then
+	if n and n.name:find("lava") and not minetest.is_protected(pos, "") then
 		minetest.set_node(pos, {name = "default:water_source"})
 	end
 		
