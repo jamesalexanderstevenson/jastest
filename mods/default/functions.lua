@@ -673,8 +673,8 @@ minetest.register_abm({
 		"stairs:stair_inner_cobble", "stairs:stair_outer_cobble",
 		"walls:cobble"},
 	neighbors = {"group:water"},
-	interval = 60,
-	chance = 200,
+	interval = 16,
+	chance = 80,
 	catch_up = false,
 	action = function(pos, node)
 		node.name = moss_correspondences[node.name]

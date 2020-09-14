@@ -114,7 +114,7 @@ minetest.register_abm({
 	label = "Flora spread 2",
 	nodenames = {"group:spreading_dirt_type"},
 	neighbors = "air",
-	chance = 128, 
+	chance = 256, 
 	interval = 30,
 	catch_up = false,
 	action = function(pos, node)
@@ -138,15 +138,17 @@ minetest.register_abm({
 minetest.register_abm({
 	label = "Grass atop mossycobble",
 	nodenames = {"default:mossycobble"},
-	neighbors = {"air"},
-	chance = 5,
-	interval = 60,
+	neighbors = {"air", "group:water"},
+	interval = 17,
+	chance = 80,
 	catch_up = false,
 	action = function(pos, node)
 		pos.y = pos.y + 1
 		local node = minetest.get_node(pos)
 		if node and node.name and node.name == "air" then
-			minetest.set_node(pos, {name = "default:grass_" .. math.random(5)})
+			if minetest.find_node_near(pos, 5, "group:water") then
+				minetest.set_node(pos, {name = "default:grass_" .. math.random(5)})
+			end
 		end
 	end,
 })
