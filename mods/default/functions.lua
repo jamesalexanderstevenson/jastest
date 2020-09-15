@@ -149,7 +149,7 @@ end
 --
 
 local minerals = {
-	{name = "default:stone_with_emerald", chance = 75},
+	{name = "oresplus:stone_with_emerald", chance = 75},
 	{name = "default:stone_with_diamond", chance = 60},
 	{name = "default:stone_with_gold", chance = 40},
 	{name = "default:stone_with_coal", chance = 25},
