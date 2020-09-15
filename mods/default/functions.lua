@@ -153,6 +153,7 @@ local minerals = {
 	{name = "default:stone_with_diamond", chance = 60},
 	{name = "default:stone_with_gold", chance = 40},
 	{name = "default:stone_with_coal", chance = 25},
+	{name = "default:stone_with_tin", chance = 25},
 	{name = "default:stone_with_copper", chance = 20},
 	{name = "default:stone_with_iron", chance = 15},
 }
