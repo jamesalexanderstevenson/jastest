@@ -491,7 +491,7 @@ minetest.register_node("default:dirt_with_dry_grass", {
 		"default_dirt.png",
 		{name = "default_dirt.png^default_dry_grass_side.png",
 			tileable_vertical = false}},
-	groups = {crumbly = 3, soil = 1},
+	groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
 	drop = "default:dirt",
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name = "default_grass_footstep", gain = 0.4},
@@ -683,7 +683,7 @@ minetest.register_node("default:ice", {
 	tiles = {"default_ice.png"},
 	is_ground_content = false,
 	paramtype = "light",
-	groups = {cracky = 3, slippery = 3, melty = 1},
+	groups = {cracky = 3, melty = 1, slippery = 3},
 	sounds = default.node_sound_ice_defaults(),
 })
 
@@ -692,8 +692,8 @@ minetest.register_node("default:cave_ice", {
 	description = S("Cave Ice"),
 	tiles = {"default_ice.png"},
 	paramtype = "light",
-	groups = {cracky = 3, slippery = 3, melty = 1,
-			not_in_creative_inventory = 1},
+	groups = {cracky = 3, melty = 1, slippery = 3,
+		not_in_creative_inventory = 1},
 	drop = "default:ice",
 	sounds = default.node_sound_ice_defaults(),
 })
@@ -1330,8 +1330,23 @@ minetest.register_node("default:aspen_sapling", {
 minetest.register_node("default:stone_with_coal", {
 	description = S("Coal Ore"),
 	tiles = {"default_stone.png^default_mineral_coal.png"},
-	groups = {cracky = 3},
-	drop = "default:coal_lump",
+	groups = {cracky = 2, oddly_breakable_by_hand = 1},
+	drop = {
+		max_items = 1,
+		items = {
+			{
+				rarity = 5,
+				items = {"default:cobble"}
+			},
+			{
+				rarity = 3,
+				items = {"default:cobble", "default:coal_lump 2"}
+			},
+			{
+				items = {"default:cobble", "default:coal_lump"}
+			},
+		}
+	},
 	sounds = default.node_sound_stone_defaults(),
 })
 

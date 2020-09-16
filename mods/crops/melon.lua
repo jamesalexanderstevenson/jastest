@@ -218,7 +218,7 @@ minetest.register_abm({
 -- grow a new melon again
 --
 minetest.register_abm({
-	label = "Melon 5 attached"
+	label = "Melon 5 attached",
 	nodenames = { "crops:melon_plant_5_attached" },
 	interval = crops.settings.interval,
 	chance = 1,

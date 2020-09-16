@@ -141,7 +141,7 @@ minetest.register_node("crops:pumpkin", {
 -- grows a plant to mature size
 --
 minetest.register_abm({
-	label = "Pumping 1-4",
+	label = "Pumpkin 1-4",
 	nodenames = { "crops:pumpkin_plant_1", "crops:pumpkin_plant_2", "crops:pumpkin_plant_3","crops:pumpkin_plant_4" },
 	neighbors = { "group:soil" },
 	interval = crops.settings.interval,
@@ -163,7 +163,7 @@ minetest.register_abm({
 -- grows a pumpkin
 --
 minetest.register_abm({
-	label = "Pumping 5",
+	label = "Pumpkin 5",
 	nodenames = { "crops:pumpkin_plant_5" },
 	neighbors = { "group:soil" },
 	interval = crops.settings.interval,

@@ -26,7 +26,7 @@ minetest.register_abm({
 
 minetest.register_abm({
 	label = "Auto-plant sapling",
-	nodenames = {"default:dirt", "default:grass"},
+	nodenames = {"default:dirt", "default:dirt_with_grass"},
 	neighbors = {"air"},
 	interval = 30,
 	chance = 10,

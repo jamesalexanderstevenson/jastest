@@ -40,9 +40,6 @@ minetest.register_craft({
 minetest.override_item("default:dry_shrub",
 		{groups = {snappy = 3, flammable = 3, attached_node = 1}})
 
-minetest.override_item("default:dirt_with_dry_grass",
-		{groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1}})
-
 local fsnn = {
 	"farming:cotton_wild",
 	"farming:cotton_6",
