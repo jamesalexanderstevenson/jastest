@@ -247,15 +247,17 @@ minetest.register_node("crops:beanpole_plant_top_" .. stage, {
 end
 
 minetest.register_abm({
+	label = "Beanpole 1-4",
 	nodenames = {
 		"crops:beanpole_plant_base_1",
 		"crops:beanpole_plant_base_2",
 		"crops:beanpole_plant_base_3",
 		"crops:beanpole_plant_base_4"
 	},
+	neighbors = { "group:soil" },
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
-	neighbors = { "group:soil" },
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if not crops.can_grow(pos) then
 			return

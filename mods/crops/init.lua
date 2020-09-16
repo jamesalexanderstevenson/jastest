@@ -247,9 +247,11 @@ end
 
 -- water handling code
 minetest.register_abm({
+	label = "Water handler",
 	nodenames = nodenames,
 	interval = crops.settings.damage_interval,
 	chance = crops.settings.damage_chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local meta = minetest.get_meta(pos)
 		local water = meta:get_int("crops_water")

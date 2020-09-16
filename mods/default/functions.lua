@@ -172,7 +172,7 @@ default.cool_lava = function(pos, node)
 	end
 	pos.y = pos.y - 2
 	minetest.sound_play("default_cool_lava",
-			{pos = pos, max_hear_distance = 16, gain = 0.15}, true)
+		{pos = pos, max_hear_distance = 16, gain = 0.25}, true)
 end
 
 if minetest.settings:get_bool("enable_lavacooling") ~= false then
@@ -273,9 +273,9 @@ minetest.register_abm({
 	label = "Grow cactus",
 	nodenames = {"default:cactus"},
 	neighbors = {"group:sand"},
-	interval = 128,
+	interval = 12,
 	chance = 83,
-	catch_up = true,
+	catch_up = false,
 	action = function(...)
 		default.grow_cactus(...)
 	end
@@ -295,9 +295,9 @@ minetest.register_abm({
 		"default:dry_dirt",
 		"default:dry_dirt_with_dry_grass",
 	},
-	interval = 120,
-	chance = 55,
-	catch_up = true,
+	interval = 14,
+	chance = 71,
+	catch_up = false,
 	action = function(...)
 		default.grow_papyrus(...)
 	end
@@ -612,8 +612,8 @@ minetest.register_abm({
 		"group:dry_grass",
 		"default:snow",
 	},
-	interval = 60,
-	chance = 500,
+	interval = 6,
+	chance = 50,
 	catch_up = false,
 	action = function(pos, node)
 		-- Check for darkness: night, shadow or under a light-blocking node
@@ -652,8 +652,8 @@ minetest.register_abm({
 minetest.register_abm({
 	label = "Grass covered",
 	nodenames = {"group:spreading_dirt_type", "default:dry_dirt_with_dry_grass"},
-	interval = 60,
-	chance = 500,
+	interval = 8,
+	chance = 50,
 	catch_up = false,
 	action = function(pos, node)
 		local above = {x = pos.x, y = pos.y + 1, z = pos.z}
@@ -691,7 +691,7 @@ minetest.register_abm({
 		"walls:cobble"},
 	neighbors = {"group:water"},
 	interval = 16,
-	chance = 80,
+	chance = 100,
 	catch_up = false,
 	action = function(pos, node)
 		node.name = moss_correspondences[node.name]
@@ -792,8 +792,9 @@ minetest.register_abm({
 		"default:bush_leaves_broken",
 	},
 	neighbors = {"air"},
-	interval = 100,
-	chance = 5,
+	interval = 61,
+	chance = 48,
+	catch_up = false,
 	action = function(pos, node)
 		local nn = minetest.get_node(pos)
 		minetest.swap_node(pos, {name = nn.name:sub(1, -8)})
@@ -814,8 +815,9 @@ minetest.register_abm({
 		"default:bush_leaves",
 	},
 	neighbors = {"air"},
-	interval = 10,
-	chance = 5,
+	interval = 9,
+	chance = 8,
+	catch_up = false,
 	action = function(pos, node)
 		local nn = minetest.get_node(pos)
 		if nn.param2 == 1 then
@@ -880,9 +882,9 @@ minetest.register_abm({
 	label = "Water drop",
 	nodenames = {"default:water_source"},
 	neighbors = {"default:water_flowing", "air"},
-	interval = 15,
-	chance = 50,
-	catch_up = true,
+	interval = 21,
+	chance = 128,
+	catch_up = false,
 	action = function(pos, node)
 		local pb = {x = pos.x, y = pos.y - 1, z = pos.z}
 		local nb = minetest.get_node(pb)
@@ -900,9 +902,9 @@ minetest.register_abm({
 	label = "River water drop",
 	nodenames = {"default:river_water_source"},
 	neighbors = {"default:river_water_flowing", "air"},
-	interval = 15,
-	chance = 50,
-	catch_up = true,
+	interval = 20,
+	chance = 128,
+	catch_up = false,
 	action = function(pos, node)
 		local pb = {x = pos.x, y = pos.y - 1, z = pos.z}
 		local nb = minetest.get_node(pb)
@@ -920,9 +922,9 @@ minetest.register_abm({
 	label = "Lava drop",
 	nodenames = {"default:lava_source"},
 	neighbors = {"default:lava_flowing", "air"},
-	interval = 15,
-	chance = 50,
-	catch_up = true,
+	interval = 19,
+	chance = 128,
+	catch_up = false,
 	action = function(pos, node)
 		local pb = {x = pos.x, y = pos.y - 1, z = pos.z}
 		local nb = minetest.get_node(pb)
@@ -938,11 +940,15 @@ minetest.register_abm({
 
 minetest.register_abm({
 	label = "Renew liquid",
-	nodenames = {"default:water_flowing", "default:river_water_flowing", "default:lava_flowing"},
+	nodenames = {
+		"default:water_flowing",
+		"default:river_water_flowing",
+		"default:lava_flowing",
+	},
 	neighbors = {"air"},
-	interval = 55,
-	chance = 50,
-	catch_up = true,
+	interval = 18,
+	chance = 128,
+	catch_up = false,
 	action = function(pos, node)
 		local l = node.name:sub(1, -8)
 		l = l .. "source"

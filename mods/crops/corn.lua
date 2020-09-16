@@ -85,10 +85,12 @@ minetest.register_node("crops:corn_base_seed", {
 })
 
 minetest.register_abm({
+	label = "Corn seed",
 	nodenames = { "crops:corn_base_seed" },
 	neighbors = { "group:soil" },
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if not crops.can_grow(pos) then
 			return
@@ -114,10 +116,12 @@ minetest.register_node("crops:corn_base_1", {
 })
 
 minetest.register_abm({
+	label = "Corn base",
 	nodenames = { "crops:corn_base_1" },
 	neighbors = { "group:soil" },
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if not crops.can_grow(pos) then
 			return
@@ -216,10 +220,12 @@ minetest.register_node("crops:corn_top_1", {
 })
 
 minetest.register_abm({
+	label = "Corn top 1",
 	nodenames = { "crops:corn_top_1" },
 	neighbors = { "crops:corn_base_2" },
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if minetest.get_node_light(pos, nil) < crops.settings.light then
 			return
@@ -253,10 +259,12 @@ minetest.register_node("crops:corn_top_2", {
 })
 
 minetest.register_abm({
+	label = "Corn top 2",
 	nodenames = { "crops:corn_top_2" },
 	neighbors = { "crops:corn_base_2" },
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		-- we don't call crops.grow here otherwise there would be 2 abm's hitting
 		-- this stack, and dmg needs to be applied to the bottom part

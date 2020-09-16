@@ -130,10 +130,12 @@ minetest.register_node("crops:soil_with_carrots", {
 -- grows a plant to mature size
 --
 minetest.register_abm({
+	label = "Carrot 1-3",
 	nodenames = {"crops:carrot_plant_1", "crops:carrot_plant_2", "crops:carrot_plant_3"},
 	neighbors = {"group:soil"},
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if not crops.can_grow(pos) then
 			return
@@ -159,10 +161,12 @@ minetest.register_abm({
 -- grows the final carrots in the soil beneath
 --
 minetest.register_abm({
+	label = "Carrot 4",
 	nodenames = {"crops:carrot_plant_4"},
 	neighbors = {"group:soil"},
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if not crops.can_grow(pos) then
 			return

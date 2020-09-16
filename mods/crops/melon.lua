@@ -147,10 +147,12 @@ minetest.register_node("crops:melon", {
 -- grows a plant to mature size
 --
 minetest.register_abm({
+	label = "Melon 1-4",
 	nodenames = { "crops:melon_plant_1", "crops:melon_plant_2", "crops:melon_plant_3","crops:melon_plant_4" },
 	neighbors = { "group:soil" },
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if not crops.can_grow(pos) then
 			return
@@ -167,10 +169,12 @@ minetest.register_abm({
 -- grows a melon
 --
 minetest.register_abm({
+	label = "Melon 5",
 	nodenames = { "crops:melon_plant_5" },
 	neighbors = { "group:soil" },
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if not crops.can_grow(pos) then
 			return
@@ -214,9 +218,11 @@ minetest.register_abm({
 -- grow a new melon again
 --
 minetest.register_abm({
+	label = "Melon 5 attached"
 	nodenames = { "crops:melon_plant_5_attached" },
 	interval = crops.settings.interval,
 	chance = 1,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		for face = 1, 4 do
 			local t = { x = pos.x + faces[face].x, y = pos.y, z = pos.z + faces[face].z }

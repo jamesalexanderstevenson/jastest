@@ -114,8 +114,8 @@ minetest.register_abm({
 	label = "Flora spread 2",
 	nodenames = {"group:spreading_dirt_type"},
 	neighbors = "air",
-	chance = 256, 
 	interval = 30,
+	chance = 256,
 	catch_up = false,
 	action = function(pos, node)
 		if minetest.get_node(pos).name == "default:dirt_with_snow" then

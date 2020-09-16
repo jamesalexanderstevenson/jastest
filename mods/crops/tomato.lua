@@ -134,10 +134,12 @@ minetest.register_craft({
 -- grows a plant to mature size
 --
 minetest.register_abm({
+	label = "Tomato 1-3",
 	nodenames = { "crops:tomato_plant_1", "crops:tomato_plant_2", "crops:tomato_plant_3" },
 	neighbors = { "group:soil" },
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if not crops.can_grow(pos) then
 			return
@@ -154,10 +156,12 @@ minetest.register_abm({
 -- grows a tomato
 --
 minetest.register_abm({
+	label = "Tomato 4",
 	nodenames = { "crops:tomato_plant_4" },
 	neighbors = { "group:soil" },
 	interval = crops.settings.interval,
 	chance = crops.settings.chance,
+	catch_up = false,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if not crops.can_grow(pos) then
 			return
