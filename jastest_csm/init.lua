@@ -65,6 +65,7 @@ local function jump(player)
 				del = minetest.get_us_time()
 			end
 		end
+		oj = p
 	end
 
 	a(0, function()
