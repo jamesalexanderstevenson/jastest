@@ -30,19 +30,34 @@ minetest.register_node("oresplus:bedrock", {
 })
 
 for _, n in pairs({"emerald", "glowstone_dust"}) do
-	minetest.register_node("oresplus:stone_with_"..n, {
-		description = string.gsub(n:gsub("^%l", string.upper), "_d", " D").." Ore",
+	minetest.register_node("oresplus:stone_with_" .. n, {
+		description = string.gsub(n:gsub("^%l", string.upper), "_d", " D") .. " Ore",
 		paramtype = "light",
-		tiles = {"default_stone.png^oresplus_mineral_"..n..".png"},
-		groups = {cracky=2},
-		drop = "oresplus:"..n,
+		tiles = {"default_stone.png^oresplus_mineral_" .. n .. ".png"},
+		groups = {cracky = 2},
+		drop = {
+			max_items = 1,
+			items = {
+				{
+					rarity = 5,
+					items = {"default:cobble"}
+				},
+				{
+					rarity = 3,
+					items = {"default:cobble", "oresplus:" .. n .. " 2"}
+				},
+				{
+					items = {"default:cobble", "oresplus:" .. n}
+				},
+			}
+		},
 		sounds = default.node_sound_stone_defaults()
 	})
 
-	minetest.register_craftitem("oresplus:"..n, {
+	minetest.register_craftitem("oresplus:" .. n, {
 		description = string.gsub(n:gsub("^%l", string.upper), "_d", " D"),
-		inventory_image = "oresplus_"..n..".png",
-		wield_image = "oresplus_"..n..".png"
+		inventory_image = "oresplus_" .. n .. ".png",
+		wield_image = "oresplus_" .. n .. ".png"
 	})
 end
 

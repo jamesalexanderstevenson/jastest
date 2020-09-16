@@ -149,11 +149,12 @@ end
 --
 
 local minerals = {
+	{name = "oresplus:stone_with_glowstone_dust", chance = 90},
 	{name = "oresplus:stone_with_emerald", chance = 75},
 	{name = "default:stone_with_diamond", chance = 60},
 	{name = "default:stone_with_gold", chance = 40},
+	{name = "default:stone_with_tin", chance = 30},
 	{name = "default:stone_with_coal", chance = 25},
-	{name = "default:stone_with_tin", chance = 25},
 	{name = "default:stone_with_copper", chance = 20},
 	{name = "default:stone_with_iron", chance = 15},
 }
