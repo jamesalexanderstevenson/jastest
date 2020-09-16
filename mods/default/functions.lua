@@ -888,7 +888,7 @@ minetest.register_abm({
 	nodenames = {"default:water_source"},
 	neighbors = {"default:water_flowing", "air"},
 	interval = 21,
-	chance = 128,
+	chance = 64,
 	catch_up = false,
 	action = function(pos, node)
 		local pb = {x = pos.x, y = pos.y - 1, z = pos.z}
@@ -908,7 +908,7 @@ minetest.register_abm({
 	nodenames = {"default:river_water_source"},
 	neighbors = {"default:river_water_flowing", "air"},
 	interval = 20,
-	chance = 128,
+	chance = 64,
 	catch_up = false,
 	action = function(pos, node)
 		local pb = {x = pos.x, y = pos.y - 1, z = pos.z}
@@ -928,7 +928,7 @@ minetest.register_abm({
 	nodenames = {"default:lava_source"},
 	neighbors = {"default:lava_flowing", "air"},
 	interval = 19,
-	chance = 128,
+	chance = 64,
 	catch_up = false,
 	action = function(pos, node)
 		local pb = {x = pos.x, y = pos.y - 1, z = pos.z}
@@ -952,7 +952,7 @@ minetest.register_abm({
 	},
 	neighbors = {"air"},
 	interval = 18,
-	chance = 128,
+	chance = 24,
 	catch_up = false,
 	action = function(pos, node)
 		local l = node.name:sub(1, -8)
