@@ -70,7 +70,9 @@ function minetest.handle_node_drops(pos, drops, digger)
 			if digger and digger:is_player() then
 				local dir = vector.direction(o:get_pos(), digger:get_pos())
 				if dir.y > 0 then
-					dir.y = dir.y + 2
+					dir.y = dir.y + 3
+				else
+					dir.y = dir.y + 1.5
 				end
 				o:add_velocity(dir)
 			end
