@@ -1,5 +1,8 @@
-# This file contains settings of minetest_game that can be changed in
+# This file contains settings of jastest that can be changed in
 # minetest.conf
+
+#    Chance of ore generation from lava cooling
+ore_gen_chance (Ore generation chance) float 0.334 0.0 1.0
 
 #    In creative mode players are able to dig all kind of blocks nearly
 #    instantly, and have access to unlimited resources.

@@ -158,12 +158,17 @@ local minerals = {
 	{name = "default:stone_with_iron", chance = 15},
 }
 
+local ore_gen_chance = minetest.settings:get("ore_gen_chance")
+if not ore_gen_chance or type(ore_gen_chance) ~= "number" then
+	ore_gen_chance = tonumber(ore_gen_chance) or 0.334
+end
+
 default.cool_lava = function(pos, node)
 	if node.name == "default:lava_source" then
 		minetest.set_node(pos, {name = "default:obsidian"})
 	else -- Lava flowing
 		local n = minerals[math.random(#minerals)]
-		if math.random() < 0.334 and math.random(100) > n.chance then
+		if math.random() < ore_gen_chance and math.random(100) > n.chance then
 			n = n.name
 		else
 			n = "default:stone"
