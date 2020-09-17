@@ -2,7 +2,7 @@
 -- copyright 2020 james alexander stevenson
 -- gnu gpl 3+
 
-if minetest.settings:get("mg_name") == "singlenode" then
+if minetest.get_mapgen_setting("mg_name") == "singlenode" then
 	minetest.register_on_generated(function(minp, maxp, seed)
 		local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 		local a = VoxelArea:new{
