@@ -1,6 +1,9 @@
 # This file contains settings of jastest that can be changed in
 # minetest.conf
 
+#    Whether to protect an area around the center of the map (spawn)
+protect_spawn (Protect spawn) bool false
+
 #    Chance of ore generation from lava cooling
 ore_gen_chance (Ore generation chance) float 0.334 0.0 1.0
 
