@@ -269,7 +269,7 @@ minetest.register_node("shop:shop", {
 })
 
 minetest.register_node("shop:shop_open", {
-	description = "Shop Open (You Hacker You!)",
+	description = "Shop",
 	drawtype = "mesh",
 	visual = "mesh",
 	mesh = "chest_open.obj",
@@ -595,7 +595,17 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 end)
 
---
+-- xdecor
+--[[
+craftguide.register_craft({
+	result = "shop:shop",
+	items = {
+		"group:wood, group:wood, group:wood",
+		"group:wood, default:goldblock, group:wood",
+		"group:wood, group:wood, group:wood",
+	}
+})
+--]]
 
 armor:register_armor("shop:boots_fast", {
 	description = "Fast Boots",
