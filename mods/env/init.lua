@@ -7,7 +7,7 @@ local function sur(player)
 	if not minetest.get_player_by_name(name) then
 		return
 	end
-	if player:get_hp() > 0 then
+	if player:get_hp() > 0 and not player_api.player_attached[name] then
 		local pos = player:get_pos()
 		local p1 = {x = pos.x - 1.25, y = pos.y - 1.25, z = pos.z - 1.25}
 		local p2 = {x = pos.x + 1.25, y = pos.y + 1.25, z = pos.z + 1.25}
