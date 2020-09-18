@@ -269,7 +269,7 @@ minetest.register_chatcommand("home", {
 		local meta = player:get_meta()
 		local homes = minetest.deserialize(meta:get_string("homes"))
 
-		if param and param ~= "" then
+		if homes and param and param ~= "" then
 			if homes[param] then
 				player:set_pos(homes[param])
 				return true, "Ok"
