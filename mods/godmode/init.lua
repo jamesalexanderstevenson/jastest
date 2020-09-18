@@ -1,3 +1,7 @@
+-- /mods/godmode is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 local regen = {}
 local cooldown = {}
 
@@ -32,6 +36,8 @@ minetest.register_privilege("godmode", {
 minetest.register_on_joinplayer(function(player)
 	player:set_properties({hp_max = 100, breath_max = 100})
 	player:set_breath(100)
+	regen[player:get_player_name()] = true
+	regenerate(player)
 end)
 
 minetest.register_on_player_hpchange(function(player, hp_change, reason)
@@ -43,11 +49,6 @@ minetest.register_on_player_hpchange(function(player, hp_change, reason)
 		return
 	end
 	cooldown[name] = 11
-end)
-
-minetest.register_on_joinplayer(function(player)
-	regen[player:get_player_name()] = true
-	regenerate(player)
 end)
 
 minetest.register_on_leaveplayer(function(player)
