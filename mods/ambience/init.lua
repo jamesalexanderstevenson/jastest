@@ -1,8 +1,12 @@
-local playing = {}
+-- /mods/ambience is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
+ambience = {}
+local playing = {}
 local r = math.random
 
-local function ss(name, param)
+ambience.ss = function(name, param)
 	if param == "start" and not playing[name] then
 		playing[name] = true
 	elseif playing[name] and param == "stop" then
@@ -64,7 +68,7 @@ local function ss(name, param)
 				del = 2.34
 			end
 			minetest.after(del, function()
-				ss(name, sound)
+				ambience.ss(name, sound)
 			end)
 		end
 	end
@@ -90,8 +94,14 @@ minetest.register_chatcommand("sound", {
 	description = "Play a sound",
 	privs = "interact",
 	params = "[start|stop]",
-	func = ss,
+	func = ambience.ss,
 })
+
+minetest.register_on_joinplayer(function(player)
+	if player:get_meta():get_string("ambient") == "switched_on" then
+		ambience.ss(player:get_player_name(), "start")
+	end
+end)
 
 minetest.register_on_leaveplayer(function(player)
 	local name = player:get_player_name()
