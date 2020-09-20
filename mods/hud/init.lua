@@ -37,7 +37,7 @@ local timer = function(player)
 end
 
 function hud.message(player, message, delay)
-	if not message then
+	if not message or not player then
 		return
 	end
 	if delay then

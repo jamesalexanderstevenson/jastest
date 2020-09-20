@@ -32,6 +32,9 @@ minetest.register_abm({
 	chance = 10,
 	catch_up = false,
 	action = function(pos, node)
+		if minetest.is_protected(pos, "") then
+			return
+		end
 		pos = {x = pos.x, y = pos.y + 1, z = pos.z}
 		local un = minetest.get_node(pos)
 		if un and un.name then
