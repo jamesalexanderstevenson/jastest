@@ -1,3 +1,9 @@
+202009200856: fix mobs menu, particularly for when the mob has died
+a cooldown period is there, but it isn't obvious, and not particularly
+functional.
+
+--
+
 sound_plop on spawn/home and other teleports
 
 --
@@ -13,8 +19,7 @@ clicked.  If I click a sheep with the walkie, perhaps I can get a little
 story or information.  If I click wood planks with a walkie, again I
 could show some more information.
 
-
-[CSM:]
+--
 
 Skins automatic camera selection for 3rd person preview
 More zoom stuff
