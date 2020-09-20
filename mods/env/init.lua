@@ -30,6 +30,18 @@ local function sur(player)
 				player:set_hp(player:get_hp() - 5, {type = "set_hp", heat = true})
 			end
 		end
+		local hp = player:get_hp()
+		if hp <= 25 then
+			for i, v in pairs(player:get_inventory():get_list("main")) do
+				if i <= 8 and v:get_name() == "bandage:bandage" then
+					hud.message(player, "Automatically applying bandage")
+					v:take_item(1)
+					player:get_inventory():set_stack("main", i, v)
+					player:set_hp(hp + 5)
+					break
+				end
+			end
+		end
 	end
 	minetest.after(0.9, function()
 		sur(player)
