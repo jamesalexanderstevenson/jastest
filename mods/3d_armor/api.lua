@@ -51,8 +51,8 @@ armor = {
 		bronze = "default:bronze_ingot",
 		diamond = "default:diamond",
 		gold = "default:gold_ingot",
-		mithril = "moreores:mithril_ingot",
-		crystal = "ethereal:crystal_ingot",
+		mithril = "default:mese_crystal",
+		crystal = "oresplus:emerald",
 	},
 	fire_nodes = {
 		{"default:lava_source",     5, 8},

@@ -460,14 +460,9 @@ minetest.register_on_player_hpchange(function(player, hp_change, reason)
 			if player:get_hp() + hp_change < 5 then
 				hp_change = -100
 			end
-			-- check if armor damage was handled by fire or on_punchplayer
-			--local time = last_punch_time[name] or 0
-			--if (time == 0 or time + 1 < minetest.get_gametime()) and not void then
-				--print("?")
-				if absorbed then
-					armor:punch(player)
-				end
-			--end
+			if absorbed then
+				armor:punch(player)
+			end
 		end
 	end
 	return hp_change
