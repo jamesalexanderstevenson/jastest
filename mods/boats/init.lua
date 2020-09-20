@@ -528,8 +528,7 @@ minetest.register_craftitem("boats:boat_mese", {
 minetest.register_craft({
 	output = "boats:boat",
 	recipe = {
-		{"",           "",           ""          },
-		{"group:wood", "",           "group:wood"},
+		{"group:wood", "", "group:wood"},
 		{"group:wood", "group:wood", "group:wood"},
 	},
 })
@@ -537,9 +536,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "boats:boat_mese",
 	recipe = {
-		{"",           "",           ""          },
-		{"default:mese", "",           "default:mese"},
-		{"default:mese", "default:mese", "default:mese"},
+		{"default:mese_crystal", "", "default:mese_crystal"},
+		{"default:mese_crystal", "default:mese_crystal", "default:mese_crystal"},
 	},
 })
 
