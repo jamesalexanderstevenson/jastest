@@ -232,13 +232,40 @@ minetest.register_item("classes:miner", {
 		full_punch_interval = 0.9,
 		max_drop_level = 0,
 		groupcaps = {
-			crumbly = {times={[2]=3.00, [3]=0.70}, uses=0, maxlevel=1},
-			snappy = {times={[3]=0.40}, uses=0, maxlevel=1},
+			crumbly = {
+				times = {
+					[2] = 5,
+					[3] = 2.5,
+				},
+				uses = 0,
+				maxlevel = 1,
+			},
+			snappy = {
+				times = {
+					[3] = 0.40,
+				},
+				uses = 0,
+				maxlevel = 1,
+			},
+			cracky = {
+				times = {
+					[1] = 15,
+					[2] = 12.5,
+					[3] = 10,
+				},
+				uses = 0,
+				maxlevel = 2,
+			},
 			oddly_breakable_by_hand = {
-				times={[1]=3.50,[2]=2.00,[3]=0.70}, uses=0
+				times = {
+					[1] = 2,
+					[2] = 1,
+					[3] = 0.5,
+				},
+				uses = 0,
 			},
 		},
-		damage_groups = {fleshy=1},
+		damage_groups = {fleshy = 1},
 	}
 })
 
