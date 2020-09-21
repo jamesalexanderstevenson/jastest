@@ -331,6 +331,7 @@ armor:register_armor("3d_armor:boots_mithril", {
 	on_use = armor.on_use,
 })
 
+-- CRYSTAL
 armor:register_armor("3d_armor:helmet_crystal", {
 	description = S("Crystal Helmet"),
 	inventory_image = "3d_armor_inv_helmet_crystal.png",
