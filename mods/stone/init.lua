@@ -1,3 +1,7 @@
+-- /mods/stone is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 -- Compressed cobble & stone tile
 local c = function()
 	local n = minetest.registered_nodes["default:cobble"]
@@ -162,22 +166,4 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "oresplus:stone_with_emerald",
 	recipe = {{"default:stone", "oresplus:emerald"}}
-})
-
-minetest.register_abm({
-	label = "Transform cobble",
-	nodenames = {"default:cobble"},
-	neighbors = {"group:water", "group:lava", "air"},
-	interval = 18,
-	chance = 80,
-	catch_up = false,
-	action = function(pos, node)
-		local law = minetest.find_node_near(pos, 2, "group:water")
-		local la = minetest.find_node_near(pos, 1, "group:lava")
-		if la then
-			minetest.set_node(pos, {name = "default:stone"})
-		elseif law then
-			minetest.set_node(pos, {name = "default:mossycobble"})
-		end
-	end
 })
