@@ -1,6 +1,15 @@
 # This file contains settings of jastest that can be changed in
 # minetest.conf
 
+#    The starting point of the area that is spawn to protect
+protect_min (Protect spawn start) v3f (-6000, -600, -6000)
+
+#    The ending point of the area that is spawn to protect
+protect_max (Protect spawn end) v3f (6000, 6000, 6000)
+
+#    Whether to PVP protect spawn
+pvp_protect_spawn (PVP protect spawn) bool false
+
 #    Whether to protect an area around the center of the map (spawn)
 protect_spawn (Protect spawn) bool false
 
