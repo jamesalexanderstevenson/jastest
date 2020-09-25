@@ -31,11 +31,9 @@ function night.check_time()
 	store:set_string("night_toggle", tostring(night.toggle))
 
 	time = minetest.get_timeofday()
-	if time <= 0.25 or time >= 0.75 then
-		--print("night", time)
+	if time <= 0.2 or time >= 0.805 then
 		night.night = true
-	else--if (time <= 0.45 or time >= 0.9) then
-		--print("day", time)
+	else
 		night.night = false
 	end
 end
