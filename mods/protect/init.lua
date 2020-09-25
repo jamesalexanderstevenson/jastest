@@ -5,7 +5,7 @@
 -- -600 for y due to caverealms beginning around -700
 local protect_min = minetest.setting_get_pos("protect_min") or {x = -6000, y = -600, z = -6000}
 local protect_max = minetest.setting_get_pos("protect_max") or {x = 6000, y = 6000, z = 6000}
-local protect_spawn = minetest.settings:get("protect_spawn")
+local protect_spawn = minetest.settings:get_bool("protect_spawn", false)
 local store = AreaStore()
 local data = "base"
 
