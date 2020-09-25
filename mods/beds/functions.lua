@@ -27,7 +27,13 @@ local function get_look_yaw(pos)
 end
 
 local function is_night_skip_enabled()
-	return true
+	--[[
+	local enable_night_skip = minetest.settings:get_bool("enable_bed_night_skip")
+	if enable_night_skip == nil then
+		enable_night_skip = true
+	end
+	return enable_night_skip
+	--]]
 end
 
 local function check_in_beds(players)
@@ -68,16 +74,30 @@ local function lay_down(player, pos, bed_pos, state, skip)
 		end
 
 		-- physics, eye_offset, etc
-		player:set_eye_offset({x = 0, y = 0, z = 0},
-				{x = 0, y = 0, z = 0})
+		player:set_eye_offset({x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 0})
 		player:set_look_horizontal(math.random(1, 180) / 100)
 		player_api.player_attached[name] = false
 		player:set_physics_override(1, 1, 1)
 		hud_flags.wielditem = true
-		default.player_set_animation(player, "stand" , 30)
+		player_api.set_animation(player, "stand" , 30)
 
 	-- lay down
 	else
+
+		-- Check if bed is occupied
+		for _, other_pos in pairs(beds.bed_position) do
+			if vector.distance(bed_pos, other_pos) < 0.1 then
+				minetest.chat_send_player(name, S("This bed is already occupied!"))
+				return false
+			end
+		end
+
+		-- Check if player is moving
+		if vector.length(player:get_player_velocity()) > 0.001 then
+			minetest.chat_send_player(name, S("You have to stop moving before going to bed!"))
+			return false
+		end
+
 		beds.pos[name] = pos
 		beds.bed_position[name] = bed_pos
 		beds.player[name] = 1
@@ -98,7 +118,7 @@ local function lay_down(player, pos, bed_pos, state, skip)
 		player:set_pos(p)
 		player_api.player_attached[name] = true
 		hud_flags.wielditem = false
-		default.player_set_animation(player, "lay" , 0)
+		player_api.set_animation(player, "lay" , 0)
 	end
 
 	player:hud_set_flags(hud_flags)
@@ -120,6 +140,7 @@ local function update_formspecs(finished)
 	local form_n
 	local esc = minetest.formspec_escape
 	if finished then
+		--form_n = beds.formspec .. "label[2.7,9;" .. esc(S("Good morning.")) .. "]"
 		form_n = ""
 	else
 		form_n = beds.formspec .. "label[2.2,9;" ..
@@ -130,7 +151,7 @@ local function update_formspecs(finished)
 				esc(S("Force night skip")) .. "]"
 		end
 		--]]
-		if is_majority and is_night_skip_enabled() then
+		if is_majority then
 			update_formspecs(true)
 			beds.skip_night()
 			beds.kick_players()
@@ -153,22 +174,30 @@ function beds.kick_players()
 end
 
 function beds.skip_night()
-	--local t = os.date("*t")
+	--minetest.set_timeofday(0.23)
 	if night.toggle then
-		--minetest.set_timeofday((t.hour * 60 + t.min) / 1440)
 		night.toggle = false
         else
-		--minetest.set_timeofday(((t.hour + 12) % 24 * 60 + t.min) / 1440)
 		night.toggle = true
         end
 	night.check_time()
-
 end
 
 function beds.on_rightclick(pos, player)
 	local name = player:get_player_name()
 	local ppos = player:get_pos()
-	--local tod = minetest.get_timeofday()
+	--[[
+	local tod = minetest.get_timeofday()
+
+	if tod > 0.2 and tod < 0.805 then
+		if beds.player[name] then
+			lay_down(player, nil, nil, false)
+		end
+		minetest.chat_send_player(name, S("You can only sleep at night."))
+		return
+	end
+	--]]
+
 	-- move to bed
 	if not beds.player[name] then
 		lay_down(player, ppos, pos)
@@ -234,6 +263,19 @@ minetest.register_on_leaveplayer(function(player)
 	end
 end)
 
+minetest.register_on_dieplayer(function(player)
+	local name = player:get_player_name()
+	local in_bed = beds.player
+	local pos = player:get_pos()
+	local yaw = get_look_yaw(pos)
+
+	if in_bed[name] then
+		lay_down(player, nil, pos, false)
+		player:set_look_horizontal(yaw)
+		player:set_pos(pos)
+	end
+end)
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname == "beds:form" then
 		local name = player:get_player_name()
@@ -255,10 +297,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			end
 		end
 	end
-
 	if formname ~= "beds_form" then
 		return
 	end
+
 	-- Because "Force night skip" button is a button_exit, it will set fields.quit
 	-- and lay_down call will change value of player_in_bed, so it must be taken
 	-- earlier.
@@ -280,3 +322,4 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		end
 	end
 end)
+

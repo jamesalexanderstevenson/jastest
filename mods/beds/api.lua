@@ -35,8 +35,8 @@ function beds.register_bed(name, def)
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		stack_max = 1,
-		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3,
-				bed = 1, bouncy = 99, fall_damage_add_percent = -80},
+		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, bed = 1,
+				bouncy = 99, fall_damage_add_percent = -80},
 		sounds = def.sounds or
 				{footstep = {name = "xdecor_bouncy", gain = 0.4, pitch = 0.8}},
 		node_box = {
@@ -107,7 +107,9 @@ function beds.register_bed(name, def)
 		on_destruct = function(pos)
 			destruct_bed(pos, 1)
 		end,
+
 		on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+			--beds.on_rightclick(pos, clicker)
 			local param2 = minetest.get_node(pos).param2
 			if param2 > 3 then
 				param2 = param2 % 4 -- Mask colorfacedir values
@@ -140,9 +142,9 @@ function beds.register_bed(name, def)
 					"button[2.75,1;2.5,1;setrespawn;Set respawn]" ..
 					"button[5.25,1;2.5,1;sethome;Set home]"
 			minetest.show_formspec(clicker:get_player_name(), "beds:form", fs)
-			--beds.on_rightclick(pos, clicker)
 			return itemstack
 		end,
+
 		on_rotate = function(pos, node, user, _, new_param2)
 			local dir = minetest.facedir_to_dir(node.param2)
 			local p = vector.add(pos, dir)
