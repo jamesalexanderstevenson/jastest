@@ -30,6 +30,22 @@ minetest.register_node(":default:obsidian_light_mese", {
 	light_source = 9,
 })
 
+minetest.register_craft({
+	output = "default:obsidian_light_mese 2",
+	recipe = {
+		{"default:meselamp", "default:meselamp"},
+		{"default:obsidian", "default:obsidian"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:obsidian_light_iron 2",
+	recipe = {
+		{"default:obsidian", "default:obsidian"},
+		{"xdecor:iron_lightbox", "xdecor:iron_lightbox"},
+	}
+})
+
 walls.register("obsidian:brick_wall", S("Obsidian Brick Wall"), {"obsidian_brick_wall.png"},
 		"default:obsidianbrick", default.node_sound_stone_defaults())
 

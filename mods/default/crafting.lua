@@ -327,22 +327,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "default:obsidian_light_mese 2",
-	recipe = {
-		{"default:meselamp", "default:meselamp"},
-		{"default:obsidian", "default:obsidian"},
-	}
-})
-
-minetest.register_craft({
-	output = "default:obsidian_light_iron 2",
-	recipe = {
-		{"default:obsidian", "default:obsidian"},
-		{"xdecor:iron_lightbox", "xdecor:iron_lightbox"},
-	}
-})
-
-minetest.register_craft({
 	output = "default:stonebrick 4",
 	recipe = {
 		{"default:stone", "default:stone"},
