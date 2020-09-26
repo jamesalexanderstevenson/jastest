@@ -255,7 +255,7 @@ local function poll(player)
 	local pos = vector.new(player:get_pos())
 	mobs.loho(player, pos)
 
-	minetest.after(1, function()
+	minetest.after(0.12 * #minetest.get_connected_players(), function()
 		poll(player)
 	end)
 end

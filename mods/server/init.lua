@@ -65,7 +65,8 @@ minetest.register_chatcommand("debug", {
 	privs = "debug",
 	func = function(name, param)
 		local pos = minetest.get_player_by_name(name):get_pos()
-		return true, "minetest.is_protected(pos, \"\"): " .. tostring(minetest.is_protected(pos, ""))
+		return true, "minetest.is_protected(pos, \"\"): " ..
+				tostring(minetest.is_protected(pos, ""))
 	end
 })
 

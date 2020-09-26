@@ -1,6 +1,6 @@
--- after all that,
--- i'd forgotten about
--- armor
+-- /mods/setup is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 setup = {}
 
@@ -34,9 +34,11 @@ local function giveit(player, init, respawn)
 			-- new player
 			local slip = initial_items
 			players[name] = {items = slip}
+			--[[
 			forms.log("[Server] Welcome " .. name ..
 					", this is your first time here!" ..
 					" You can buy fly/fast armor at spawn.", true)
+			--]]
 		elseif respawn then
 			-- respawning player
 			local slip = respawn_items
