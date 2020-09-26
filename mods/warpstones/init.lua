@@ -21,7 +21,7 @@ if pane then
 		end
 		str = str:sub(1, -3) .. "\n"
 	end
-	str = str:sub(1, -2)
+	str = str:sub(2, -2)
 	pane = str
 	warpstones.warps = prepane
 end
