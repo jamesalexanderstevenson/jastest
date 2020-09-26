@@ -26,24 +26,21 @@ minetest.register_globalstep(function(dtime)
 				{x = pos.x - radius , y = pos.y - radius , z = pos.z - radius},
 				{x = pos.x + radius , y = pos.y + radius , z = pos.z + radius},
 				{"protector:protect","protector:protect2"})
-
 			if #protectors > 0 then
 				local npos = protectors[1]
 				local meta = minetest.get_meta(npos)
 				local nodeowner = meta:get_string("owner")
-
-				hud_text = S("Owner: @1", nodeowner)
+				hud_text = "Protector: " .. nodeowner
 			end
-
 			if not hud[name] then
 
 				hud[name] = {}
 
 				hud[name].id = player:hud_add({
 					hud_elem_type = "text",
-					name = "Protector Area",
-					number = 0xFFFF22,
-					position = {x = 0, y = 0.95},
+					name = "Protector",
+					number = 0xFFFFFF,
+					position = {x = 0, y = 0.975},
 					offset = {x = 8, y = -8},
 					text = hud_text,
 					scale = {x = 200, y = 60},

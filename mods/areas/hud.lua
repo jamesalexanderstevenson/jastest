@@ -44,6 +44,7 @@ minetest.register_globalstep(function(dtime)
 				areaString = areaString.."\n"..
 					table.concat(areaStrings, "\n")
 			end
+
 			local hud = areas.hud[name]
 			if not hud then
 				hud = {}
@@ -52,11 +53,11 @@ minetest.register_globalstep(function(dtime)
 					hud_elem_type = "text",
 					name = "Areas",
 					number = 0xFFFFFF,
-					position = {x=0, y=1},
+					position = {x=0, y=0.95},
 					offset = {x=8, y=-8},
 					text = areaString,
 					scale = {x=200, y=60},
-					alignment = {x=1, y=-1},
+					alignment = {x = 1, y = -1},
 				})
 				hud.oldAreas = areaString
 				break
