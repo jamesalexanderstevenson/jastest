@@ -2,6 +2,9 @@
 -- copyright 2020 james alexander stevenson
 -- gnu gpl 3+
 
+local movement_gravity = tonumber(
+		minetest.settings:get("movement_gravity")) or 9.81
+
 local fsnn = {
 	"farming:cotton_wild",
 	"farming:cotton_6",
