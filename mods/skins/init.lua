@@ -1,3 +1,7 @@
+-- /mods/skins is part ofjastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 skins = {}
 skins.players = {}
 skins.skins = {}
@@ -151,7 +155,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				s = skins.skins[1]
 			end
 			if s:find("skins_") == 1 then
-				print("--TODO where is this set? onjoin?")
+				-- Player hits apply button when selected skin is stil applied.
 				s = s:sub(7, -5)
 			end
 			local give = false

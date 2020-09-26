@@ -1,3 +1,7 @@
+-- /mods/supersprint is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 supersprint = {}
 local sprint_toggle = {}
 local t = {}
