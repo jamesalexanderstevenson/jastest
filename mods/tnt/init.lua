@@ -7,10 +7,12 @@ local S = minetest.get_translator("tnt")
 
 
 -- Default to enabled when in singleplayer
+--[[
 local enable_tnt = minetest.settings:get_bool("enable_tnt")
 if enable_tnt == nil then
 	enable_tnt = minetest.is_singleplayer()
 end
+--]]
 
 -- loss probabilities array (one in X will be lost)
 local loss_prob = {}
@@ -298,11 +300,11 @@ local function tnt_explode(pos, radius, ignore_protection, ignore_on_blast, owne
 	local c_tnt_burning = minetest.get_content_id("tnt:tnt_burning")
 	local c_tnt_boom = minetest.get_content_id("tnt:boom")
 	local c_air = minetest.get_content_id("air")
-	if enable_tnt then
+	--if enable_tnt then
 		c_tnt = minetest.get_content_id("tnt:tnt")
-	else
-		c_tnt = c_tnt_burning -- tnt is not registered if disabled
-	end
+	--else
+		--c_tnt = c_tnt_burning -- tnt is not registered if disabled
+	--end
 	-- make sure we still have explosion even when centre node isnt tnt related
 	if explode_center then
 		count = 1
@@ -574,7 +576,7 @@ minetest.register_craftitem("tnt:tnt_stick", {
 	groups = {flammable = 5},
 })
 
-if enable_tnt then
+--if enable_tnt then
 	minetest.register_craft({
 		output = "tnt:tnt_stick 2",
 		recipe = {
@@ -603,7 +605,7 @@ if enable_tnt then
 			tnt.burn(pos, node.name)
 		end,
 	})
-end
+--end
 
 function tnt.register_tnt(def)
 	local name
@@ -620,7 +622,7 @@ function tnt.register_tnt(def)
 	local tnt_burning = def.tiles.burning or def.name .. "_top_burning_animated.png"
 	if not def.damage_radius then def.damage_radius = def.radius * 2 end
 
-	if enable_tnt then
+	--if enable_tnt then
 		minetest.register_node(":" .. name, {
 			description = def.description,
 			tiles = {tnt_top, tnt_bottom, tnt_side},
@@ -663,7 +665,7 @@ function tnt.register_tnt(def)
 				minetest.registered_nodes[name .. "_burning"].on_construct(pos)
 			end,
 		})
-	end
+	--end
 
 	minetest.register_node(":" .. name .. "_burning", {
 		tiles = {
