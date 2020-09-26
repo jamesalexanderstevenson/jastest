@@ -1,3 +1,9 @@
+-- /mods/warpstones is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+; warpstone model, sound effect,
+-- and texture by sofar, with modifications
+-- by myself.
+
 warpstones = {}
 warpstones.warps = {}
 

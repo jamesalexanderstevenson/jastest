@@ -1,6 +1,6 @@
--- jastest/mods/chatbot is part of jastest
--- jastest is Copyright 2020 by James Stevenson
--- jastest is released under the GNU GPL v3+
+-- /mods/chatbot is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 chatbot = {}
 local new_pos

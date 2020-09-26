@@ -36,6 +36,7 @@ farming.register_hoe(":farming:hoe_bronze", {
 	description = S("Bronze Hoe"),
 	inventory_image = "farming_tool_bronzehoe.png",
 	max_uses = 220,
+	material = "default:bronze_ingot",
 	groups = {hoe = 1, not_in_creative_inventory = 1},
 })
 
@@ -43,6 +44,7 @@ farming.register_hoe(":farming:hoe_mese", {
 	description = S("Mese Hoe"),
 	inventory_image = "farming_tool_mesehoe.png",
 	max_uses = 350,
+	material = "default:mese_crystal",
 	groups = {hoe = 1, not_in_creative_inventory = 1},
 })
 
@@ -50,5 +52,6 @@ farming.register_hoe(":farming:hoe_diamond", {
 	description = S("Diamond Hoe"),
 	inventory_image = "farming_tool_diamondhoe.png",
 	max_uses = 500,
+	material = "default:diamond",
 	groups = {hoe = 1, not_in_creative_inventory = 1},
 })
