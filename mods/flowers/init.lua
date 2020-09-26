@@ -174,8 +174,8 @@ end
 minetest.register_abm({
 	label = "Flower spread",
 	nodenames = {"group:flora"},
-	interval = 60,
-	chance = 368,
+	interval = 13,
+	chance = 300,
 	catch_up = false,
 	action = function(...)
 		flowers.flower_spread(...)
@@ -200,7 +200,7 @@ minetest.register_node("flowers:mushroom_red", {
 	buildable_to = true,
 	groups = {mushroom = 1, snappy = 3, attached_node = 1, flammable = 1},
 	sounds = default.node_sound_leaves_defaults(),
-	on_use = minetest.item_eat(-15),
+	on_use = minetest.item_eat(-5),
 	selection_box = {
 		type = "fixed",
 		fixed = {-4 / 16, -0.5, -4 / 16, 4 / 16, -1 / 16, 4 / 16},
@@ -221,7 +221,7 @@ minetest.register_node("flowers:mushroom_brown", {
 	buildable_to = true,
 	groups = {mushroom = 1, food_mushroom = 1, snappy = 3, attached_node = 1, flammable = 1},
 	sounds = default.node_sound_leaves_defaults(),
-	on_use = minetest.item_eat(10),
+	on_use = minetest.item_eat(1),
 	selection_box = {
 		type = "fixed",
 		fixed = {-3 / 16, -0.5, -3 / 16, 3 / 16, -2 / 16, 3 / 16},
@@ -256,8 +256,9 @@ end
 minetest.register_abm({
 	label = "Mushroom spread",
 	nodenames = {"flowers:mushroom_brown", "flowers:mushroom_red"},
-	interval = 30,
+	interval = 11,
 	chance = 150,
+	catch_up = false,
 	action = function(...)
 		flowers.mushroom_spread(...)
 	end,

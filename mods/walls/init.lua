@@ -35,7 +35,7 @@ walls.register = function(wall_name, wall_desc, wall_texture_table, wall_mat, wa
 			connect_back = {-1/4,-1/2,1/4,1/4,1/2 + fence_collision_extra,1/2},
 			connect_right = {1/4,-1/2,-1/4,1/2,1/2 + fence_collision_extra,1/4},
 		},
-		connects_to = { "group:wall", "group:stone", "group:fence", "group:obsidian" },
+		connects_to = { "group:wall", "group:stone", "group:fence" },
 		paramtype = "light",
 		is_ground_content = false,
 		tiles = wall_texture_table,
@@ -65,5 +65,3 @@ walls.register("walls:mossycobble", S("Mossy Cobblestone Wall"), {"default_mossy
 walls.register("walls:desertcobble", S("Desert Cobblestone Wall"), {"default_desert_cobble.png"},
 		"default:desert_cobble", default.node_sound_stone_defaults())
 
-walls.register("walls:obsidianbrick", S("Obsidian Brick Wall"), {"walls_obsidian_brick.png"},
-		"default:obsidianbrick", default.node_sound_stone_defaults())

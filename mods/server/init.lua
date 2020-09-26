@@ -1,12 +1,6 @@
--- jastest/mods/server/init.lua is part of jastest
--- Copyright 2020 James Stevenson
--- Licensed GNU GPL v3+
-
--- TODO I didn't know about
--- minetest.register_on_privilege_grant() and
--- minetest.register_on_privilege_revoke(), so
--- please replace this sillyness with this more
--- proper approach. Thanks future, probable self!
+-- /mods/server is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 server = {}
 
@@ -59,8 +53,7 @@ minetest.register_chatcommand("debug", {
 	privs = "debug",
 	func = function(name, param)
 		local pos = minetest.get_player_by_name(name):get_pos()
-		print(minetest.is_protected(pos, ""))
-		return true, "Printed"
+		return true, "minetest.is_protected(pos, \"\"): " .. tostring(minetest.is_protected(pos, ""))
 	end
 })
 
