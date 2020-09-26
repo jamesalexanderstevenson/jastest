@@ -32,6 +32,18 @@ minetest.register_on_joinplayer(function(player)
 	end)
 end)
 
+minetest.register_privilege("creative", {
+	description = "Creative mode is currently under construction.",
+	give_to_admin = false,
+	give_to_singleplayer = false,
+})
+
+minetest.register_privilege("admin", {
+	description = "Can operate administrative facilities",
+	give_to_admin = false,
+	give_to_singleplayer = false,
+})
+
 minetest.register_privilege("debug", {
 	description = "Can use debug functions",
 	give_to_admin = false,
@@ -296,8 +308,6 @@ minetest.register_tool("server:adminpick2", {
 		return itemstack
 	end,
 })
-
-minetest.register_privilege("creative")
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname == "setup:items" and

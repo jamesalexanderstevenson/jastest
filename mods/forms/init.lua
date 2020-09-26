@@ -1,3 +1,7 @@
+-- /mods/forms is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 forms = {}
 forms.players = {}
 forms.x = "button_exit[6.89,0;1,1;quit;X]"

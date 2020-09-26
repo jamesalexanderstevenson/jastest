@@ -22,7 +22,7 @@ if pane then
 		str = str:sub(1, -3) .. "\n"
 	end
 	str = str:sub(1, -2)
-	print(str)
+	pane = str
 	warpstones.warps = prepane
 end
 
@@ -246,13 +246,20 @@ minetest.register_chatcommand("warps", {
 	params = "",
 	privs = "shout",
 	func = function(name, param)
-		local w = warpstones.warps[name]
-		if w then
-			local str = ""
-			for k, v in pairs(w) do
-				str = str .. k .. " "
+		if minetest.check_player_privs(name, "admin") then
+			forms.dialog(name, pane, true)
+			return true, "[Server] Displaying all warps"
+		else
+			local w = warpstones.warps[name]
+			if w then
+				local str = ""
+				for k, v in pairs(w) do
+					str = str .. k .. minetest.pos_to_string(v) .. "; "
+				end
+				str = str:sub(1, -3)
+				forms.dialog(name, str, true)
 			end
-			minetest.chat_send_player(name, str)
+			return true, "[Server] Displaying your warps"
 		end
 	end,
 })
