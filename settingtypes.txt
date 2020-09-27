@@ -2,7 +2,7 @@
 # minetest.conf
 
 #    A message sent to each new player joining for the first time.
-welcome_message (Show a welcome message to new players) string "Hi {$name}, welcome to {$server}!"
+welcome_message (Show a welcome message to new players) string Hi {$name}, welcome to {$server}!
 
 #    The starting point of the area that is spawn to protect
 protect_min (Protect spawn start) v3f (-6000, -600, -6000)
