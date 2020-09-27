@@ -9,6 +9,18 @@ local initial_items = {}
 local respawn_items = {}
 local listnames = {}
 
+local welcome_msg = minetest.settings:get("welcome_message")
+if not welcome_msg or welcome_msg == "" then
+	welcome_msg = "Hi {$name}, welcome to {$server}!"
+end
+if welcome_msg:find("{$server}") then
+	local server_name = minetest.settings:get("server_name")
+	if not server_name or server_name == "" then
+		server_name = "My Server"
+	end
+	welcome_msg = welcome_msg:gsub("{$server}", server_name)
+end
+
 setup.init = function(item, priority, respawn, listname)
 	if not item or not tonumber(priority) then
 		return
@@ -34,11 +46,13 @@ local function giveit(player, init, respawn)
 			-- new player
 			local slip = initial_items
 			players[name] = {items = slip}
-			--[[
-			forms.log("[Server] Welcome " .. name ..
-					", this is your first time here!" ..
-					" You can buy fly/fast armor at spawn.", true)
-			--]]
+			if welcome_msg then
+				if welcome_msg:find("{$name}") then
+					minetest.after(2.3, forms.log, welcome_msg:gsub("{$name}", name))
+				else
+					minetest.after(2.3, forms.log, welcome_msg, true)
+				end
+			end
 		elseif respawn then
 			-- respawning player
 			local slip = respawn_items
