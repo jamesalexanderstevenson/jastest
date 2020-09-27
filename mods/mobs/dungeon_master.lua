@@ -119,24 +119,24 @@ mobs:register_arrow("mobs:fireball", {
 	-- direct hit, no fire... just plenty of pain
 	hit_player = function(self, player)
 		local p = self.object:get_pos()
-		if not minetest.is_protected(p, "") then
+		--if not minetest.is_protected(p, "") then
 			tnt.boom(p, b)
-		end
+		--end
 	end,
 
 	hit_mob = function(self, player)
 		local p = self.object:get_pos()
-		if not minetest.is_protected(p, "") then
+		--if not minetest.is_protected(p, "") then
 			tnt.boom(p, b)
-		end
+		--end
 	end,
 
 	-- node hit
 	hit_node = function(self, pos, node)
 		local p = self.object:get_pos()
-		if not minetest.is_protected(p, "") then
+		--if not minetest.is_protected(p, "") then
 			tnt.boom(p, b)
-		end
+		--end
 	end
 })
 

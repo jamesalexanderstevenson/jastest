@@ -1,3 +1,7 @@
+-- /mods/shooter is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 local del = {}
 
 local function kb(player, hitter, time_from_last_punch, tool_capabilities, unused_dir, damage)
@@ -84,13 +88,13 @@ local function sh(itemstack, user, pointed_thing, boom)
 		if boom and loaded and vector.distance(user:get_pos(), t.above) < 1.67 then
 			local pf = user:get_look_dir()
 			user:add_player_velocity(vector.multiply(pf, {x = 0, y = -10, z = 0}))
-			if not minetest.is_protected(t.above, "") then
+			--if not minetest.is_protected(t.above, "") then
 				tnt.boom(user:get_pos(), {
 					radius = 1,
 					damage_radius = 1,
 					explode_center = true,
 				})
-			end
+			--end
 			wear = wear + 10000
 			swung = true
 		elseif minetest.get_node_or_nil(t.above) and dif > 0.18 then

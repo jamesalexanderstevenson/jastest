@@ -1,6 +1,6 @@
--- jastest/mods/classes
--- Copyright 2020 James Stevenson
--- GNU GPL 3+
+-- /mods/classes is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 classes = {}
 classes.roles = {
@@ -32,9 +32,11 @@ local function particles(pos, texture)
 end
 
 local function boom(pos)
+	--[[
 	if minetest.is_protected(pos, "") then
 		return
 	end
+	--]]
 	local def = {
 		radius = 1,
 		damage_radius = 3,
