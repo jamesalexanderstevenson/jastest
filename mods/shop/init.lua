@@ -1,3 +1,7 @@
+-- /mods/shop is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 local players = {}
 local sel = {}
 
@@ -69,6 +73,9 @@ local function check_armor_privs(bit, index, stack)
 		if name and minetest.get_player_by_name(name) then
 			local player = minetest.get_player_by_name(name)
 			local privs = minetest.get_player_privs(name)
+			if privs.admin then
+				return
+			end
 			local boots_fast = inv:contains_item("armor", "shop:boots_fast")
 			local shield_fly = inv:contains_item("armor", "shop:shield_fly")
 			local y
