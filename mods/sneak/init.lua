@@ -5,7 +5,8 @@ local function poll(player)
 	if sneaking[name] == nil then
 		return
 	end
-	if minetest.get_player_by_name(name) then
+	if minetest.get_player_by_name(name) and
+			not player_api.player_attached[name] then
 		local c = player:get_player_control()
 		if c.sneak and not sneaking[name] then
 			sneaking[name] = true
@@ -38,10 +39,10 @@ local function poll(player)
 			})
 			sneaking[name] = false
 		end
-		minetest.after(0.09, function()
-			poll(player)
-		end)
 	end
+	minetest.after(0.09, function()
+		poll(player)
+	end)
 end
 
 minetest.register_on_joinplayer(function(player)

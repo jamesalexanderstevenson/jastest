@@ -42,14 +42,15 @@ end)
 
 minetest.register_on_player_hpchange(function(player, hp_change, reason)
 	if hp_change > 0 then
-		return
+		return hp_change
 	end
 	local name = player:get_player_name()
 	if minetest.check_player_privs(name, "godmode") then
-		return
+		return 0
 	end
 	cooldown[name] = 11
-end)
+	return hp_change
+end, true)
 
 minetest.register_on_leaveplayer(function(player)
 	regen[player:get_player_name()] = nil

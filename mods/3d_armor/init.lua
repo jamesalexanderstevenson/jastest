@@ -422,47 +422,47 @@ if armor.config.punch_damage == true then
 end
 
 minetest.register_on_player_hpchange(function(player, hp_change, reason)
-	if player and hp_change < 0 then
-		local name = player:get_player_name()
-		if name then
-			local ttl = hud.get_armor_total(name)
-			local absorbed = true
-			local void
-			if reason.type == "set_hp" then
-				if reason.starving or
-						reason.poisoned or
-						reason.stung then
-					void = true
-					absorbed = false
-				elseif reason.roughage then
-					if ttl >= 50 then
-						hp_change = hp_change / 1.5
-						absorbed = true
-					end
-				elseif reason.killme then
-					local _, inv = armor:get_valid_player(player)
-					for i = 1, 6 do
-						inv:set_stack("armor", i, nil)
-					end
-					armor:set_player_armor(player)
-					absorbed = false
-				end
-			elseif reason.type == "drown" then
+	local name = player:get_player_name()
+	if minetest.get_player_by_name(name) and
+			hp_change < 0 and
+			not minetest.check_player_privs(name, "godmode") then
+		local ttl = hud.get_armor_total(name)
+		local absorbed = true
+		local void
+		if reason.type == "set_hp" then
+			if reason.starving or
+					reason.poisoned or
+					reason.stung then
 				void = true
 				absorbed = false
-			end
-			if ttl > 0 and absorbed then
-				hp_change = hp_change / (ttl * 5 / 10)
-				if hp_change > -1 then
-					hp_change = -1
+			elseif reason.roughage then
+				if ttl >= 50 then
+					hp_change = hp_change / 1.5
+					absorbed = true
 				end
+			elseif reason.killme then
+				local _, inv = armor:get_valid_player(player)
+				for i = 1, 6 do
+					inv:set_stack("armor", i, nil)
+				end
+				armor:set_player_armor(player)
+				absorbed = false
 			end
-			if player:get_hp() + hp_change < 5 then
-				hp_change = -100
+		elseif reason.type == "drown" then
+			void = true
+			absorbed = false
+		end
+		if ttl > 0 and absorbed then
+			hp_change = hp_change / (ttl * 5 / 10)
+			if hp_change > -1 then
+				hp_change = -1
 			end
-			if absorbed then
-				armor:punch(player)
-			end
+		end
+		if player:get_hp() + hp_change < 5 then
+			hp_change = -100
+		end
+		if absorbed then
+			armor:punch(player)
 		end
 	end
 	return hp_change

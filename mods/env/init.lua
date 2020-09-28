@@ -26,7 +26,7 @@ local function sur(player)
 			end
 		end
 		local m = minetest.find_node_near(pos, 1, {"group:igniter", "group:torch"}, true)
-		if m then
+		if m and not minetest.check_player_privs(name, "godmode") then
 			local d = vector.distance(m, pos)
 			if d <= 0.75 then
 				player:set_hp(player:get_hp() - 5, {type = "set_hp", heat = true})
