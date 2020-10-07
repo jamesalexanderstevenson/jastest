@@ -25,12 +25,6 @@ ore_gen_chance (Ore generation chance) float 0.334 0.0 1.0
 #    at startup.
 creative_mode (Creative mode) bool false
 
-#    Flammable nodes will be ignited by nearby igniters. Spreading fire may
-#    cause severe destruction.
-#    Spreading fire nodes will disappear when fire is disabled, but
-#    'permanent_flame' nodes are unaffected.
-enable_fire (Fire) bool true
-
 #    Enable flame sound.
 flame_sound (Flame sound) bool true
 

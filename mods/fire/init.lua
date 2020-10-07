@@ -7,7 +7,7 @@ fire = {}
 local S = minetest.get_translator("fire")
 
 -- 'Enable fire' setting
-local fire_enabled = minetest.settings:get_bool("enable_fire")
+local fire_enabled = true --[[minetest.settings:get_bool("enable_fire")
 if fire_enabled == nil then
 	-- enable_fire setting not specified, check for disable_fire
 	local fire_disabled = minetest.settings:get_bool("disable_fire")
@@ -18,6 +18,7 @@ if fire_enabled == nil then
 		fire_enabled = not fire_disabled
 	end
 end
+--]]
 
 --
 -- Items
@@ -67,7 +68,8 @@ minetest.register_abm({
 local function flood_flame(pos, _, newnode)
 	-- Play flame extinguish sound if liquid is not an 'igniter'
 	if minetest.get_item_group(newnode.name, "igniter") == 0 then
-		minetest.sound_play("fire_extinguish_flame",
+		--minetest.sound_play("fire_extinguish_flame",
+		minetest.sound_play("default_cool_lava",
 			{pos = pos, max_hear_distance = 16, gain = 0.15}, true)
 	end
 	-- Remove the flame
@@ -319,8 +321,8 @@ if fire_enabled then
 		label = "Ignite flame",
 		nodenames = {"group:flammable"},
 		neighbors = {"group:igniter"},
-		interval = 7,
-		chance = 12,
+		interval = 9,
+		chance = 6,
 		catch_up = false,
 		action = function(pos)
 			local p = minetest.find_node_near(pos, 1, {"air"})
@@ -335,8 +337,8 @@ if fire_enabled then
 		label = "Remove flammable nodes",
 		nodenames = {"fire:basic_flame"},
 		neighbors = "group:flammable",
-		interval = 5,
-		chance = 18,
+		interval = 3,
+		chance = 6,
 		catch_up = false,
 		action = function(pos)
 			local p = minetest.find_node_near(pos, 1, {"group:flammable"})
@@ -348,13 +350,11 @@ if fire_enabled then
 						def.on_burn(p)
 					end
 				elseif not minetest.is_protected(pos, "") then
-					minetest.remove_node(p)
+					--minetest.remove_node(p)
+					minetest.dig_node(p)
 					minetest.check_for_falling(p)
+					minetest.set_node(p, {name = "fire:basic_flame"})
 				end
-			end
-			p = minetest.find_node_near(pos, 1, {"group:water"})
-			if p then
-				minetest.set_node(pos, {name = "fire:antifire"})
 			end
 		end
 	})

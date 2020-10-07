@@ -1,3 +1,103 @@
+# ANIMAL MOBS
+
+### Bee
+Tends to buzz around flowers and gives honey when killed, you can also right-click a bee to pick it up and place in inventory. 3x bee's in a row can craft a beehive.
+
+---
+### Bunny
+Bunnies appear in green grass areas (prairie biome in ethereal) and can be tamed with 4 carrots or grass. Can also be picked up and placed in inventory and gives 1 raw rabbit and 1 rabbit hide when killed.
+
+---
+### Chicken
+Found in green areas (bamboo biome in ethereal) and lays eggs on flat ground, Can be picked up and placed in inventory and gives 1-2 raw chicken when killed. Feed 8x wheat seed to breed.
+
+---
+### Cow
+Wanders around eating grass/wheat and can be right-clicked with empty bucket to get milk. Cows will defend themselves when hit and can be right-clicked with 8x wheat to tame and breed.
+
+---
+### Kitten
+Found on green grass these cute cats walk around and can be picked up and placed in inventory as pets or right-clicked with 4x live rats or raw fish (found in ethereal) and tamed.  They can sometimes leave you little gifts of a hairball.
+
+---
+### Rat
+Typically found around stone they can be picked up and cooked for eating.
+
+---
+### Sheep
+Green grass and wheat munchers that can be clipped using shears to give 1-3 wool. Feed sheep 8x wheat to regrow wool, tame and breed.  Right-click a tamed sheep with dye to change it's colour.  Will drop 1-3 raw mutton when killed.
+
+---
+### Warthog
+Warthogs unlike pigs defend themselves when hit and give 1-3 raw pork when killed, they can also be right-clicked with 8x apples to tame or breed.
+
+---
+### Penguin
+These little guys can be found in glacier biomes on top of snow and have the ability to swim if they fall into water.
+
+---
+### Panda
+These monochrome cuties spawn in Ethereal's bamboo biome and can be tamed with bamboo stalks :)  Remember they have claws though.
+
+---
+*Note: After breeding, animals need to rest for 4 minutes and baby animals take 4 minutes to grow up, also feeding them helps them grow quicker...*
+
+#### Lucky Blocks: 20
+
+MONSTER MOBS
+
+Dirt Monster
+
+- Spawning at night on green grass (or grey in ethereal) these mobs wander around looking for a player to eat. Drops 1-5 dirt when killed.
+
+Dungeon Master
+
+- Spawning below -70 underground DM's have a tendency to hurl fire balls at unsuspecting players and can cause major damage, but get too close and he will switch to dogfight attack. Can drop mese or diamond when killed.
+
+Lava Flan
+
+- Cute as they may look lava flan wallow in their namesake (no, not flans) and get curious about players who wander by, forgetting that they can burn you and cause damage. They have a 1 in 5 chance of dropping lava orb when killed.
+
+Mese Monster
+
+- These mobs are territorial and spawn below -20 and will fire mese shards at passers by, so best avoided. Will drop mese when killed.
+
+Oerkki
+
+- Found in dark areas like most monsters Oerkki wander the caverns stealing away torches on the ground and attacking anyone found in that area. 1 in 3 chance of dropping obsidian.
+
+Sand Monster
+
+- The hot deserts are home to these guys who spawn at any time of the day to attack players. They drop 3-5 desert sand when killed.
+
+Spiders
+
+- Snowy spiders are found on higher cold areas, Tarantula's in higher jungle, Cave spider below -20 and Mese spider near areas containing the ore and Crystal spiders only in Ethereal's crystal biomes.  Some are docile during the daytime and will drop string when killed.
+
+Stone Monster
+
+- Found underground in dark caves these mobs seem to be zombie-like in fashion with a tendency to rush a player in the area. can drop torch, iron or coal when killed.
+
+Tree Monster
+
+- Found atop tree's at night time they drop down and look for food in the form of players and animals. Can drop saplings and sometimes an apple or three.
+
+Lucky Blocks: 11
+
+NPC MOBS
+
+
+NPC
+
+- While NPC's don't actually spawn in the world just yet, they do have a spawn egg available to drop him/her into the world and wander around defending himself if attacked.  It will also he will help you attack any monsters in the area and will follow you if you hold a diamond. Right-clicking the NPC with a gold lump will make him drop steel tools or food, right-clicking with an empty hand orders the NPC to stay or follow if owned.
+
+Trader
+
+- Traders are new and still being tested but can be placed into the world using a spawn egg. Right-clicking on a trader opens his shop and allows you to buy his wares inside.  If provoked a trader will attack a player or monster.
+
+Note: self.npc_drops and self.igor_drops are used for random item list when trading for gold and may be changed within the mob itself, if not found the global mobs.npc_drops and mobs.igor_drops are used instead for a default list.
+
+Lucky Blocks: 4
 
 MOBS REDO for MINETEST
 

@@ -282,14 +282,12 @@ minetest.register_chatcommand("gender", {
 			return false, "[Server] Specified gender too long"
 		end
 		param = param:gsub("%W", "")
-		if param == "female" then
-			player:get_meta():set_string("gender", "female")
-			apply(player)
-			return true, "[Server] Gender specified to male"
+		if param == "" then
+			return true, "[Server] Your gender is now " .. player:get_meta():get_string("gender")
 		else
 			player:get_meta():set_string("gender", param)
 			apply(player)
-			return true, "[Server] Gender specified to " .. param
+			return true, "[Server] Gender specified as " .. param
 		end
 	end,
 })

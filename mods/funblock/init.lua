@@ -1,3 +1,7 @@
+-- /mods/funblock is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 --  2  2 = northeast
 -- -2  2 = northwest
 --  2 -2 = southeast

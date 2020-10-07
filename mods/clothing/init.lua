@@ -32,6 +32,8 @@ local function save_clothing_metadata(player, clothing_inv)
 	end
 end
 
+clothing.save = save_clothing_metadata
+
 clothing.on_use = function(itemstack, user, pointed_thing)
 	local inv = minetest.get_inventory({type = "detached",
 			name = user:get_player_name() .. "_clothing"})

@@ -1,3 +1,7 @@
+-- /mods/ctf is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 ctf = {}
 ctf.players = {}
 
@@ -113,6 +117,7 @@ minetest.register_node("ctf:flag_blue", {
 	on_place = function() end,
 })
 
+--[[
 minetest.register_chatcommand("team", {
 	func = function(name, param)
 		if param == "red" then
@@ -133,6 +138,7 @@ minetest.register_chatcommand("team", {
 		end
 	end,
 })
+--]]
 
 minetest.register_on_leaveplayer(function(player)
 	ctf.players[player:get_player_name()] = nil
