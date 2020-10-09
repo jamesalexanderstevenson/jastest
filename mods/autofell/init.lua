@@ -1,7 +1,6 @@
--- jastest/mods/autofell
--- Part of jastest Minetest Game
--- Copyright 2020 James Alexander Stevenson
--- GNU GPL 3+
+-- /mods/autofell is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 local function chop(pos, oldnode)
 	local above_pos = {x = pos.x, y = pos.y + 1, z = pos.z}

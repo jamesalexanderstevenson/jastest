@@ -485,3 +485,5 @@ minetest.register_globalstep(function(dtime)
 		timer = 0
 	end
 end)
+
+dofile(modpath .. "/stand.lua")
