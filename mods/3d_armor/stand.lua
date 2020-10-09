@@ -433,5 +433,5 @@ minetest.register_craft({
 })
 
 minetest.register_alias("3d_armor_stand:armor_stand", "3d_armor:stand")
-minetest.register_alias("3d_armor_stand:armor_stand_locked", "3d_armor:stand_locked")
+minetest.register_alias("3d_armor_stand:locked_armor_stand", "3d_armor:stand_locked")
 minetest.register_alias("3d_armor_stand:top", "3d_armor:stand_top")
