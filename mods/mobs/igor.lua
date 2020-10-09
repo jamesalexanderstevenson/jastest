@@ -15,7 +15,6 @@ mobs:register_mob("mobs:igor", {
 	damage = 5,
 	attack_type = "dogfight",
 	owner_loyal = true,
-	pathfinding = true,
 	reach = 2,
 	attacks_monsters = true,
 	hp_min = 20,

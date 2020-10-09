@@ -17,7 +17,6 @@ mobs:register_mob("mobs:npc", {
 	attacks_monsters = true,
 	attack_npcs = false,
 	owner_loyal = true,
-	pathfinding = true,
 	hp_min = 15,
 	hp_max = 30,
 	armor = 100,

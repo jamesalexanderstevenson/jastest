@@ -9,7 +9,6 @@ mobs:register_mob("mobs:stone_monster", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	pathfinding = true,
 	reach = 2,
 	damage = 10,
 	hp_min = 10,

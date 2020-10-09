@@ -68,7 +68,7 @@ local aoc_range = tonumber(minetest.settings:get("active_block_range")) * 16
 
 -- pathfinding settings
 local enable_pathfinding = true
-local stuck_timeout = 3 -- how long before stuck mod starts searching
+local stuck_timeout = 3 -- how long before stuck mob starts searching
 local stuck_path_timeout = 10 -- how long will mob follow path before giving up
 
 -- default nodes
