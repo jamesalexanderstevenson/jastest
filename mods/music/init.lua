@@ -170,8 +170,8 @@ end
 
 minetest.register_abm({
 	label = "Lava sounds",
-	nodenames = "lava:source",
-	neighbors = {"obsidian:obsidian"},
+	nodenames = "default:lava_source",
+	neighbors = {"default:obsidian"},
 	interval = 6.0,
 	chance = 3,
 	catch_up = false,
