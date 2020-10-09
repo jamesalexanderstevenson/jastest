@@ -3,6 +3,7 @@
 -- gnu gpl 3+
 
 setup = {}
+setup.sel = {}
 
 local players = {}
 local initial_items = {}
@@ -123,5 +124,8 @@ minetest.register_on_leaveplayer(function(player)
 	local name = player:get_player_name()
 	if name then
 		forms.log("*** " .. name .. " left the game.", false)
+	end
+	if setup.sel[name] then
+		setup.sel[name] = nil
 	end
 end)
