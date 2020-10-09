@@ -238,9 +238,9 @@ minetest.register_tool("rings:muddy_vision", {
 minetest.register_craft({
 	output = "rings:muddy_vision",
 	recipe = {
-		{"obsidian:shard", "mese:crystal_fragment", "obsidian:shard",},
-		{"mese:crystal_fragment", "", "mese:crystal_fragment",},
-		{"obsidian:shard", "mese:crystal_fragment", "obsidian:shard",},
+		{"default:obsidian_shard", "default:mese_crystal_fragment", "default:obsidian_shard",},
+		{"default:mese_crystal_fragment", "", "default:mese_crystal_fragment",},
+		{"default:obsidian_shard", "default:mese_crystal_fragment", "default:obsidian_shard",},
 	},
 })
 
@@ -252,9 +252,9 @@ minetest.register_tool("rings:invisibility", {
 minetest.register_craft({
 	output = "rings:invisibility",
 	recipe = {
-		{"diamond:diamond", "mese:crystal_fragment", "diamond:diamond",},
-		{"mese:crystal_fragment", "", "mese:crystal_fragment",},
-		{"diamond:diamond", "mese:crystal_fragment", "diamond:diamond",},
+		{"default:diamond", "default:mese_crystal_fragment", "default:diamond",},
+		{"default:mese_crystal_fragment", "", "default:mese_crystal_fragment",},
+		{"default:diamond", "default:mese_crystal_fragment", "default:diamond",},
 	}
 })
 
