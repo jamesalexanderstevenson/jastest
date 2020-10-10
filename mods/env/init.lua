@@ -2,6 +2,52 @@
 -- copyright 2020 james alexander stevenson
 -- gnu gpl 3+
 
+local ob = {}
+local u = {}
+
+local function uw(player)
+	local name = player:get_player_name()
+	if not minetest.get_player_by_name(name) then
+		return
+	end
+
+	local hp = player:get_hp()
+	if hp == 0 then
+		return
+	end
+
+	local b = player:get_breath()
+	if b < 100 and not ob[name] then
+		ob[name] = b
+		u[name] = true
+	elseif b < ob[name] then
+		ob[name] = b
+		u[name] = true
+	elseif b == 0 then
+		player:set_hp(hp / 2)
+		ob[name] = nil
+		u[name] = nil
+		return
+	elseif b > ob[name] then
+		if u[name] then
+			if b < 99 then
+				minetest.after(0, minetest.sound_play,
+						"catching_breath", {object = player})
+			end
+			u[name] = nil
+		end
+		ob[name] = b
+	elseif b == 100 then
+		ob[name] = nil
+		u[name] = nil
+		return
+	end
+	
+	minetest.after(0.1, function()
+		uw(player)
+	end)
+end
+
 function minetest.handle_node_drops(pos, drops, digger)
 	-- Add dropped items to object's inventory
 	local inv = digger and digger:get_inventory()
@@ -37,34 +83,6 @@ function minetest.handle_node_drops(pos, drops, digger)
 			end
 		end
 	end
-end
-
-local ob = {}
-local u = {}
-
-local function uw(player)
-	local name = player:get_player_name()
-	if not minetest.get_player_by_name(name) then
-		return
-	end
-	local b = player:get_breath()
-	if b == 0 then
-		player:set_hp(player:get_hp() - player:get_hp() / 2)
-		-- TODO CHOKE SOUND
-		return
-	elseif not ob[name] or (ob[name] and ob[name] > b) then
-		ob[name] = b
-		u[name] = true
-	elseif b > ob[name] and u[name] then
-		ob[name] = nil
-		u[name] = nil
-		minetest.after(0,
-				minetest.sound_play, "catching_breath", {pos = player:get_pos()}, true)
-		return
-	end
-	minetest.after(0.1, function()
-		uw(player)
-	end)
 end
 
 local function sur(player)
@@ -144,14 +162,27 @@ minetest.register_on_leaveplayer(function(player)
 end)
 
 minetest.register_on_respawnplayer(function(player)
-	minetest.after(0,
-			minetest.sound_play, "catching_breath", {pos = player:get_pos()}, true)
+	local name = player:get_player_name()
+	if ob[name] then
+		ob[name] = nil
+	end
+	minetest.after(0.2,
+			minetest.sound_play, "catching_breath", {object = player}, true)
 end)
 
 minetest.register_chatcommand("breath", {
 	description = "Show breath meter",
-	func = function(name)
-		return true, minetest.get_player_by_name(name):get_breath()
+	func = function(name, param)
+		if minetest.check_player_privs(name, "server") and param ~= "" then
+			local b = tonumber(param)
+			if b then
+				minetest.get_player_by_name(name):set_breath(b)
+				return true, "Set?"
+			end
+			return false, "Uhoh"
+		else
+			return true, minetest.get_player_by_name(name):get_breath()
+		end
 	end,
 })
 

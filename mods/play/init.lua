@@ -1,3 +1,7 @@
+-- /mods/play is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 play = {}
 
 local rand = math.random
@@ -27,6 +31,7 @@ play.sounds = {
 	"play_c3h",
 	"play_c8l",
 	"play_c8l",
+	"phit",
 }
 
 local aplay = function(sound, spt)

@@ -1,3 +1,7 @@
+-- /mods/music is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 music = {}
 music.players = {}
 local handles = {}
@@ -171,7 +175,7 @@ end
 minetest.register_abm({
 	label = "Lava sounds",
 	nodenames = "default:lava_source",
-	neighbors = {"default:obsidian"},
+	neighbors = "default:obsidian",
 	interval = 6.0,
 	chance = 3,
 	catch_up = false,
@@ -189,7 +193,7 @@ minetest.register_abm({
 						pos = pos,
 						gain = rand(),
 						pitch = rand(),
-					})
+					}, true)
 					minetest.after(rand(5, 10), function()
 						if music.players[name] then
 							music.players[name] = music.players[name] - 1
