@@ -55,15 +55,37 @@ ambience.play = function(sound, pos)
 		return x + rand(-2, 2)
 	end
 	local ppos = vector.apply(pos, f)
+	local echo = false
 	local spt = {
 		pos = ppos,
 		pitch = pitch,
 		gain = gain,
 	}
-	if sound:find("phit") then
-		gain = gain / 5 
+	if gain < 0.25 then
+		gain = 0.25
+	end
+	if pitch < 0.4 then
+		pitch = 0.4
+	end
+	if sound:find("phit") or pitch > 0.5 then
+		gain = 0.05 
+		echo = true
+	end
+	if gain > 0.3 then
+		gain = 0.2
+	end
+	if sound:find("c8l") then
+		gain = 0.8
 	end
 	aplay(sound, spt)
+	if echo then
+		spt.gain = spt.gain / 1.5
+		minetest.after(1, aplay, sound, spt)
+		if rand() > 0.5 then
+			spt.gain = spt.gain / 1.5
+			minetest.after(1.5 + rand(), aplay, sound, spt)
+		end
+	end
 	local o = minetest.get_objects_inside_radius(ppos, 2)
 	for i = 1, #o do
 		if o[i]:is_player() then
