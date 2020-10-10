@@ -172,6 +172,7 @@ local function play_disk(pos)
 	end
 end
 
+--[[
 minetest.register_abm({
 	label = "Lava sounds",
 	nodenames = "default:lava_source",
@@ -205,6 +206,7 @@ minetest.register_abm({
 		end
 	end,
 })
+--]]
 
 minetest.register_on_joinplayer(function(player)
 	music.players[player:get_player_name()] = 0
