@@ -1,3 +1,7 @@
+-- /mods/intercomm is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 minetest.register_node("intercomm:intercomm", {
 	description = "Intercomm",
 	drawtype = "nodebox",

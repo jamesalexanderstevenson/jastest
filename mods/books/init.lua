@@ -1,3 +1,7 @@
+-- /mods/books is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 local S = default.get_translator
 
 minetest.register_chatcommand("book", {

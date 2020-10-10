@@ -1,3 +1,7 @@
+-- /mods/glass is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 for i = 1, #dye.dyes do
 	local d = dye.dyes[i]
 	local cc = d[1]

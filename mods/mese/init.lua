@@ -1,4 +1,6 @@
---
+-- /mods/mese is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 local S = minetest.get_translator(minetest.get_current_modname())
 

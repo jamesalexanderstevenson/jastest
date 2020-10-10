@@ -1,3 +1,7 @@
+-- /mods/flood is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 flood = {}
 
 flood.on_flood = function(pos, oldnode, newnode)

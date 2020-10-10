@@ -1,6 +1,6 @@
---[[ Walkie Talkie Minetest Mod (Part of Glitchtest Game)
-     Copyright (C) 2018 James A. Stevenson
-     GNU GPL 3 ]]
+-- /mods/walkie is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 walkie = {}
 walkie.players = {}

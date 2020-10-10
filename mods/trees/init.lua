@@ -1,3 +1,7 @@
+-- /mods/trees is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 local grasses = {"default:grass_1", "default:grass_2", "default:grass_3",
 		"default:grass_4", "default:grass_5"}
 

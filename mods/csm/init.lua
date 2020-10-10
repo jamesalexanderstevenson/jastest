@@ -1,6 +1,6 @@
--- jaserver/mods/csm/init.lua
--- Copyright James Stevenson 2020
--- GPL v3+
+-- /mods/csm is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 csm = {}
 csm.players = {}

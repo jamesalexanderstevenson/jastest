@@ -1,6 +1,6 @@
--- Terminal mod for Minetest `Glitchtest' game
--- Copyright 2018 James Alexander Stevenson
--- GNU GPL 3
+-- /mods/terminal is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 terminal = {}
 local store = minetest.get_mod_storage()

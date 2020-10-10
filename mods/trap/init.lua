@@ -1,3 +1,7 @@
+-- /mods/trap is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 minetest.register_node("trap:obsidian", {
 	description = "Trap Obsidian",
 	tiles = {"default_obsidian.png"},

@@ -1,3 +1,7 @@
+-- /mods/bandage is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 minetest.register_craftitem("bandage:bandage", {
 	description = "Bandage",
 	inventory_image = "bandage_bandage.png",

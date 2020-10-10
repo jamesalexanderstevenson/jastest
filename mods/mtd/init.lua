@@ -1,3 +1,7 @@
+-- /mods/mtd is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 mtd = {}
 
 local players = {}

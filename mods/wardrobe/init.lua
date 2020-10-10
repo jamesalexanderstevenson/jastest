@@ -1,3 +1,7 @@
+-- /mods/wardrobe is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 wardrobe = {}
 wardrobe.players = {}
 

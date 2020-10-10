@@ -1,3 +1,7 @@
+-- /mods/sneak is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
+
 local sneaking = {}
 
 local function poll(player)
