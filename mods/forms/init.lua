@@ -162,11 +162,11 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			local amb = meta:get_string("ambient") == "switched_on"
 			if amb then
 				meta:set_string("ambient", "")
-				play.stop(name)
+				ambience.stop(name)
 				ambience.ss(name, "stop")
 			else
 				meta:set_string("ambient", "switched_on")
-				play.start(name)
+				ambience.start(name)
 				ambience.ss(name, "start")
 			end
 		end
