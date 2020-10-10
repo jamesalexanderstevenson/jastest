@@ -32,11 +32,6 @@ local function particles(pos, texture)
 end
 
 local function boom(pos)
-	--[[
-	if minetest.is_protected(pos, "") then
-		return
-	end
-	--]]
 	local def = {
 		radius = 1,
 		damage_radius = 3,

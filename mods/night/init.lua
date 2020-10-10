@@ -1,6 +1,6 @@
--- jastest/mods/night
--- Copyright 2020 James Stevenson
--- GNU GPL 3+
+-- /mods/night is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 night = {toggle = false}
 local players = {}

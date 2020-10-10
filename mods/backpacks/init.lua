@@ -1,6 +1,6 @@
--- Backpacks mod for Glitchtest game
--- Copyright 2018 James Stevenson
--- GNU GPL version 3 and above
+-- /mods/backpacks is part of jastest
+-- copyright 2020 james alexander stevenson
+-- gnu gpl 3+
 
 local backpacks = {}
 
