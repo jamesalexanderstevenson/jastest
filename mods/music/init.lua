@@ -189,7 +189,7 @@ minetest.register_abm({
 				if n < 3 then
 					music.players[name] = n + 1
 					pos.y = pos.y - 5
-					minetest.sound_play("lava", {
+					minetest.sound_play("ambience_lava", {
 						pos = pos,
 						gain = rand(),
 						pitch = rand(),
@@ -347,6 +347,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 end)
 
+--[[
 minetest.register_chatcommand("hum", {
 	description = "arg(bool) means this arg is a bool",
 	params = "loop(bool) gain(float) pitch(float) | stop",
@@ -408,3 +409,4 @@ minetest.register_chatcommand("p", {
 		show_box(nil, nil, minetest.get_player_by_name(name))
 	end,
 })
+--]]
