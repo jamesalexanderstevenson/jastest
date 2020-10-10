@@ -61,7 +61,7 @@ ambience.play = function(sound, pos)
 		gain = gain,
 	}
 	if sound:find("phit") then
-		gain = gain / 2.3
+		gain = gain / 5 
 	end
 	aplay(sound, spt)
 	local o = minetest.get_objects_inside_radius(ppos, 2)
