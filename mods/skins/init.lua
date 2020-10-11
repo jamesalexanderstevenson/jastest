@@ -105,7 +105,7 @@ local function apply(player, skin)
 	skins.players[player:get_player_name()] = skin
 	meta:set_string("skin", sk)
 	multiskin.set_player_skin(player, sk)
-	armor.textures[name].skin = sk
+	armor.textures[player:get_player_name()].skin = sk
 	armor:set_player_armor(player)
 end
 

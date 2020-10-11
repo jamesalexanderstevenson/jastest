@@ -139,11 +139,11 @@ ambience.ss = function(name, param)
 
 	local tv = minetest.add_entity(pos, "ambience:tv")
 	if tv then
-		if sound and sound ~= "" then
+		--[[if sound and sound ~= "" then
 			sound = sound
-		else
-			sound = "ambience_wind"
-		end
+		else--]]
+		local	sound = "ambience_wind"
+		--end--what the fuck?
 
 		-- Gain
 		local gain = ma / 34
