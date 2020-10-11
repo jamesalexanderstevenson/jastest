@@ -129,6 +129,24 @@ minetest.register_chatcommand("cozy", {
 	func = cozy.set
 })
 
+minetest.register_chatcommand("sit", {
+	description = "Sit down",
+	params = "",
+	privs = "interact",
+	func = function(name, param)
+		cozy.set(name, "sit")
+	end,
+})
+
+minetest.register_chatcommand("lay", {
+	description = "Lay down",
+	params = "",
+	privs = "interact",
+	func = function(name, param)
+		cozy.set(name, "lay")
+	end,
+})
+
 minetest.register_on_joinplayer(function(player)
 	cozy.players[player:get_player_name()] = "stand"
 	minetest.after(5, function()
