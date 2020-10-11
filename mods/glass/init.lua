@@ -6,7 +6,7 @@ for i = 1, #dye.dyes do
 	local d = dye.dyes[i]
 	local cc = d[1]
 	if d[1] == "white" then
-		break
+		--break
 	elseif d[1]:find("dark_") then
 		cc = d[1]:gsub("_", "")
 	end
@@ -61,7 +61,6 @@ for i = 1, #dye.dyes do
 		}
 	})
 end
-minetest.register_alias("glass:glass_connected_white", "default:glass")
 
 minetest.register_node("glass:obsidian_glass", {
 	description = "Obsidian Glass",
