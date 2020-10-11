@@ -5,7 +5,7 @@
 for i = 1, #dye.dyes do
 	local d = dye.dyes[i]
 	local cc = d[1]
-	if d[1] == white then
+	if d[1] == "white" then
 		break
 	elseif d[1]:find("dark_") then
 		cc = d[1]:gsub("_", "")
