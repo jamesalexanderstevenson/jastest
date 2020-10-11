@@ -5,30 +5,30 @@
 for i = 1, #dye.dyes do
 	local d = dye.dyes[i]
 	local cc = d[1]
-	if d[1] == "white" then
-		--break
-	elseif d[1]:find("dark_") then
+	if d[1]:find("dark_") then
 		cc = d[1]:gsub("_", "")
 	end
 	local m = "^[colorize:" .. cc .. ":55]"
 	-- Connected
-	minetest.register_node("glass:glass_connected_" .. cc, {
-		description = d[2] .. " Glass (Connected)",
-		drawtype = "glasslike_framed",
-		tiles = {"default_glass.png" .. m,
-				"default_glass_detail.png" .. m},
-		paramtype = "light",
-		paramtype2 = "glasslikeliquidlevel",
-		sunlight_propagates = true,
-		is_ground_content = false,
-		groups = {cracky = 3, oddly_breakable_by_hand = 3, not_cuttable = 1},
-		sounds = default.node_sound_glass_defaults(),
-	})
-	minetest.register_craft({
-		type = "shapeless",
-		output = "glass:glass_connected_" .. cc,
-		recipe = {"default:glass", "dye:" .. d[1]},
-	})
+	if d[1] ~= "white" then
+		minetest.register_node("glass:glass_connected_" .. cc, {
+			description = d[2] .. " Glass (Connected)",
+			drawtype = "glasslike_framed",
+			tiles = {"default_glass.png" .. m,
+					"default_glass_detail.png" .. m},
+			paramtype = "light",
+			paramtype2 = "glasslikeliquidlevel",
+			sunlight_propagates = true,
+			is_ground_content = false,
+			groups = {cracky = 3, oddly_breakable_by_hand = 3, not_cuttable = 1},
+			sounds = default.node_sound_glass_defaults(),
+		})
+		minetest.register_craft({
+			type = "shapeless",
+			output = "glass:glass_connected_" .. cc,
+			recipe = {"default:glass", "dye:" .. d[1]},
+		})
+	end
 	-- Framed
 	minetest.register_node("glass:glass_" .. cc, {
 		description = d[2] .. " Glass (Framed)",
@@ -61,6 +61,8 @@ for i = 1, #dye.dyes do
 		}
 	})
 end
+
+minetest.register_alias("glass:glass_connected_white", "default:glass")
 
 minetest.register_node("glass:obsidian_glass", {
 	description = "Obsidian Glass",
