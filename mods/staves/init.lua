@@ -3,7 +3,12 @@
 -- gnu gpl 3+
 
 local cooldown = {}
-local boom = {radius = 3, explode_center = false, ignore_protection = false, owner = ""}
+local boom = {
+	radius = 3,
+	explode_center = true,
+	ignore_protection = false,
+	owner = "",
+}
 
 local warp = function(name, pos)
 	local player = minetest.get_player_by_name(name)
