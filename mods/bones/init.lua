@@ -259,6 +259,7 @@ minetest.register_on_dieplayer(function(player, reason)
 	local player_name = player:get_player_name()
 	local pos_string = minetest.pos_to_string(pos)
 
+	--[[
 	-- return if keep inventory set or in creative mode
 	if bones_mode == "keep" or (creative and creative.is_enabled_for
 			and creative.is_enabled_for(player:get_player_name())) then
@@ -269,6 +270,7 @@ minetest.register_on_dieplayer(function(player, reason)
 		end
 		return
 	end
+	--]]
 
 	local player_inv = player:get_inventory()
 	if is_all_empty(player_inv) then
@@ -329,11 +331,13 @@ minetest.register_on_dieplayer(function(player, reason)
 		end
 
 		ll_items.throw_inventory(pos, {"bones:bones", "bones:bone", "bones:skull"})
-		--minetest.log("action", player_name .. " dies at " .. pos_string ..
-		--	". Inventory dropped")
-		--minetest.chat_send_all(minetest.colorize("Red", "[Server] ") ..
-		--		player_name .. " died at " .. pos_string)
-		print(player_name, dump(reason))
+		minetest.log("action", player_name .. " dies at " .. pos_string ..
+			". Inventory dropped")
+		--[[
+		minetest.chat_send_all(minetest.colorize("Red", "[Server] ") ..
+				player_name .. " died at " .. pos_string)
+		--]]
+		--print(player_name, dump(reason))
 		if reason.type == "punch" then
 			if reason.object then
 				local ent = reason.object:get_luaentity()

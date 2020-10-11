@@ -592,7 +592,30 @@ function mob_class:flight_check()
 end
 
 
--- if self.stay_near set then check periodically for nodes and turn to face/move
+-- turn mob to face position
+local yaw_to_pos = function(self, target, rot)
+
+	rot = rot or 0
+
+	local pos = self.object:get_pos()
+	local vec = {x = target.x - pos.x, z = target.z - pos.z}
+	local yaw = (atan(vec.z / vec.x) + rot + pi / 2) - self.rotate
+
+	if target.x > pos.x then
+		yaw = yaw + pi
+	end
+
+	yaw = self:set_yaw(yaw, rot)
+
+	return yaw
+end
+
+function mobs:yaw_to_pos(self, target, rot)
+	return yaw_to_pos(self, target, rot)
+end
+
+
+-- if stay near set then check periodically for nodes and turn towards them
 function mob_class:do_stay_near()
 
 	if not self.stay_near then return false end
@@ -604,7 +627,7 @@ function mob_class:do_stay_near()
 	local searchnodes = self.stay_near[1]
 	local chance = self.stay_near[2] or 10
 
-	if random(1, chance) > 1 then
+	if not pos or random(chance) > 1 then
 		return false
 	end
 
@@ -615,24 +638,13 @@ function mob_class:do_stay_near()
 	local r = self.view_range
 	local nearby_nodes = minetest.find_nodes_in_area(
 		{x = pos.x - r, y = pos.y - 1, z = pos.z - r},
-		{x = pos.x + r, y = pos.y + 1, z = pos.z + r},
-		searchnodes)
+		{x = pos.x + r, y = pos.y + 1, z = pos.z + r}, searchnodes)
 
 	if #nearby_nodes < 1 then
 		return false
 	end
 
-	local target = nearby_nodes[math.random(1, #nearby_nodes)]
-	local direction = vector.direction(pos, target)
-	local vec = {x = target.x - pos.x, z = target.z - pos.z}
-
-	yaw = (atan(vec.z / vec.x) + pi / 2) - self.rotate
-
-	if target.x > pos.x then
-		yaw = yaw + pi
-	end
-
-	yaw = self:set_yaw(yaw, 4)
+	yaw_to_pos(self, nearby_nodes[random(#nearby_nodes)])
 
 	self:set_animation("walk")
 
@@ -3335,7 +3347,7 @@ function mob_class:on_step(dtime)
 	end
 
 	-- mob plays random sound at times
-	if random(1, 100) == 1 then
+	if random(100) == 1 then
 		self:mob_sound(self.sounds.random)
 	end
 
@@ -3704,6 +3716,7 @@ end
 
 -- MarkBu's spawn function
 function mobs:spawn(def)
+
 	mobs:spawn_specific(
 		def.name,
 		def.nodes or {"group:soil", "group:stone"},
@@ -3915,6 +3928,7 @@ function mobs:register_egg(mob, desc, background, addegg, no_creative)
 			-- am I clicking on something with existing on_rightclick function?
 			local under = minetest.get_node(pointed_thing.under)
 			local def = minetest.registered_nodes[under.name]
+
 			if def and def.on_rightclick then
 				return def.on_rightclick(pointed_thing.under, under, placer, itemstack)
 			end
@@ -3997,7 +4011,6 @@ function mobs:register_egg(mob, desc, background, addegg, no_creative)
 			return itemstack
 		end,
 	})
-
 end
 
 
@@ -4007,10 +4020,12 @@ function mobs:force_capture(self, clicker)
 	-- add special mob egg with all mob information
 	local new_stack = ItemStack(self.name .. "_set")
 
-	local tmp = {}
+	local tmp, t = {}
 
 	for _,stat in pairs(self) do
-		local t = type(stat)
+
+		t = type(stat)
+
 		if  t ~= "function"
 		and t ~= "nil"
 		and t ~= "userdata" then
@@ -4031,6 +4046,7 @@ function mobs:force_capture(self, clicker)
 	end
 
 	self:mob_sound("default_place_node_hard")
+
 	self.object:remove()
 end
 
@@ -4061,8 +4077,7 @@ function mobs:capture_mob(self, clicker, chance_hand, chance_net, chance_lasso,
 	--		tool:get_name() ~= "fireflies:bug_net" then
 
 	-- is mob tamed?
-	if self.tamed == false
-	and force_take == false then
+	if self.tamed == false and force_take == false then
 
 		hud.message(clicker, S("Not tamed!"))
 		--minetest.chat_send_player(name, S("Not tamed!"))
