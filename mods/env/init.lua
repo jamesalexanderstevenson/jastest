@@ -170,8 +170,35 @@ minetest.register_on_respawnplayer(function(player)
 			minetest.sound_play, "catching_breath", {object = player}, true)
 end)
 
+minetest.register_on_dieplayer(function(player)
+	if not player then
+		return
+	end
+	local pos = player:get_pos()
+	if pos then
+		minetest.add_particle({
+			pos = pos,
+			velocity = {x = 0, y = 1, z = 0},
+			--acceleration = {x = 0, y = 0.1, z = 0},
+			expirationtime = 9,
+			size = 7,
+			--collisiondetection = true,
+			--collision_removal = true,
+			--object_collision = false,
+			--vertical = false,
+			texture = "default_smoke_puff.png",
+			--playername = "singleplayer",
+			--animation = {Tile Animation defintion},
+			glow = 14,
+			--node = {name = "ignore", param2 = 0},
+			--node_tile = 0,
+		})
+	end
+end)
+
 minetest.register_chatcommand("breath", {
 	description = "Show breath meter",
+	privs = "interact",
 	func = function(name, param)
 		if minetest.check_player_privs(name, "server") and param ~= "" then
 			local b = tonumber(param)
@@ -188,6 +215,7 @@ minetest.register_chatcommand("breath", {
 
 minetest.register_chatcommand("hp", {
 	description = "Number of health points",
+	privs = "interact",
 	func = function(name)
 		return true, minetest.get_player_by_name(name):get_hp()
 	end,
